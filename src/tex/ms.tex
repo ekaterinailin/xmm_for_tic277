@@ -6,52 +6,94 @@
 \begin{document}
 
 % Title
-\title{An open source scientific article}
+\title{Corona of an M7 fast rotator with a high latitude flare}
 
 % Author list
 \author{@ekaterinailin}
 
 % Abstract with filler text
 \begin{abstract}
-    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-    Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis.
-    Curabitur dictum gravida mauris, consectetuer id, vulputate a, magna.
-    Donec vehicula augue eu neque, morbi tristique senectus et netus et.
-    Mauris ut leo, cras viverra metus rhoncus sem, nulla et lectus vestibulum.
-    Phasellus eu tellus sit amet tortor gravida placerat.
-    Integer sapien est, iaculis in, pretium quis, viverra ac, nunc.
-    Praesent eget sem vel leo ultrices bibendum.
-    Aenean faucibus, morbi dolor nulla, malesuada eu, pulvinar at, mollis ac.
-    Curabitur auctor semper nulla donec varius orci eget risus.
-    Duis nibh mi, congue eu, accumsan eleifend, sagittis quis, diam.
-    Duis eget orci sit amet orci dignissim rutrum.
+    Small scale fields
+
+    late M dwarfs
+
+    XMM-Newton observations
+
+    Flare
+
+    Anything unusual about the dwarf
+    
 \end{abstract}
 
 % Main body with filler text
 \section{Introduction}
 \label{sec:intro}
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis.
-Curabitur dictum gravida mauris, consectetuer id, vulputate a, magna.
-Donec vehicula augue eu neque, morbi tristique senectus et netus et.
-Mauris ut leo, cras viverra metus rhoncus sem, nulla et lectus vestibulum.
-Phasellus eu tellus sit amet tortor gravida placerat.
-Integer sapien est, iaculis in, pretium quis, viverra ac, nunc.
-Praesent eget sem vel leo ultrices bibendum.
-Aenean faucibus, morbi dolor nulla, malesuada eu, pulvinar at, mollis ac.
-Curabitur auctor semper nulla donec varius orci eget risus.
-Duis nibh mi, congue eu, accumsan eleifend, sagittis quis, diam.
-Duis eget orci sit amet orci dignissim rutrum.
+\section{Observations}
 
-Nam dui ligula, fringilla a, euismod sodales, sollici- tudin vel, wisi.
-Morbi auctor lorem non justo, nam lacus libero, pretium at, lobortis vitae.
-Donec aliquet, tortor sed accumsan bibendum, erat ligula aliquet magna.
-Morbi ac orci et nisl hendrerit mollis, suspendisse ut massa, cras nec ante.
-Pellentesque a nulla cum sociis natoque penatibus et magnis dis parturient.
-Aliquam tincidunt urna, nulla ullamcorper vestibulum turpis.
-Pellentesque cursus luctus mauris \citep{Luger2021}.
+XMM-Newton
 
-\bibliography{bib}
+uninterrupted two rotation periods
+
+MOS1/2 and PN, as well as OM data
+
+\section{Results}
+
+show light curve
+
+show spectra with fits and residuals
+
+\subsection{Rotational variability}
+
+\begin{figure*}[ht!]
+    \script{FIGURE_periodograms_xray_and_optical.py}
+    \begin{centering}
+        \includegraphics[width=\linewidth]{figures/periodogram_xmm_stacked.png}
+        \caption{
+         MOS and PN light curves stacked Lomb-Scargle periodogram.
+        }
+        \label{fig:coherence_hist}
+    \end{centering}
+\end{figure*}
+
+\begin{figure*}[ht!]
+    \script{FIGURE_periodograms_xray_and_optical.py}
+    \begin{centering}
+        \includegraphics[width=\linewidth]{figures/periodogram_om.png}
+        \caption{
+         MOS and PN light curves stacked Lomb-Scargle periodogram.
+        }
+        \label{fig:coherence_hist}
+    \end{centering}
+\end{figure*}
+
+periodograms
+
+present simple model and upper limits from the data
+
+\subsection{Coronal temperature and luminosity}
+
+spectral analysis
+
+APEC+APEC model, grsa abundances
+
+\subsection{Flare}
+
+optical and X-ray combined
+
+\section{Discussion}
+
+Ro-Lx relation
+
+\section{Summary and Conclusions}
+
+
+\section{Acknowledgements}
+\citep{lightkurvecollaboration2018lightkurve}
+
+\section{Data Availability}
+
+
+\bibliography{references}
 
 \end{document}
