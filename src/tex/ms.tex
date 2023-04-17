@@ -29,6 +29,28 @@
 \section{Introduction}
 \label{sec:intro}
 
+\begin{table}
+
+    \caption{TIC 277539431 (WISEA J105515.71-735611.3)}
+    \begin{tabular}{l|r}
+         Parameter & Value  \\\hline\hline 
+         Distance & $13.70\pm0.11\,$pc [2] \\
+         $K_s$ mag & $9.666 \pm 0.024$ [3]\\
+         $J$ mag & $10.630 \pm 0.023$ [3] \\
+         SpT & M7 [1]\\
+         Rotation period & $273.618 \pm 0.007\,$min [1]\\
+         $v\sin i$ & $38.6\pm1.0\,$km/s [1] \\
+         Inclination & $87.0^{+2.0}_{-2.4}\,$ deg [1]\\
+         Radius & $0.145\pm0.004\,R_\odot$ [1]\\
+         TESS flaring rate $\beta$ &  \\
+        
+    \end{tabular}
+    \newline\footnotesize
+    [1] \citet{ilin2021giant}, [2] \citet{bailer-jones2018estimating}, [3] 2MASS, \citet{skrutskie2006two}
+    \label{tab:modelparams}
+\end{table}
+
+
 \section{Observations}
 
 XMM-Newton
@@ -61,7 +83,7 @@ show spectra with fits and residuals
     \begin{centering}
         \includegraphics[width=\linewidth]{figures/periodogram_om.png}
         \caption{
-         MOS and PN light curves stacked Lomb-Scargle periodogram.
+         OM light curve Lomb-Scargle periodogram.
         }
         \label{fig:coherence_hist}
     \end{centering}
@@ -72,6 +94,19 @@ periodograms
 present simple model and upper limits from the data
 
 \subsection{Coronal temperature and luminosity}
+
+
+\begin{figure}[ht!]
+    \script{FIGURE_data_resid.py}
+    \begin{centering}
+        \includegraphics[width=\linewidth]{figures/pn_onlyflare1_data_resid.png}
+        \caption{
+         Flare only PN spectrum fit
+        }
+        \label{fig:spec_pn_onlyflare}
+    \end{centering}
+\end{figure}
+
 
 spectral analysis
 
