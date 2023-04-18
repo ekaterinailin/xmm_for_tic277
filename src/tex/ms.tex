@@ -9,7 +9,8 @@
 \title{Corona of an M7 fast rotator with a high latitude flare}
 
 % Author list
-\author{@ekaterinailin}
+\author{Ekaterina Ilin, Katja Poppenh\"ager}
+
 
 % Abstract with filler text
 \begin{abstract}
@@ -29,11 +30,21 @@
 \section{Introduction}
 \label{sec:intro}
 
+Small scale fields of late M dwarfs
+
+We know little about the corona of late M dwarfs
+
+Planets around late M dwarfs exists, see TRAPPIST-1 or LHS 3154~\citep{stefansson2023extreme}
+
+TIC 277 -- edge-on rotation, high-latitude flare
+
+
+
 \begin{table}
 
     \caption{TIC 277539431 (WISEA J105515.71-735611.3)}
-    \begin{tabular}{l|r}
-         Parameter & Value  \\\hline\hline 
+    \begin{tabular}{ll}\hline 
+         Parameter & Value  \\\hline
          Distance & $13.70\pm0.11\,$pc [2] \\
          $K_s$ mag & $9.666 \pm 0.024$ [3]\\
          $J$ mag & $10.630 \pm 0.023$ [3] \\
@@ -42,7 +53,7 @@
          $v\sin i$ & $38.6\pm1.0\,$km/s [1] \\
          Inclination & $87.0^{+2.0}_{-2.4}\,$ deg [1]\\
          Radius & $0.145\pm0.004\,R_\odot$ [1]\\
-         TESS flaring rate $\beta$ &  \\
+         TESS flaring rate $\beta$ &  \\\hline
         
     \end{tabular}
     \newline\footnotesize
@@ -61,7 +72,19 @@ MOS1/2 and PN, as well as OM data
 
 \section{Results}
 
-show light curve
+Figure~\ref{fig:lightcurves} shows the time series in X-ray and optical. 
+
+\begin{figure*}[ht!]
+    \script{FIGURE_lightcurves.py}
+    \begin{centering}
+        \includegraphics[width=0.75\linewidth]{figures/lightcurves.png}
+        \caption{
+         Top panel: Optical Monitoring (OM) light curve. Bottom panel: X-ray (PN, MOS1 and MOS2 combined) light curve. 
+        }
+        \label{fig:lightcurves}
+    \end{centering}
+\end{figure*}
+
 
 show spectra with fits and residuals
 
@@ -70,7 +93,7 @@ show spectra with fits and residuals
 \begin{figure*}[ht!]
     \script{FIGURE_periodograms_xray_and_optical.py}
     \begin{centering}
-        \includegraphics[width=\linewidth]{figures/periodogram_xmm_stacked.png}
+        \includegraphics[width=0.75\linewidth]{figures/periodogram_xmm_stacked.png}
         \caption{
          MOS and PN light curves stacked Lomb-Scargle periodogram.
         }
@@ -81,7 +104,7 @@ show spectra with fits and residuals
 \begin{figure*}[ht!]
     \script{FIGURE_periodograms_xray_and_optical.py}
     \begin{centering}
-        \includegraphics[width=\linewidth]{figures/periodogram_om.png}
+        \includegraphics[width=0.75\linewidth]{figures/periodogram_om.png}
         \caption{
          OM light curve Lomb-Scargle periodogram.
         }
@@ -101,7 +124,7 @@ present simple model and upper limits from the data
     \begin{centering}
         \includegraphics[width=\linewidth]{figures/pn_onlyflare1_data_resid.png}
         \caption{
-         Flare only PN spectrum fit
+         Flare only PN Double apec spectrum fit.
         }
         \label{fig:spec_pn_onlyflare}
     \end{centering}
