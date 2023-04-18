@@ -35,7 +35,20 @@ if __name__ == "__main__":
                         gridspec_kw={'height_ratios': [2, 3],
                                             'wspace':0, 'hspace':0})
     ax[0].scatter(om.time, om.rate, label="OM", s=2)
-    ax[1].plot(xray.time, xray.normalized_flux + 1., label="PN + MOS1 + MOS2")
+    ax[1].plot(xray.time, xray.normalized_flux + 1., label="PN + MOS1 + MOS2", c="olive")
+    
+    
+    # add inset
+    axins = ax[1].inset_axes([0.3, 0.55, 0.4, 0.5])
+    l, r = 600, 750
+    axins.scatter(om.time[l:r], om.rate[l:r], s=1)
+    axins.set_xlim(om.time[l], om.time[r])
+    axins.set_ylim(0, 3)
+    patch, lines = ax[0].indicate_inset_zoom(axins)
+    # [line.set(visible=False) for line in lines]
+
+
+    # layout
     ax[0].set_ylim(0,3)
 
     for a in ax:
