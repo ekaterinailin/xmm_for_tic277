@@ -28,7 +28,7 @@ def convert_to_scinote(series, rel_err=1e-2):
     pd.Series
         The converted series of strings.
     """
-    return series.apply(lambda x: f"{x:.1e}" if np.abs(x)<rel_err else f"{x:.1f}").astype(str)
+    return series.apply(lambda x: f"{x:.1e}" if np.abs(x)<rel_err else f"{x:.2f}").astype(str)
 
 
 
@@ -124,10 +124,10 @@ if __name__ == "__main__":
         del df[err]
 
     # convert to latex strings
-    for col, up, low in cols_mid_low_high:
+    for col, low, up in cols_mid_low_high:
         
         newname = mapcolnames[col]
-        df[newname] = tex_up_low(df[col], df[up]-df[col], df[col]-df[low])
+        df[newname] = tex_up_low(df[col], df[up]-df[col], df[low]-df[col])
         del df[col]
         del df[up]
         del df[low]
