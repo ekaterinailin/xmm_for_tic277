@@ -155,8 +155,8 @@ def plot_data_resid_1(file):
 if __name__ == "__main__":
 
     # filename
-    files = ["pn_onlyflare1.txt", "joint_onlyflare.txt", "joint_noflare.txt",
-             "joint_all.txt"]
+    files = ["pn_onlyflare.txt", "joint_onlyflare.txt", "joint_noflare.txt",
+             "joint_all.txt", 'mos1.txt', 'mos2.txt', 'pn.txt', "pn_noflare.txt"]
 
     # plot
     for file in files:
