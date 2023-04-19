@@ -120,7 +120,15 @@ periodograms
 present simple model and upper limits from the data
 
 \subsection{Coronal temperature and luminosity}
-
+\begin{table*}
+\movetableright=-20mm
+\footnotesize
+    \script{TABLE_specfits.py}
+    \caption{XSPEC fits to PN, MOS1/MOS2 and joint fits also.}
+    \input{output/specfit.tex}
+        \label{tab:specfit}
+    \tablerefs{\input{output/specfit.tex}}
+\end{table*}
 
 \begin{figure}
     \script{FIGURE_data_resid.py}
