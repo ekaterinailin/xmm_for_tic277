@@ -121,13 +121,12 @@ present simple model and upper limits from the data
 
 \subsection{Coronal temperature and luminosity}
 \begin{table*}
-\movetableright=-20mm
+% \movetableright=-20mm
 \footnotesize
     \script{TABLE_specfits.py}
-    \caption{XSPEC fits to PN, MOS1/MOS2 and joint fits also.}
+    \caption{XSPEC fits to PN, MOS1/MOS2 and joint data also.}
     \input{output/specfit.tex}
         \label{tab:specfit}
-    \tablerefs{\input{output/specfit.tex}}
 \end{table*}
 
 \begin{figure}
@@ -144,7 +143,7 @@ present simple model and upper limits from the data
 \begin{figure}
     \script{FIGURE_data_resid.py}
     \begin{centering}
-        \includegraphics[width=\linewidth]{figures/pn_onlyflare_data_resid.png}
+        \includegraphics[width=\linewidth]{figures/pn_noflare_data_resid.png}
         \caption{
          No flare PN Double apec spectrum fit.
         }
