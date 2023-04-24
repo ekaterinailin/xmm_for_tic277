@@ -23,9 +23,55 @@ import matplotlib.pyplot as plt
 
 from astropy.modeling import models
 from astropy import units as u
+from astropy.constants import sigma_sb
+
+
+def flare_factor(teff, radius, wav, resp,  tflare=10000):
+    """Calculate the flare energy factor in ergs.
+
+    Parameters
+    ----------
+    teff : float
+        Stellar effective temperature in Kelvin.
+    radius : float
+        Stellar radius in solar radii.
+    wav : array
+        Array of wavelengths in nanometers.
+    resp : array
+        Array of bandpass responses.
+     tflare : float
+        Flare temperature in Kelvin.
+    
+    Returns
+    -------
+    factor : float
+        Flare energy factor in ergs/s.
+    """
+
+    # blackbody
+    bb = models.BlackBody(temperature=teff * u.K)
+
+    # blackbody flux in TESS band
+    bbwavs = bb(wav * u.nm)  * resp
+
+    fluxs = np.trapz(bbwavs.value, wav)
+
+    # blackbody
+    bb = models.BlackBody(temperature=tflare * u.K)
+
+    # blackbody flux in TESS band
+    bbwavf = bb(wav * u.nm)  * resp
+
+    fluxf = np.trapz(bbwavf.value, wav)
+
+    ratio = fluxs / fluxf
+
+    factor = ratio * np.pi * (radius * u.R_sun) ** 2 * sigma_sb * (tflare * u.K)**4
+
+    return factor.to("erg/s")
+
 
 if __name__ == "__main__":
-
     # stellar Teff
     teff = 2680
 
@@ -35,21 +81,7 @@ if __name__ == "__main__":
     # TESS band response
     tessresp = pd.read_csv(paths.data / "TESS_response.csv")
 
-    # blackbody
-    bb = models.BlackBody(temperature=teff * u.K)
-
-    # blackbody flux in TESS band
-    bbtess = bb(tessresp["WAVELENGTH"].values * u.nm)  * tessresp["PASSBAND"].values
-
-    # flux in TESS band
-    fstar = np.trapz(bbtess.value, tessresp["WAVELENGTH"].values)
-
-    # flux in all bands
-    wav = np.linspace(5,3e4, 20000)
-    fall = np.trapz(bb(wav * u.nm).value, wav)
-
-    # luminosity in TESS band
-    lumtess = (fstar / fall * bb.bolometric_flux * np.pi * (radius * u.Rsun)**2).to("erg/s")
+    factor = flare_factor(2680, 0.145, tessresp["WAVELENGTH"].values, tessresp["PASSBAND"].values)
 
     # get FFD values
     ffd_vals = pd.read_csv(paths.data / "tess_ffd.csv")
@@ -58,13 +90,13 @@ if __name__ == "__main__":
     df = pd.read_csv(paths.data / "tess_flares.csv")
 
     # convert ED to E
-    df["ed_rec"] = df["ed_rec"] * lumtess
-    df["ed_rec_err"] = df["ed_rec_err"] * lumtess
+    df["ed_rec"] = df["ed_rec"] * factor
+    df["ed_rec_err"] = df["ed_rec_err"] * factor
 
     # make FFD
     ffd = FFD(df, tot_obs_time=df["tot_obs_time"].values[0])
     ffd.alpha = ffd_vals["alpha"].values[0]
-    ffd.beta = ffd_vals["beta"].values[0] * lumtess**(ffd.alpha -1)
+    ffd.beta = ffd_vals["beta"].values[0] * factor**(ffd.alpha -1)
     ffd.alpha_low_err = ffd_vals["alpha_low_err"].values[0]
     ffd.alpha_up_err = ffd_vals["alpha_up_err"].values[0]
     ed, freq, counts = ffd.ed_and_freq()
