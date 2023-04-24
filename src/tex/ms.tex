@@ -6,7 +6,7 @@
 \begin{document}
 
 % Title
-\title{Corona of an M7 fast rotator with a high latitude flare}
+\title{Case study: The corona of an M7 fast rotator with a high latitude flare}
 
 % Author list
 \author{Ekaterina Ilin, Katja Poppenh\"ager}
@@ -38,6 +38,7 @@ Planets around late M dwarfs exists, see TRAPPIST-1 or LHS 3154~\citep{stefansso
 
 TIC 277 -- edge-on rotation, high-latitude flare
 
+Age unknown ... \citep{schneider2018hazmat} classify it as field star, but its FUV and NUV fluxes are on the high end for field stars and would be compatible with the NUV/FUV emission from younger open cluster members as well
 
 
 \begin{table}
@@ -52,6 +53,7 @@ TIC 277 -- edge-on rotation, high-latitude flare
          $K_s$ mag & $9.666 \pm 0.024$ [3]\\
          $J$ mag & $10.630 \pm 0.023$ [3] \\
          SpT & M7 [1]\\
+         age & \\
          Rotation period & $273.618 \pm 0.007\,$min [1]\\
          $v\sin i$ & $38.6\pm1.0\,$km/s [1] \\
          Inclination & $87.0^{+2.0}_{-2.4}\,$ deg [1]\\
@@ -120,6 +122,8 @@ periodograms
 present simple model and upper limits from the data
 
 \subsection{Coronal temperature and luminosity}
+
+From the proposal: $F_X=2.7^{-13}$ erg/s/cm$^2$, $L_X=6\cdot10^27$ erg/s (update with new eROSITA data) -- 1 oom above the measured XMM values.
 \begin{table*}
 % \movetableright=-20mm
 \footnotesize
@@ -228,6 +232,23 @@ APEC+APEC model, grsa abundances
 optical and X-ray combined
 
 \section{Discussion}
+\citep{pass2022constraints} on rotational evol of late Ms
+
+FFD power law fit converged after 16000 steps on $\alpha = 1.77_{-0.23}^{+0.29}$.
+
+$\log_10(R_{31.5}$, that is, the rate of flares per day with energies above $\log E_{flare}=10^{31.5}\,$erg, is ca. $-0.7$, consistent with other late M dwarfs~\citep{medina2022galactic}.
+
+
+\begin{figure}
+    \script{FIGURE_tess_ffd.py}
+    \begin{centering}
+        \includegraphics[width=\linewidth]{figures/tess_ffd.png}
+        \caption{
+         Flare frequency distribution and power law fit.
+        }
+        \label{fig:ffd}
+    \end{centering}
+\end{figure}
 
 \begin{figure}[ht!]
     \script{FIGURE_lx_lbol.py}
