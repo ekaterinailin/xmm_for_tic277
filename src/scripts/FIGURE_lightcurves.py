@@ -21,12 +21,12 @@ import paths
 if __name__ == "__main__":
 
     # read in optical data
-    om = pd.read_csv("../data/timeseries.csv")
+    om = pd.read_csv(paths.data / "timeseries.csv")
     om.time = om.time / 3600. / 24.
     om.rate = om.rate / np.nanmedian(om.rate)
 
     # read in X-ray data
-    xray = pd.read_csv("../data/stacked_xray_lightcurve.csv")
+    xray = pd.read_csv(paths.data / "stacked_xray_lightcurve.csv")
     xray.time = xray.time / 3600. / 24.
 
     # make the figure
