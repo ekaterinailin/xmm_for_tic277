@@ -59,6 +59,7 @@ if __name__ == "__main__":
     plt.figure(figsize=(6.5,5))
     
     # TIC 277 data
+    df = df[df["label"] == "PN (all)"]
     plt.errorbar(df.Rossby, df.Lx_Lbol, 
                 xerr=[df.Rossby-df.Rossby_low,df.Rossby_high-df.Rossby], 
                 yerr=df.e_Lx_Lbol, fmt='o', label="TIC 277", alpha=1, c="k")
