@@ -108,7 +108,7 @@ if __name__ == "__main__":
         ed, freq, counts = ffd.ed_and_freq()
 
         # plot
-        fig, ax = plt.subplots(1,1,figsize=(5,4))
+        fig, ax = plt.subplots(1,1,figsize=(5.5,4.5))
 
         # make label
         label = (fr"$\alpha =$ {ffd.alpha:.1f} (+{ffd.alpha_up_err:.1f} "
