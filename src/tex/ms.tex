@@ -6,39 +6,37 @@
 \begin{document}
 
 % Title
-\title{Case study: The corona of an M7 fast rotator with a high latitude flare}
+\title{Does a fully convective star need a special corona to produce a polar flare?}
 
 % Author list
-\author{Ekaterina Ilin, Katja Poppenh\"ager}
+\author{Ekaterina Ilin, Katja Poppenh\"ager, Beate Stelzer}
 
 
 % Abstract with filler text
 \begin{abstract}
-    Small scale fields
+    TIC 277 is currently the star with the highest latitude flare located to date. In 2020, TESS observed this rapidly rotating M7 dwarf produce a flare at 81 deg latitude. This is in stark contrast to solar flares that occur much closer to the equator, typically below 30 deg. Does a star require a special corona to produce polar flares?
 
-    late M dwarfs
-
-    XMM-Newton observations
-
-    Flare
-
-    Anything unusual about the dwarf
+    We obtained 36 ks ob XMM-Newton observations, and determined that the X-ray luminosity $L_X$ is slightly lower but not far below the $L_X$ of other stars with similar spectral types a rotation rates. We constructed flare frequency distributions using the three TESS Sectors, with a power law slope of $XXXX\pm XXXX$, and flare rate above $\log_{10}E=31.5\,$erg of XXXX, again typical of similar stars. Our results suggest that the star's magnetic activity is typical for its rotation rate and mass. However, the rotation period of 4.56 hours is on the short end, which could indicate that polar flares on these stars are a feature of youth.  
     
 \end{abstract}
 
 % Main body with filler text
 \section{Introduction}
 \label{sec:intro}
+The smallest stars are crawling with rocky planets. The mass of the disk decreases such that giant planet are no longer efficiently formed, leaving room for smaller objects in the orbit. Terrestrial planets in the habitable zones of these stars are a factor of XXXX more likely than around higher mass stars. However, to be truly habitable in an Earth-like sense, more conditions need to be met than simply the possibility of surface water in its liquid form. One of them is the space weather of the host, that is, the high energy radiation and particles that force the planet's atmosphere. If too high, the atmosphere may blow off. If too energetic, life may not survive. If not energetic enough, life may not emerge in the first place. So, what is the space weather of planets around these smallest, and most abundant, stars, like? 
 
-Small scale fields of late M dwarfs
+At the lowest masses, a star's life unfolds much slower than for a Sun. While the Sun's magnetic activity, and with it the flares, winds, coronal mass ejections and energetic particle eruption that make up space weather, decline rapidly over a few hundred megayears, a fully convective M dwarf stays highly active for gigayears. Add that the zone where liquid water can reside is much closer to these faint stars, and the result is a planet that may be exposed to violent space weather conditions for a good fraction of the age of the universe. 
 
-We know little about the corona of late M dwarfs
+Space weather originates from the stellar corona. The transition from star to brown dwarf is characterized by increasing rotation speed and decreasing coronal emission. The simultaneous surge of radio emission indicates a transition from stellar corona to planet-like magnetosphere at the bottom of the main sequence. Yet, brown dwarfs are regularly detected with energetic flares regardless of their low X-ray luminosity. How these flares are produced in the apparent absence of a solar-type corona is unclear. An intermittent corona is conceivable, similarly XYZ. Perhaps, the rapid rotation of these low-mass objects plays a role, as it governs the dynamo process within.  
 
-Planets around late M dwarfs exists, see TRAPPIST-1 or LHS 3154~\citep{stefansson2023extreme}
+\citet{ilin2021giant} searched fully convective dwarfs observed in TESS, and found four flares on four rapidly rotating ($P<10\,$h) M5-M7 dwarfs. These flares' durations spanned multiple rotation periods of each star, so that the flares were observed to rotate in and out view. The shape of this modulation together with known inclination (combining $P$ and $v \sin i$ from high resolution spectroscopy) allowed them to determine the latitudes of these flares. Surprisingly, these flares were found closer to the pole than to the equator, in contrast to the Sun, where flares are usually found below 30 deg latitude. Their results indicate a preference for flares at high latitudes in these star, as a chance finding was unlikely ($0.1\%$). If flares and associated particle eruptions have a latitude preference, the space weather of a planet in an aligned orbit would be less severe than previously thought. %Are high flaring latitudes  an effect of the dynamo at high rotation speeds? Or is there something special about these stars' coronae that allowed them to produce flares at these latitudes? 
 
-TIC 277 -- edge-on rotation, high-latitude flare
+%Planets around late M dwarfs exists, see TRAPPIST-1 or LHS 3154~\citep{stefansson2023extreme}
 
-Age unknown ... \citep{schneider2018hazmat} classify it as field star, but its FUV and NUV fluxes are on the high end for field stars and would be compatible with the NUV/FUV emission from younger open cluster members as well
+TIC 277539431, TIC 277 for short, is one out of four stars with a high-latitude flare in its TESS observations~\citep{ilin2021giant}. In fact, it showed the highest latitude flare known to date at $81\pm1\,$deg. TIC 277 is an M7 dwarf with a rotation period of 4.56 hours. Its age is unknown. \citet{schneider2018hazmat} classify it as a field star, but its FUV and NUV fluxes are on the high end for field stars and would be compatible with the NUV/FUV emission from younger open cluster members, as well. 
+Is its high flaring latitude an effect of the dynamo at high rotation speeds? Or is there something special about this star's corona that led it to produce are flare at these latitudes? 
+
+In this work, we follow TIC 277 with XMM-Newton for 36 ks, derive its coronal properties, and investigate if producing a high-latitude flare requires an unusual corona, or if it is rather typical of stars of this spectral type and rotation.
 
 
 \begin{table}
@@ -57,8 +55,7 @@ Age unknown ... \citep{schneider2018hazmat} classify it as field star, but its F
          Rotation period & $273.618 \pm 0.007\,$min [1]\\
          $v\sin i$ & $38.6\pm1.0\,$km/s [1] \\
          Inclination & $87.0^{+2.0}_{-2.4}\,$ deg [1]\\
-         Radius & $0.145\pm0.004\,R_\odot$ [1]\\
-         TESS flaring rate $\beta$ &  \\\hline
+         Radius & $0.145\pm0.004\,R_\odot$ [1]\\\hline
         
     \end{tabular}
     \newline\footnotesize
@@ -69,11 +66,29 @@ Age unknown ... \citep{schneider2018hazmat} classify it as field star, but its F
 
 \section{Observations}
 
+\subsection{XMM-Newton}
 XMM-Newton
 
 uninterrupted two rotation periods
 
 MOS1/2 and PN, as well as OM data
+
+\subsection{TESS}
+
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Flux and luminosity}
+
+\subsection{Spectral fitting}
+
+\subsection{Flares}
+
+\subsubsection{XMM-Newton flare}
+
+X-ray energy of $8.4\pm0.7\cdot10^{30}\,$erg
+
+\subsubsection{TESS flares}
 
 \section{Results}
 
@@ -93,33 +108,35 @@ Figure~\ref{fig:lightcurves} shows the time series in X-ray and optical.
 
 show spectra with fits and residuals
 
-\subsection{Rotational variability}
+% \subsection{Rotational variability}
 
-\begin{figure*}[ht!]
-    \script{FIGURE_periodograms_xray_and_optical.py}
-    \begin{centering}
-        \includegraphics[width=0.75\linewidth]{figures/periodogram_xmm_stacked.png}
-        \caption{
-         MOS and PN light curves stacked Lomb-Scargle periodogram.
-        }
-        \label{fig:coherence_hist}
-    \end{centering}
-\end{figure*}
+% \begin{figure*}[ht!]
+%     \script{FIGURE_periodograms_xray_and_optical.py}
+%     \begin{centering}
+%         \includegraphics[width=0.75\linewidth]{figures/periodogram_xmm_stacked.png}
+%         \caption{
+%          MOS and PN light curves stacked Lomb-Scargle periodogram.
+%         }
+%         \label{fig:coherence_hist}
+%     \end{centering}
+% \end{figure*}
 
-\begin{figure*}[ht!]
-    \script{FIGURE_periodograms_xray_and_optical.py}
-    \begin{centering}
-        \includegraphics[width=0.75\linewidth]{figures/periodogram_om.png}
-        \caption{
-         OM light curve Lomb-Scargle periodogram.
-        }
-        \label{fig:coherence_hist}
-    \end{centering}
-\end{figure*}
+% \begin{figure*}[ht!]
+%     \script{FIGURE_periodograms_xray_and_optical.py}
+%     \begin{centering}
+%         \includegraphics[width=0.75\linewidth]{figures/periodogram_om.png}
+%         \caption{
+%          OM light curve Lomb-Scargle periodogram.
+%         }
+%         \label{fig:coherence_hist}
+%     \end{centering}
+% \end{figure*}
 
-periodograms
+% periodograms
 
-present simple model and upper limits from the data
+% present simple model and upper limits from the data
+
+% how large of a loop would that be? convert relative amplitude to flux, convert flux to emission measure, convert emission measure to loop size?
 
 \subsection{Coronal temperature and luminosity}
 
@@ -227,17 +244,25 @@ spectral analysis
 
 APEC+APEC model, grsa abundances
 
-\subsection{Flare}
+\subsection{Flares}
 
 optical and X-ray combined
 
-\section{Discussion}
-\citep{pass2022constraints} on rotational evol of late Ms
-
 FFD power law fit converged after 16000 steps on $\alpha = 1.77_{-0.23}^{+0.29}$.
 
-$\log_10(R_{31.5}$, that is, the rate of flares per day with energies above $\log E_{flare}=10^{31.5}\,$erg, is ca. $-0.7$, consistent with other late M dwarfs~\citep{medina2022galactic}.
 
+\section{Discussion}
+\label{sec:discussion}
+% \citep{pass2022constraints} on rotational evol of late Ms
+
+Is the magnetic activity of the star with the highest known flare latitude known to date is any way unusual? The star is rotating rapidly, even for the typically fast rotating late M dwarfs~\citep{medina2022galactic}. This could lead to an unusual manifestation of the stellar dynamo that produces high latitude flares that other dynamo states cannot generate. With TESS and XMM-Newton, we can now evaluate if this suspected exceptionality is reflected in the star's magnetic activity and coronal properties. We compare its flaring activity, coronal luminosity and temperatures to stars of similar spectral type and rotation rates
+
+\subsection{Flaring activity}
+\label{sec:discussion:flares}
+
+$\log_10(R_{31.5}$, that is, the rate of flares per day with energies above $\log E_{flare}=10^{31.5}\,$erg, is ca. $-1.XXXX$, consistent with other saturated late M dwarfs~\citep{medina2022galactic}.
+
+Compared to the X-ray luminosities of M7 dwarfs among the late M dwarfs observed by eROSITA in \citet{stelzer2022first}, TIC 277 appears mildly underluminous. This could be an effect of its fast rotation, and consequent supersaturation as in \citet{magaudda2022first}, but we lack the rotation periods to confirm this. 
 
 \begin{figure}
     \script{FIGURE_tess_ffd.py}
@@ -249,6 +274,22 @@ $\log_10(R_{31.5}$, that is, the rate of flares per day with energies above $\lo
         \label{fig:ffd}
     \end{centering}
 \end{figure}
+
+
+\begin{figure}
+    \script{FIGURE_r315_comparison.py}
+    \begin{centering}
+        \includegraphics[width=\linewidth]{figures/r315_prot.png}
+        \caption{
+         R31.5 against rotation period for fully convective M dwarfs.
+        }
+        \label{fig:r315}
+    \end{centering}
+\end{figure}
+
+
+\subsection{X-ray luminosity}
+\label{sec:discussion:xraylum}
 
 \begin{figure}[ht!]
     \script{FIGURE_lx_lbol.py}
@@ -262,13 +303,28 @@ $\log_10(R_{31.5}$, that is, the rate of flares per day with energies above $\lo
 \end{figure}
 
 
+The $L_X/L_{\rm bol}$ distributions in \citet{cook2014trends, wright2016solartype} grow sparse around $Ro\sim10^{-3}$. Using eROSITA data, \citet{magaudda2022first} cover both fully convective and rapidly rotating M dwarfs, and find a downward trend with decreasing $Ro$, pointing toward a supersaturation of the corona at fast rotation speeds, as has been conjectured before~\citep{jeffries2011investigating,ramsay2020tess}. \citet{jeffries2011investigating} suggest that the cause for supersaturation is centrifugal stripping of the corona, but \citet{reiners2022magnetism} show that if magnetic field increases, X-ray increases likewise with no sign of a break. They conclude that the trend is rather due to the underlying dynamo.
+
+\cite{brown2023coronal}
+
+\cite{johnstone2012soft}
+
+
+\subsection{Coronal temperature}
+\label{sec:discussion:xraytemp}
+
+
+
+
 \section{Summary and Conclusions}
 
 
-\section{Acknowledgements}
+\section*{Acknowledgements}
 \citep{lightkurvecollaboration2018lightkurve}
+Based on observations obtained with XMM-Newton, an ESA science mission with instruments and contributions directly funded by ESA Member States and NASA.
 
-\section{Data Availability}
+DLR
+\section*{Data Availability}
 
 
 \bibliography{references}
