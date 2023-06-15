@@ -74,8 +74,8 @@ if __name__ == "__main__":
     
     # TIC 277 data
     df = df[df["label"] == "PN (all)"]
-    plt.errorbar(df.Rossby, df.Lx_Lbol, 
-                xerr=[df.Rossby-df.Rossby_low,df.Rossby_high-df.Rossby], 
+    plt.errorbar(df.Rossby_wright18, df.Lx_Lbol, 
+                xerr=[df.Rossby_wright18-df.Rossby_low_wright18,df.Rossby_high_wright18-df.Rossby_wright18], 
                 yerr=df.e_Lx_Lbol, fmt='o', label="TIC 277", alpha=1, c="k")
     
     # Wright et al. 2011 data
