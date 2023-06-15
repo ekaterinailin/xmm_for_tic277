@@ -77,6 +77,8 @@ if __name__ == "__main__":
                     (237880881, 3060, 0.275),
                     (452922110, 2680, 0.137),
                     (44984200, 2810, 0.145)]
+    
+    
 
     for tic, teff, radius in tic_teff_rad:
 
@@ -126,7 +128,7 @@ if __name__ == "__main__":
             plt.plot(x, pl, linestyle="dashed", c= "grey")
 
         # FFD
-        plt.scatter(ed, freq, c="k")
+        plt.scatter(ed, freq, c="k", label="TESS")
 
         # power law
         ffd.plot_powerlaw(ax, c="olive", label=label)

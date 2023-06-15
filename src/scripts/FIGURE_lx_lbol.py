@@ -1,3 +1,17 @@
+"""
+Python 3.8 - UTF-8
+
+X-ray Loops
+Ekaterina Ilin, 2023
+MIT License
+
+---
+
+This script plots the Lx/Lbol vs Rossby number for TIC 277 and 
+the Wright et al. 2011 sample.
+"""
+
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import paths
