@@ -26,16 +26,17 @@ if __name__ == "__main__":
     om.rate = om.rate / np.nanmedian(om.rate)
 
     # read in X-ray data
-    xray = pd.read_csv(paths.data / "stacked_xray_lightcurve.csv")
-    xray.time = xray.time / 3600. / 24.
+    xray = pd.read_csv(paths.data / "corrected_merged_epic_lc.csv")
+    xray["TIME"] = xray["TIME"] / 3600. / 24.
 
     # make the figure
 
     fix, ax = plt.subplots(2, 1, sharex=True, figsize=(8, 6),
                         gridspec_kw={'height_ratios': [2, 3],
                                             'wspace':0, 'hspace':0})
-    ax[0].scatter(om.time, om.rate, label="OM", s=2)
-    ax[1].plot(xray.time, xray.normalized_flux + 1., label="PN + MOS1 + MOS2", c="olive")
+    ax[0].scatter(om.time, om.rate, label="OM", s=2, alpha=0.8)
+    ax[1].errorbar(xray["TIME"], xray["RATE"], yerr=xray["ERROR"],
+                   label="PN + MOS1 + MOS2", c="olive", alpha=0.8, lw=1.5)
     
     
     # add inset
@@ -45,20 +46,20 @@ if __name__ == "__main__":
     axins.set_xlim(om.time[l], om.time[r])
     axins.set_ylim(0, 3)
     patch, lines = ax[0].indicate_inset_zoom(axins)
-    # [line.set(visible=False) for line in lines]
-
+   
 
     # layout
     ax[0].set_ylim(0,3)
+    ax[0].axhline(1, c="grey")
 
     for a in ax:
-        a.axhline(1, c="grey")
-        a.set_xlim(om.time.min(), xray.time.max())
+        
+        a.set_xlim(om.time.min(), xray["TIME"].max())
         a.legend(loc=1, frameon=True)
 
 
     ax[0].set_ylabel("normalized flux")
-    ax[1].set_ylabel("normalized flux")
+    ax[1].set_ylabel("background subtracted flux <10 keV [cts/s]")
     ax[1].set_xlabel("time [days]")
 
     plt.tight_layout()

@@ -134,11 +134,11 @@ if __name__ == "__main__":
         ffd.plot_powerlaw(ax, c="olive", label=label)
 
         # layout
-        plt.legend(loc=1, frameon=False)
+        plt.legend(loc=1, frameon=False, fontsize=12)
         plt.xscale("log")
         plt.yscale("log")
-        plt.xlabel(r"$E_{flare}$ [erg]")
-        plt.ylabel(r"flares per day above $E_{flare}$")
+        plt.xlabel(r"$E_{flare}$ [erg]", fontsize=12)
+        plt.ylabel(r"flares per day above $E_{flare}$", fontsize=12)
         plt.tight_layout()
 
         # save to file
