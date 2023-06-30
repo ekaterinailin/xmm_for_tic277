@@ -82,13 +82,20 @@ def tex_one_err(val, err):
 if __name__ == "__main__":
 
     # read in the data
-    df = pd.read_csv(paths.data / "apec2_results.csv")
+    df = pd.read_csv(paths.data / "apec_apec_results.csv")
+    df["model"] = "APEC+APEC"
     print(df.shape)
-    dfjoint = pd.read_csv(paths.data / "apec2_joint_results.csv")
-    print(dfjoint.shape)
+    dfjoint0 = pd.read_csv(paths.data / "vapec_vapec_results.csv")
+    dfjoint0["model"] = "VAPEC+VAPEC"
+    dfjoint = pd.read_csv(paths.data / "apec_apec_joint.csv")
+    dfjoint["model"] = "APEC+APEC"
+    dfjoint2 = pd.read_csv(paths.data / "vapec_vapec_joint.csv")
+    dfjoint2["model"] = "VAPEC+VAPEC"
+
+    print(dfjoint.columns)
     # append the joint results
-    df = pd.concat([df, dfjoint], ignore_index=True)
-    print(df.shape)
+    df = pd.concat([df, dfjoint0, dfjoint, dfjoint2], ignore_index=True)
+    print(df.columns)
 
     # values with one error
     cols2 = [("Lx_erg_s","Lx_erg_s_err"),
@@ -136,13 +143,14 @@ if __name__ == "__main__":
     # delete xtra columns
     del df["detector"]
     del df["cut"]
-    del df["Rossby"]
-    del df["Rossby_high"]
-    del df["Rossby_low"]
+
+    for col in df.columns:
+        if "Rossby" in col:
+            del df[col]
 
 
     # convert to LaTeX
-    df = df.sort_values("label")
+    df = df.sort_values("model")
     string = df.to_latex(escape=False,index=False)
 
     # layout

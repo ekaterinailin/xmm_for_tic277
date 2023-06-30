@@ -89,12 +89,12 @@ if __name__ == "__main__":
     # plot our values and annotate with SpT
     txts = []
     for i, d in ffd_vals.iterrows():
-
-        plt.scatter([d.Prot_days],[d.r315],c="k",s=35,marker="s")
-        plt.scatter([d.Prot_days],[d.r315],c="magenta",s=20,marker="s")
-        
-        txts.append(plt.text( d.Prot_days, d.r315, d.SpT,
-                        fontsize=11,  color="k"))
+        if d.TIC == 277539431:
+            plt.scatter([d.Prot_days],[d.r315],c="k",s=35,marker="s")
+            plt.scatter([d.Prot_days],[d.r315],c="magenta",s=20,marker="s")
+            
+            txts.append(plt.text( d.Prot_days, d.r315, "TIC 277",
+                            fontsize=11,  color="k"))
         
     # legend and layout    
     plt.legend(loc=(1.05,0.3), frameon=False, )
