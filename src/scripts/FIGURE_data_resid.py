@@ -39,8 +39,8 @@ def plot_data_resid_3(file):
                                         'wspace':0, 'hspace':0})
     
     for din, rin, c, label, m in zip(d, r, ["olive", "orange", "blue"],
-                                     ["MOS1", "MOS2", "PN"],
-                                     ["o", "s", "x"]):
+                                           ["PN", "MOS1", "MOS2"],
+                                           ["o", "s", "x"]):
 
         data = din.astype(float)
         resid = rin.drop("model [counts/s/keV]", axis=1).astype(float)
@@ -59,21 +59,23 @@ def plot_data_resid_3(file):
         ax[1].errorbar(resid["E [keV]"], resid["flux [counts/s/keV]"],
                     yerr=resid["e_flux"], fmt=m, markersize=6, c=c)
         
+        
       # zero line for residuals
     ax[1].axhline(0,c="k")
 
     # labels
     ax[1].set_xlabel("E [keV]")
-    ax[0].set_ylabel("flux [counts/s/keV]")
+    ax[0].set_ylabel("flux [counts / s / keV]")
     ax[1].set_ylabel("residuals")
     ax[0].set_ylim(0,)
     ax[0].legend(loc=1, frameon=False, fontsize=12)
 
     # x limits
     for a in ax:
-        first = data["E [keV]"].values[0] - data["dE"].values[0]
-        last = data["E [keV]"].values[-1] + data["dE"].values[-1]
-        a.set_xlim(first, last)
+        # first = data["E [keV]"].values[0] - data["dE"].values[0]
+        # last = data["E [keV]"].values[-1] + data["dE"].values[-1]
+        a.set_xlim(0.25, 5)
+
         a.set_xscale("log")
 
 

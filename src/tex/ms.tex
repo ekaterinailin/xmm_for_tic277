@@ -78,20 +78,27 @@ MOS1/2 and PN, as well as OM data
 \section{Methods}
 \label{sec:methods}
 
-\subsection{Flux and luminosity}
+
+
 
 \subsection{Spectral fitting}
-We fitted a two-temperature VAPEC+VAPEC model to the joint PN and MOS spectra, using solar abundances from GRSA, but adjusting to an Fe/0=.6 ratio, which is more typical of M dwarfs. An APEC+APEC model leads to similar results with a XXXX Chi-square value. 
-
-
+We use XSPEC~\citep{arnaud1996xspec} to fit a two-temperature additive APEC~\citep{smith2001collisional,foster2012updated} model to the joint PN and MOS spectra, using solar abundances from~\citet{grevesse1998standard}, but adjusting to an Fe/0=.6 ratio, which is more typical of M dwarfs~\citep{wood2018chandra}. From the same fit, but to PN data only, we derived the flux and X-ray luminosity in the 0.2-12 keV band. 
 
 \subsection{Flares}
 
 \subsubsection{XMM-Newton flare}
 
-X-ray energy of $8.4\pm0.7\cdot10^{30}\,$erg
+We fitted the soft X-ray light curve using constant flux with a flare, applying the~\citet{davenport2014kepler} optical flare model that captures the fast rise and exponential decay of the flare seen with XMM-Newton. From the fit, we extracted the baseline flux against which we measured the equivalent duration $ED$ of the flare
 
+ED EQUATION
+
+We then converted ED to flare energy in the 0.2-12 keV band by multiplying with $L_X$. 
+
+Lacking calibration for the white light filter in OM, we used the effective width of the passband to extract the conversion factor for a 10kK flare to obtain the corrected $ED$, which we could multiply with $L_{\rm bol}$ to arrive at the bolometric flare energy. $L_{\rm bol}$ was derived using G and J magnitudes, converting J to V mag, then using the bolometric correction from
 \subsubsection{TESS flares}
+
+Similar to the OM flare, we used the TESS response curve to obtain the conversion factor in the redder optical filter of TESS, and convert to bolometric flare energy.
+
 
 \section{Results}
 
@@ -111,136 +118,120 @@ Figure~\ref{fig:lightcurves} shows the time series in X-ray and optical.
 
 show spectra with fits and residuals
 
-% \subsection{Rotational variability}
-
-% \begin{figure*}[ht!]
-%     \script{FIGURE_periodograms_xray_and_optical.py}
-%     \begin{centering}
-%         \includegraphics[width=0.75\linewidth]{figures/periodogram_xmm_stacked.png}
-%         \caption{
-%          MOS and PN light curves stacked Lomb-Scargle periodogram.
-%         }
-%         \label{fig:coherence_hist}
-%     \end{centering}
-% \end{figure*}
-
-% \begin{figure*}[ht!]
-%     \script{FIGURE_periodograms_xray_and_optical.py}
-%     \begin{centering}
-%         \includegraphics[width=0.75\linewidth]{figures/periodogram_om.png}
-%         \caption{
-%          OM light curve Lomb-Scargle periodogram.
-%         }
-%         \label{fig:coherence_hist}
-%     \end{centering}
-% \end{figure*}
-
-% periodograms
-
-% present simple model and upper limits from the data
-
-% how large of a loop would that be? convert relative amplitude to flux, convert flux to emission measure, convert emission measure to loop size?
 
 \subsection{Coronal temperature and luminosity}
 
 % From the proposal: $F_X=2.7^{-13}$ erg/s/cm$^2$, $L_X=6\cdot10^27$ erg/s (update with new eROSITA data) -- 1 oom above the measured XMM values.
-\begin{table*}
-% \movetableright=-20mm
-\footnotesize
-    \script{TABLE_specfits.py}
-    \caption{XSPEC fits to PN, MOS1/MOS2 and joint data also.}
-    \input{output/specfit.tex}
-        \label{tab:specfit}
-\end{table*}
+
+% \begin{table*}
+% % \movetableright=-20mm
+% \footnotesize
+%     \script{TABLE_specfits.py}
+%     \caption{XSPEC fits to PN, MOS1/MOS2 and joint data also.}
+%     \input{output/specfit.tex}
+%         \label{tab:specfit}
+% \end{table*}
+
+% \begin{figure}
+%     \script{FIGURE_data_resid.py}
+%     \begin{centering}
+%         \includegraphics[width=\linewidth]{figures/pn_onlyflare_data_resid.png}
+%         \caption{
+%          Flare only PN Double apec spectrum fit.
+%         }
+%         \label{fig:spec_pn_onlyflare}
+%     \end{centering}
+% \end{figure}
+
+% \begin{figure}
+%     \script{FIGURE_data_resid.py}
+%     \begin{centering}
+%         \includegraphics[width=\linewidth]{figures/pn_noflare_data_resid.png}
+%         \caption{
+%          No flare PN Double apec spectrum fit.
+%         }
+%         \label{fig:spec_pn_noflare}
+%     \end{centering}
+% \end{figure}
+
+% \begin{figure}
+%     \script{FIGURE_data_resid.py}
+%     \begin{centering}
+%         \includegraphics[width=\linewidth]{figures/pn_data_resid.png}
+%         \caption{
+%          PN Double apec spectrum fit.
+%         }
+%         \label{fig:spec_pn}
+%     \end{centering}
+% \end{figure}
+
+% \begin{figure}
+%     \script{FIGURE_data_resid.py}
+%     \begin{centering}
+%         \includegraphics[width=\linewidth]{figures/mos1_data_resid.png}
+%         \caption{
+%          MOS1 Double apec spectrum fit.
+%         }
+%         \label{fig:spec_mos1}
+%     \end{centering}
+% \end{figure}
+
+% \begin{figure}
+%     \script{FIGURE_data_resid.py}
+%     \begin{centering}
+%         \includegraphics[width=\linewidth]{figures/mos2_data_resid.png}
+%         \caption{
+%          MOS2 Double apec spectrum fit.
+%         }
+%         \label{fig:spec_mos2}
+%     \end{centering}
+% \end{figure}
+
+% \begin{figure}
+%     \script{FIGURE_data_resid.py}
+%     \begin{centering}
+%         \includegraphics[width=\linewidth]{figures/joint_onlyflare_data_resid.png}
+%         \caption{
+%          Flare only joint Double APEC spectrum fit.
+%         }
+%         \label{fig:spec_joint_onlyflare}
+%     \end{centering}
+% \end{figure}
+
+
+% \begin{figure}
+%     \script{FIGURE_data_resid.py}
+%     \begin{centering}
+%         \includegraphics[width=\linewidth]{figures/joint_noflare_data_resid.png}
+%         \caption{
+%          Joint Double APEC spectrum fit with flare excluded.
+%         }
+%         \label{fig:spec_joint_noflare}
+%     \end{centering}
+% \end{figure}
+
+% \begin{figure}
+%     \script{FIGURE_data_resid.py}
+%     \begin{centering}
+%         \includegraphics[width=\linewidth]{figures/joint_all_data_resid.png}
+%         \caption{
+%          Joint Double APEC spectrum fit.
+%         }
+%         \label{fig:spec_joint_all}
+%     \end{centering}
+% \end{figure}
 
 \begin{figure}
     \script{FIGURE_data_resid.py}
     \begin{centering}
-        \includegraphics[width=\linewidth]{figures/pn_onlyflare_data_resid.png}
+        \includegraphics[width=\linewidth]{figures/joint_vapec_fe06_data_resid.png}
         \caption{
-         Flare only PN Double apec spectrum fit.
-        }
-        \label{fig:spec_pn_onlyflare}
-    \end{centering}
-\end{figure}
-
-\begin{figure}
-    \script{FIGURE_data_resid.py}
-    \begin{centering}
-        \includegraphics[width=\linewidth]{figures/pn_noflare_data_resid.png}
-        \caption{
-         No flare PN Double apec spectrum fit.
-        }
-        \label{fig:spec_pn_noflare}
-    \end{centering}
-\end{figure}
-
-\begin{figure}
-    \script{FIGURE_data_resid.py}
-    \begin{centering}
-        \includegraphics[width=\linewidth]{figures/pn_data_resid.png}
-        \caption{
-         PN Double apec spectrum fit.
-        }
-        \label{fig:spec_pn}
-    \end{centering}
-\end{figure}
-
-\begin{figure}
-    \script{FIGURE_data_resid.py}
-    \begin{centering}
-        \includegraphics[width=\linewidth]{figures/mos1_data_resid.png}
-        \caption{
-         MOS1 Double apec spectrum fit.
-        }
-        \label{fig:spec_mos1}
-    \end{centering}
-\end{figure}
-
-\begin{figure}
-    \script{FIGURE_data_resid.py}
-    \begin{centering}
-        \includegraphics[width=\linewidth]{figures/mos2_data_resid.png}
-        \caption{
-         MOS2 Double apec spectrum fit.
-        }
-        \label{fig:spec_mos2}
-    \end{centering}
-\end{figure}
-
-\begin{figure}
-    \script{FIGURE_data_resid.py}
-    \begin{centering}
-        \includegraphics[width=\linewidth]{figures/joint_onlyflare_data_resid.png}
-        \caption{
-         Flare only joint Double APEC spectrum fit.
-        }
-        \label{fig:spec_joint_onlyflare}
-    \end{centering}
-\end{figure}
-
-
-\begin{figure}
-    \script{FIGURE_data_resid.py}
-    \begin{centering}
-        \includegraphics[width=\linewidth]{figures/joint_noflare_data_resid.png}
-        \caption{
-         Joint Double APEC spectrum fit with flare excluded.
-        }
-        \label{fig:spec_joint_noflare}
-    \end{centering}
-\end{figure}
-
-\begin{figure}
-    \script{FIGURE_data_resid.py}
-    \begin{centering}
-        \includegraphics[width=\linewidth]{figures/joint_all_data_resid.png}
-        \caption{
-         Joint Double APEC spectrum fit.
+         Joint Double APEC spectrum fit with Fe/0$=0.6$.
         }
         \label{fig:spec_joint_all}
     \end{centering}
 \end{figure}
+
 
 
 spectral analysis
@@ -249,9 +240,17 @@ spectral analysis
 
 \subsection{Flares}
 
-optical and X-ray combined
+X-ray energy of $8.4\pm0.7\cdot10^{30}\,$erg
+OM energy of XXXX
+
+Ratio of OM and EPIC flare compared to \citet{guarcello2019simultaneous} simultaneous K2 and XMM flares
+
+In TESS, we found 8 flares
 
 FFD power law fit converged after 16000 steps on $\alpha = 1.77_{-0.23}^{+0.29}$.
+
+The OM flare energy fits the extension of TESS' flare frequency distributions to lower energies within uncertainties on the power law fit. Roughly one flare per day of the order of the observed one or above can therefore be expected in future X-ray observations of TIC 277.
+
 
 
 \section{Discussion}
@@ -306,7 +305,8 @@ Compared to the X-ray luminosities of M7 dwarfs among the late M dwarfs observed
 \end{figure}
 
 
-The $L_X/L_{\rm bol}$ distributions in \citet{cook2014trends, wright2016solartype} grow sparse around $Ro\sim10^{-3}$. Using eROSITA data, \citet{magaudda2022first} cover both fully convective and rapidly rotating M dwarfs, and find a downward trend with decreasing $Ro$, pointing toward a supersaturation of the corona at fast rotation speeds, as has been conjectured before~\citep{jeffries2011investigating,ramsay2020tess}. \citet{jeffries2011investigating} suggest that the cause for supersaturation is centrifugal stripping of the corona, but \citet{reiners2022magnetism} show that if magnetic field increases, X-ray increases likewise with no sign of a break. They conclude that the trend is rather due to the underlying dynamo.
+
+Using eROSITA data, \citet{magaudda2022first} cover both fully convective and rapidly rotating M dwarfs, and find a downward trend with decreasing rotation period, pointing toward a supersaturation of the corona at fast rotation speeds, as has been conjectured before~\citep{jeffries2011investigating,ramsay2020tess}. \citet{jeffries2011investigating} suggest that the cause for supersaturation is centrifugal stripping of the corona, but \citet{reiners2022magnetism} show that if magnetic field increases, X-ray increases likewise with no sign of a break. They conclude that the trend is rather due to the underlying dynamo.
 
 \cite{brown2023coronal}
 
@@ -315,6 +315,8 @@ The $L_X/L_{\rm bol}$ distributions in \citet{cook2014trends, wright2016solartyp
 
 \subsection{Coronal temperature}
 \label{sec:discussion:xraytemp}
+
+3 and 13 MK
 
 
 
