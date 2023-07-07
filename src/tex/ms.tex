@@ -140,14 +140,14 @@ show spectra with fits and residuals
 
 % From the proposal: $F_X=2.7^{-13}$ erg/s/cm$^2$, $L_X=6\cdot10^27$ erg/s (update with new eROSITA data) -- 1 oom above the measured XMM values.
 
-\begin{table*}
+\begin{table}
 % \movetableright=-20mm
-\footnotesize
+\centering
     \script{TABLE_specfits.py}
-    \caption{XSPEC fits to PN, MOS1/MOS2 and joint data also.}
+    \caption{XSPEC fits EPIC spectra for different subsets of observations.}
     \input{output/mcmc_specfit.tex}
         \label{tab:specfit}
-\end{table*}
+\end{table}
 
 % \begin{figure}
 %     \script{FIGURE_data_resid.py}
