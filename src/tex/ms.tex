@@ -98,7 +98,7 @@ Since 2018, TESS has been supplying publicly available red-optical high-precisio
 
 We used 5 Sectors of optical monitoring of TIC 277 in 2-minute cadence by TESS. Sector 12 was observed in May 2019, Sectors 37 and 39 in April and June 2021, and Sectors 64 and 65 in April and May 2023. 
 
-We used AltaiPony~\citep{ilin2021altaipony} to de-trend the light curves using the custom de-trending function \texttt{custom\_detrending}\footnote{see also the documentation online at \url{https://altaipony.readthedocs.io/en/latest/tutorials/detrend.html}, accessed on July 3, 2023}, detailed in~\citet{ilin2022searching}. The procedure includes 3rd order spline fitting of coarse trends, followed by iterative sine fitting to remove rotational modulation, and the two Savitzky-Golay filters with a 6h and 3h window, respectively to remove aperiodic short term trends, while masking outliers above $>2.5\sigma$, as well as the six-fold of consecutive orginally masked data points following the orginal mask, and finally, additional 3 adjacent data point before and after the so expanded mask. 
+We used AltaiPony~\citep{ilin2021altaipony} to de-trend the light curves using the custom de-trending function \texttt{custom\_detrending}\footnote{see also the documentation online at \url{https://altaipony.readthedocs.io/en/latest/tutorials/detrend.html}, accessed on July 3, 2023}, detailed in~\citet{ilin2022searching}. The procedure includes 3rd order spline fitting of coarse trends, followed by iterative sine fitting to remove rotational modulation, and the two Savitzky-Golay filters with a 6h and 3h window, respectively to remove aperiodic short term trends, while masking outliers above $>2.5\sigma$, as well as the six-fold of consecutive orginally masked data points following the original mask, and finally, additional 3 adjacent data point before and after the so expanded mask. 
 
 In the de-trended light curves, we searched for flare candidates as at least 3 consecutive $>3\sigma$ outliers above the noise level in the masked light curve, filling in the noise level inside the masked areas with the mean of the noise levels adjecent to the mask. To the series of outliers, we kept adding data points to the flare candidate until a data point falls below $XXXX\sigma$. 
 
@@ -107,9 +107,7 @@ In the de-trended light curves, we searched for flare candidates as at least 3 c
 
 
 \subsection{Spectral fitting}
-We use XSPEC version 12.12.1~\citep{arnaud1996xspec} to fit a two-temperature additive APEC~\citep{smith2001collisional,foster2012updated} model to the joint PN and MOS spectra, using solar abundances from~\citet{grevesse1998standard}, but adjusting to an Fe/0=.6 ratio, which is more typical of M dwarfs~\citep{wood2018chandra}. From the same fit, but to PN data only, we derived the flux and X-ray luminosity in the 0.2-12 keV band. 
-
-
+We use XSPEC version 12.12.1~\citep{arnaud1996xspec} to fit a two-temperature additive APEC~\citep{smith2001collisional,foster2012updated} model to the joint PN and MOS spectra, using solar abundances from~\citet{grevesse1998standard}, but adjusting to an Fe/0=.6 ratio, which is more typical of M dwarfs~\citep{wood2018chandra}. We analyzed both the full data set, and the quiescent and flaring parts separately. In the full data set, we used the \texttt{bayes} method in XSPEC to assign constant priors within the model's hard limits, and sample the uncertainties using the Markov-Chain-Monte-Carlo (MCMC) method using \texttt{chain} for a total of 30000 steps, discarding the first 5000 as the burn-in phase. From the same fit, but using PN data only, we derived the flux and X-ray luminosity in the 0.2-12 keV band. For the quiescent and flaring portions of the observations, we chose the same procedure, but chose the Gaussian prior distributions for the two coronal temperatures using the full data set as ground truth, and assigning the largest of the upper and lower uncertainties as standard deviation.
 
 \subsection{Flares}
 
@@ -140,7 +138,10 @@ show spectra with fits and residuals
 
 % From the proposal: $F_X=2.7^{-13}$ erg/s/cm$^2$, $L_X=6\cdot10^27$ erg/s (update with new eROSITA data) -- 1 oom above the measured XMM values.
 
-\begin{table}
+From the XMM-Newton EPIC spectra, we could measure the coronal properties of TIC in both its quiescent, and flaring states~(Table~\ref{tab:specfit}). Using the combined quiescent and flaring data, we found a two-temperature VAPEC model to fit better than a one-temperature solution and no worse than a three-temperature solution. The resulting fit~(Fig.~\ref{fig:spec_joint_all}) consists of a cooler and a hotter component of about $3.1\,$MK and $13.4\,$MK, respectively. The emission measure (norm) weighted mean temperature was $8\,$MK. With these temperatures as ground truth, we also fitted two-temperature VAPEC models to the flaring and quiescent portions of the observations separately. The coronal temperatures did not update significantly using either subset, although the quiescent spectrum appeared slightly cooler overall. However, the emission measure weighted mean temperature was about $1.5\,$MK cooler in the quiescent spectrum, and $\sim3.3\,$MK hotter in the flaring spectrum. This suggests that the flaring corona emits the hotter component, while the cooler component corresponds to the quiescent corona. In this interpretation, the presence of a hot component in the quiescent spectrum indicates suggests that TIC 277 is flaring below the detection threshold, consistent with an extrapolation of the flare frequency distribution to lower temperatures~(see the following Section, and Fig.~\ref{fig:ffd}).
+
+From the PN spectra, we measured a soft X-ray flux of $F_X=XXXX$, and a luminosity $L_X=XXXX$ in the $0.2-2\,$keV band. In the broader $0.2-10\,$keV band, we measured XXXX and XXXX.
+ \begin{table}
 % \movetableright=-20mm
 \centering
     \script{TABLE_specfits.py}
@@ -248,11 +249,6 @@ show spectra with fits and residuals
         \label{fig:spec_joint_all}
     \end{centering}
 \end{figure}
-
-
-
-spectral analysis
-
 
 
 \subsection{Flares}
