@@ -81,89 +81,59 @@ def tex_one_err(val, err):
 
 if __name__ == "__main__":
 
-    # read in the data
-    df = pd.read_csv(paths.data / "apec_apec_results.csv")
-    df["model"] = "APEC+APEC"
-    print(df.shape)
-    dfjoint0 = pd.read_csv(paths.data / "vapec_vapec_results.csv")
-    dfjoint0["model"] = "VAPEC+VAPEC"
-    dfjoint = pd.read_csv(paths.data / "apec_apec_joint.csv")
-    dfjoint["model"] = "APEC+APEC"
-    dfjoint2 = pd.read_csv(paths.data / "vapec_vapec_joint.csv")
-    dfjoint2["model"] = "VAPEC+VAPEC"
+    df = pd.read_csv(paths.data / "mcmc_results.csv", index_col=0)
 
-    print(dfjoint.columns)
-    # append the joint results
-    df = pd.concat([df, dfjoint0, dfjoint, dfjoint2], ignore_index=True)
-    print(df.columns)
+    # remove extra columns
+    del df["symb"]
+    del df["norm_ratio"]
+    del df["e_norm_ratio"]
 
-    # values with one error
-    cols2 = [("Lx_erg_s","Lx_erg_s_err"),
-            ("Lx_Lbol","e_Lx_Lbol") ]
+    for c in df.columns:
+        if "_err" in c:
+            del df[c]
 
-    # values with up and lower 90% errors
-    cols_mid_low_high = [("flux_erg_s_cm2","flux_erg_s_cm2_low","flux_erg_s_cm2_high"),
-                        ("T_MK_1","T_MK_1_low","T_MK_1_high"),
-                        ("T_MK_5","T_MK_5_low","T_MK_5_high"),]
-    
     # rename columns
-    mapcolnames = {"flux_erg_s_cm2":r"$10^{-14} F_X$ [erg/s/cm$^2$]",
-                    "T_MK_1":r"$T_1$ [MK]",
-                    "T_MK_5":r"$T_2$ [MK]",
-                    "Lx_erg_s":r"$10^{26} L_X$ [erg/s]",
-                    "Lx_Lbol":r"$10^{-4} L_X/L_{bol} $"}
-
-    # convert to new units
-    df["Lx_Lbol"] = 1e4 * df["Lx_Lbol"]
-    df["e_Lx_Lbol"] = 1e4 * df["e_Lx_Lbol"]
-    df["Lx_erg_s"] = 1e-26 * df["Lx_erg_s"]
-    df["Lx_erg_s_err"] = 1e-26 * df["Lx_erg_s_err"]
-    df["flux_erg_s_cm2"] = 1e14 * df["flux_erg_s_cm2"]
-    df["flux_erg_s_cm2_low"] = 1e14 * df["flux_erg_s_cm2_low"]
-    df["flux_erg_s_cm2_high"] = 1e14 * df["flux_erg_s_cm2_high"]
-
-    # convert to latex strings
-    for col, err in cols2:
-     
-        newname = mapcolnames[col]
-        df[newname] = tex_one_err(df[col], df[err])
-        del df[col]
-        del df[err]
-
-    # convert to latex strings
-    for col, low, up in cols_mid_low_high:
-        
-        newname = mapcolnames[col]
-        df[newname] = tex_up_low(df[col], df[up]-df[col], df[low]-df[col])
-        del df[col]
-        del df[up]
-        del df[low]
-
-
-    # delete xtra columns
-    del df["detector"]
-    del df["cut"]
-
-    for col in df.columns:
-        if "Rossby" in col:
-            del df[col]
-
-
+    mapcolnames = {'T1': r'$T_{cool}$ [MK]',
+                   'T2': r'$T_{hot}$ [MK]',
+                   'norm1': r'$norm_{cool}$',
+                   'norm2': r'$norm_{hot}$',
+                   'weighted_mean_T': r'$T_{mean}$ [MK]'}
+    
     # convert to LaTeX
-    df = df.sort_values("model")
-    string = df.to_latex(escape=False,index=False)
+    for col in ["T1", "T2", "norm1", "norm2"]:
+
+        df[f"{col}_uperr"] = df[f"{col}_84"] - df[f"{col}_50"]
+        df[f"{col}_lowerr"] = df[f"{col}_16"] - df[f"{col}_50"]
+
+        newname = mapcolnames[col]
+        df[newname] = tex_up_low(df[f"{col}_50"], df[f"{col}_uperr"], df[f"{col}_lowerr"])
+
+        del df[f"{col}_84"]
+        del df[f"{col}_50"]
+        del df[f"{col}_16"]
+        del df[f"{col}_uperr"]
+        del df[f"{col}_lowerr"]
+
+
+    col = "weighted_mean_T"
+    df[mapcolnames[col]] = tex_one_err(df[col], df[f"e_{col}"])
+    del df[col]
+    del df[f"e_{col}"]
+
+    string = df.T.to_latex(escape=False,index=True)
 
     # layout
     string = string.replace("midrule","hline")
     string = string.replace("toprule","hline")
     string = string.replace("bottomrule","hline")
-    string = string.replace("label","Detector (Cut)")
-    string = string.replace("$nan[nan]$","-")
-    string = string.replace(r"$nan^{nan}_{nan}$","-")
+   
 
     # write to file
-    path = paths.output / f"specfit.tex"
+    path = paths.output / f"mcmc_specfit.tex"
     print("Write to file: ", path)
 
     with open(path, "w") as f:
         f.write(string)
+
+
+    
