@@ -36,7 +36,7 @@ Space weather originates from the stellar corona. The transition from star to br
 TIC 277539431, TIC 277 for short, is one out of four stars with a high-latitude flare in its TESS observations~\citep{ilin2021giant}. In fact, it showed the highest latitude flare known to date at $81\pm1\,$deg. TIC 277 is an M7 dwarf with a rotation period of 4.56 hours. Its age is unknown. \citet{schneider2018hazmat} classify it as a field star, but its FUV and NUV fluxes are on the high end for field stars and would be compatible with the NUV/FUV emission from younger open cluster members, as well. 
 Is its high flaring latitude an effect of the dynamo at high rotation speeds? Or is there something special about this star's corona that led it to produce are flare at these latitudes? 
 
-In this work, we follow TIC 277 with XMM-Newton for 36 ks, derive its coronal properties, and investigate if producing a high-latitude flare requires an unusual corona, or if it is rather typical of stars of this spectral type and rotation.
+In this work, we follow TIC 277 with XMM-Newton for 36 ks and use optical monitoring from the Transiting Exoplanet Survey Satellite~(TESS,~\citealt{ricker2015transiting}) to measure its coronal properties, and investigate if producing a high-latitude flare requires an unusual corona, or if it is rather typical of stars of this spectral type and rotation.
 
 
 \begin{table}
@@ -67,22 +67,49 @@ In this work, we follow TIC 277 with XMM-Newton for 36 ks, derive its coronal pr
 \section{Observations}
 
 \subsection{XMM-Newton}
-XMM-Newton
+XMM-Newton observed TIC 277 for 36 ks, i.e. two full rotation periods of the star, on August 5, 2022 (Proposal 090120; PI: E. Ilin). We used the EPIC instruments aboard XMM-Newton, i.e., MOS1/2 and PN, that cover the soft X-ray band between 0.2-12 keV. 
 
-uninterrupted two rotation periods
+\subsubsection{Time series with EPIC and OM}
 
-MOS1/2 and PN, as well as OM data
+ We extracted the events time series from EPIC using XMM SAS version 20 using the \texttt{evselect} task. We selected a circular source region with 20 arcsec radius on all detectors, and a circular source-free background region 120 and 90 arcsec in MOS and PN, respectively. We used the \texttt{epiclccorr} task in XMM SAS to correct for energy and time dependent loss of events\footnote{\url{https://heasarc.gsfc.nasa.gov/docs/xmm/sas/help/epiclccorr/node3.html}, accessed on July 3, 2023}, and extract a soft X-ray time series with a time binning of 200 s.
+
+Simultaneously, we used the optical monitor (OM) aboard XMM-Newton, to monitor TIC 277 in its white light filter at $10$\,s cadence. The OM white light filter is centered on $XXXX\AA$, with an equivalent width of $XXXX\AA$. We used the \texttt{omfchain} in XMM SAS to extract the 8 individual light curves.
+
+Fig.~\ref{fig:lightcurves} shows the time series using the combined PN and MOS time series together with the OM light curve.
+
+\begin{figure*}[ht!]
+    \script{FIGURE_lightcurves.py}
+    \begin{centering}
+        \includegraphics[width=0.75\linewidth]{figures/lightcurves.png}
+        \caption{
+         Top panel: Optical Monitoring (OM) light curve. Bottom panel: X-ray (PN, MOS1 and MOS2 combined) light curve. 
+        }
+        \label{fig:lightcurves}
+    \end{centering}
+\end{figure*}
+
+
+\subsubsection{EPIC Spectra}
+From the EPIC observations, we extracted spectra using \texttt{evselect,epatplot,backscale,rmfgen,arfgen}, and \texttt{grppha}. 
 
 \subsection{TESS}
+
+Since 2018, TESS has been supplying publicly available red-optical high-precision time series photometry in an ongoing all-sky survey. Each uninterrupted observing Sector provides an approximately 27 day long light curve in a broad $XXXX$-$XXXX\AA$ band pass. 
+
+We used 5 Sectors of optical monitoring of TIC 277 in 2-minute cadence by TESS. Sector 12 was observed in May 2019, Sectors 37 and 39 in April and June 2021, and Sectors 64 and 65 in April and May 2023. 
+
+We used AltaiPony~\citep{ilin2021altaipony} to de-trend the light curves using the custom de-trending function \texttt{custom\_detrending}\footnote{see also the documentation online at \url{https://altaipony.readthedocs.io/en/latest/tutorials/detrend.html}, accessed on July 3, 2023}, detailed in~\citet{ilin2022searching}. The procedure includes 3rd order spline fitting of coarse trends, followed by iterative sine fitting to remove rotational modulation, and the two Savitzky-Golay filters with a 6h and 3h window, respectively to remove aperiodic short term trends, while masking outliers above $>2.5\sigma$, as well as the six-fold of consecutive orginally masked data points following the orginal mask, and finally, additional 3 adjacent data point before and after the so expanded mask. 
+
+In the de-trended light curves, we searched for flare candidates as at least 3 consecutive $>3\sigma$ outliers above the noise level in the masked light curve, filling in the noise level inside the masked areas with the mean of the noise levels adjecent to the mask. To the series of outliers, we kept adding data points to the flare candidate until a data point falls below $XXXX\sigma$. 
 
 \section{Methods}
 \label{sec:methods}
 
 
-
-
 \subsection{Spectral fitting}
-We use XSPEC~\citep{arnaud1996xspec} to fit a two-temperature additive APEC~\citep{smith2001collisional,foster2012updated} model to the joint PN and MOS spectra, using solar abundances from~\citet{grevesse1998standard}, but adjusting to an Fe/0=.6 ratio, which is more typical of M dwarfs~\citep{wood2018chandra}. From the same fit, but to PN data only, we derived the flux and X-ray luminosity in the 0.2-12 keV band. 
+We use XSPEC version 12.12.1~\citep{arnaud1996xspec} to fit a two-temperature additive APEC~\citep{smith2001collisional,foster2012updated} model to the joint PN and MOS spectra, using solar abundances from~\citet{grevesse1998standard}, but adjusting to an Fe/0=.6 ratio, which is more typical of M dwarfs~\citep{wood2018chandra}. From the same fit, but to PN data only, we derived the flux and X-ray luminosity in the 0.2-12 keV band. 
+
+
 
 \subsection{Flares}
 
@@ -104,16 +131,6 @@ Similar to the OM flare, we used the TESS response curve to obtain the conversio
 
 Figure~\ref{fig:lightcurves} shows the time series in X-ray and optical. 
 
-\begin{figure*}[ht!]
-    \script{FIGURE_lightcurves.py}
-    \begin{centering}
-        \includegraphics[width=0.75\linewidth]{figures/lightcurves.png}
-        \caption{
-         Top panel: Optical Monitoring (OM) light curve. Bottom panel: X-ray (PN, MOS1 and MOS2 combined) light curve. 
-        }
-        \label{fig:lightcurves}
-    \end{centering}
-\end{figure*}
 
 
 show spectra with fits and residuals
@@ -123,14 +140,14 @@ show spectra with fits and residuals
 
 % From the proposal: $F_X=2.7^{-13}$ erg/s/cm$^2$, $L_X=6\cdot10^27$ erg/s (update with new eROSITA data) -- 1 oom above the measured XMM values.
 
-% \begin{table*}
-% % \movetableright=-20mm
-% \footnotesize
-%     \script{TABLE_specfits.py}
-%     \caption{XSPEC fits to PN, MOS1/MOS2 and joint data also.}
-%     \input{output/specfit.tex}
-%         \label{tab:specfit}
-% \end{table*}
+\begin{table*}
+% \movetableright=-20mm
+\footnotesize
+    \script{TABLE_specfits.py}
+    \caption{XSPEC fits to PN, MOS1/MOS2 and joint data also.}
+    \input{output/mcmc_specfit.tex}
+        \label{tab:specfit}
+\end{table*}
 
 % \begin{figure}
 %     \script{FIGURE_data_resid.py}
@@ -278,31 +295,31 @@ Compared to the X-ray luminosities of M7 dwarfs among the late M dwarfs observed
 \end{figure}
 
 
-\begin{figure}
-    \script{FIGURE_r315_comparison.py}
-    \begin{centering}
-        \includegraphics[width=\linewidth]{figures/r315_prot.png}
-        \caption{
-         R31.5 against rotation period for fully convective M dwarfs.
-        }
-        \label{fig:r315}
-    \end{centering}
-\end{figure}
+% \begin{figure}
+%     \script{FIGURE_r315_comparison.py}
+%     \begin{centering}
+%         \includegraphics[width=\linewidth]{figures/r315_prot.png}
+%         \caption{
+%          R31.5 against rotation period for fully convective M dwarfs.
+%         }
+%         \label{fig:r315}
+%     \end{centering}
+% \end{figure}
 
 
 \subsection{X-ray luminosity}
 \label{sec:discussion:xraylum}
 
-\begin{figure}[ht!]
-    \script{FIGURE_lx_lbol.py}
-    \begin{centering}
-        \includegraphics[width=\linewidth]{figures/lx_lbol.png}
-        \caption{
-         Rossby number versus $L_x/L_{bol}$.
-        }
-        \label{fig:lxlbol}
-    \end{centering}
-\end{figure}
+% \begin{figure}[ht!]
+%     \script{FIGURE_lx_lbol.py}
+%     \begin{centering}
+%         \includegraphics[width=\linewidth]{figures/lx_lbol.png}
+%         \caption{
+%          Rossby number versus $L_x/L_{bol}$.
+%         }
+%         \label{fig:lxlbol}
+%     \end{centering}
+% \end{figure}
 
 
 
