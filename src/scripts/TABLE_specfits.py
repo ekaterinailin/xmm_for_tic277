@@ -93,11 +93,11 @@ if __name__ == "__main__":
             del df[c]
 
     # rename columns
-    mapcolnames = {'T1': r'$T_{cool}$ [MK]',
-                   'T2': r'$T_{hot}$ [MK]',
+    mapcolnames = {'T1': r'$T_{\rm cool}$ [MK]',
+                   'T2': r'$T_{\rm hot}$ [MK]',
                    'norm1': r'$10^6$ norm$_{\rm cool}$',
-                   'norm2': r'$norm_{hot}$',
-                   'weighted_mean_T': r'$T_{mean}$ [MK]'}
+                   'norm2': r'$10^6$ norm$_{\rm hot}$',
+                   'weighted_mean_T': r'$T_{\rm mean}$ [MK]'}
     
     # convert to LaTeX
     for col in ["T1", "T2", "norm1", "norm2"]:

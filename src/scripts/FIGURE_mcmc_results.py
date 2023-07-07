@@ -31,8 +31,8 @@ if __name__ == "__main__":
     # read in the MCMC chains and plot them, extract percentiles and save to file
 
     subsets = [("full data set", "chain_joint_vapec_feo06.fits","x"),
-            ("no flare", "chain_joint_vapec_feo06_noflare.fits","o"),
-            ("flare only", "chain_joint_vapec_feo06_flareonly.fits","d"),]
+            ("quiescent", "chain_joint_vapec_feo06_noflare.fits","o"),
+            ("flaring", "chain_joint_vapec_feo06_flareonly.fits","d"),]
 
     res = dict()
 
@@ -40,6 +40,10 @@ if __name__ == "__main__":
 
         # read in the chain
         df = Table.read(paths.data / fn, format='fits').to_pandas()
+
+        
+        # discard the first 5000 steps
+        df = df.iloc[5000:]
 
         # convert units
         df["norm__16"] = df["norm__16"] * 1e6 # now in 10^-6
