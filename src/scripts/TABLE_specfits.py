@@ -95,7 +95,7 @@ if __name__ == "__main__":
     # rename columns
     mapcolnames = {'T1': r'$T_{cool}$ [MK]',
                    'T2': r'$T_{hot}$ [MK]',
-                   'norm1': r'$norm_{cool}$',
+                   'norm1': r'$10^6$ norm$_{\rm cool}$',
                    'norm2': r'$norm_{hot}$',
                    'weighted_mean_T': r'$T_{mean}$ [MK]'}
     
