@@ -11,6 +11,8 @@
 % Author list
 \author{Ekaterina Ilin, Katja Poppenh\"ager, Beate Stelzer}
 
+%\affiliation
+
 
 % Abstract with filler text
 \begin{abstract}
@@ -44,22 +46,27 @@ In this work, we follow TIC 277 with XMM-Newton for 36 ks and use optical monito
     \caption{TIC 277539431 (WISEA J105515.71-735611.3)}
     \begin{tabular}{ll}\hline 
          Parameter & Value  \\\hline
-         Distance & $13.70\pm0.11\,$pc [2] \\
-         $G$ mag & \\
-         $G_{BP}$ mag & \\
-         $G_{BP}$ mag & \\
-         $K_s$ mag & $9.666 \pm 0.024$ [3]\\
-         $J$ mag & $10.630 \pm 0.023$ [3] \\
+         Distance $d$ & $13.70\pm0.11\,$pc [2] \\
+         % $G$ mag & $14.7189 \pm 0.0011$ [4]\\
+         % $G_{BP}$ mag & \\
+         % $G_{BP}$ mag & \\
+         % $K_s$ mag & $9.666 \pm 0.024$ [3]\\
+         % $J$ mag & $10.630 \pm 0.023$ [3] \\
          SpT & M7 [1]\\
-         age & \\
-         Rotation period & $273.618 \pm 0.007\,$min [1]\\
+         $T_{eff}$ & $2680^{60}_{-50}\,$ K [5]\\
+         % age & \\
+         Rotation period $P$ & $273.618 \pm 0.007\,$min [1]\\
          $v\sin i$ & $38.6\pm1.0\,$km/s [1] \\
-         Inclination & $87.0^{+2.0}_{-2.4}\,$ deg [1]\\
-         Radius & $0.145\pm0.004\,R_\odot$ [1]\\\hline
+         Inclination $i$ & $87.0^{+2.0}_{-2.4}\,$ deg [1]\\
+         Radius $R$ & $0.145\pm0.004\,R_\odot$ [1]\\\hline
         
     \end{tabular}
     \newline\footnotesize
-    [1] \citet{ilin2021giant}, [2] \citet{bailer-jones2018estimating}, [3] 2MASS, \citet{skrutskie2006two}
+    [1] \citet{ilin2021giant}, 
+    [2] \citet{bailer-jones2018estimating}, 
+    % [3] 2MASS, \citet{skrutskie2006two}, 
+    % [4] \citet{collaboration2016gaia,gaiacollaboration2023gaia}, 
+    [5] \citet{pecaut2013intrinsic}
     \label{tab:modelparams}
 \end{table}
 
@@ -67,7 +74,9 @@ In this work, we follow TIC 277 with XMM-Newton for 36 ks and use optical monito
 \section{Observations}
 
 \subsection{XMM-Newton}
-XMM-Newton observed TIC 277 for 36 ks, i.e. two full rotation periods of the star, on August 5, 2022 (Proposal 090120; PI: E. Ilin). We used the EPIC instruments aboard XMM-Newton, i.e., MOS1/2 and PN, that cover the soft X-ray band between 0.2-12 keV. 
+\label{sec:obs:xmm}
+XMM-Newton is an X-ray telescope, which launched into orbit 1999, equipped with six science instruments that operate simultaneously, among them the European Photon Imaging Camera with three cameras, PN, MOS1 and MOS2; and the Optical Monitor (OM) that provides near-UV and optical photometry, among other capabilities.
+We used XMM-Newton to observe TIC 277 for 36 ks, i.e. two full rotation periods of the star, on August 5, 2022 (Proposal 090120; PI: E. Ilin). We used the EPIC instruments aboard XMM-Newton, i.e., MOS1/2 and PN, that cover the soft X-ray band between 0.2-12 keV, as well as the OM using its broad band white light filter.
 
 \subsubsection{Time series with EPIC and OM}
 
@@ -90,10 +99,10 @@ Fig.~\ref{fig:lightcurves} shows the time series using the combined PN and MOS t
 
 
 \subsubsection{EPIC Spectra}
-From the EPIC observations, we extracted spectra using \texttt{evselect,epatplot,backscale,rmfgen,arfgen}, and \texttt{grppha}. 
+From the EPIC observations, we used standard spectral extraction procedure for point sources. We extracted spectra using \texttt{evselect} to select all events in the circular event and background regions,\texttt{epatplot} to check for pile-up of multiple photons in one exposure, \texttt{backscale} to calculate the area of the source region, and \texttt{rmfgen} and \texttt{arfgen} to convolve the observed energies with the instrument response, and produce the spectra. Finally, we use \texttt{grppha} to rebin the data in the spectra to obtain at least 15 counts per bin. To prduce spectra for the quiescent and flaring portions of the observations separately, we used \texttt{tabgtigen} to select the time intervals to pass to \texttt{evselect}.
 
 \subsection{TESS}
-
+\label{sec:obs:tess}
 Since 2018, TESS has been supplying publicly available red-optical high-precision time series photometry in an ongoing all-sky survey. Each uninterrupted observing Sector provides an approximately 27 day long light curve in a broad $XXXX$-$XXXX\AA$ band pass. 
 
 We used 5 Sectors of optical monitoring of TIC 277 in 2-minute cadence by TESS. Sector 12 was observed in May 2019, Sectors 37 and 39 in April and June 2021, and Sectors 64 and 65 in April and May 2023. 
@@ -106,24 +115,37 @@ In the de-trended light curves, we searched for flare candidates as at least 3 c
 \label{sec:methods}
 
 
-\subsection{Spectral fitting}
+\subsection{Spectral fitting: EPIC}
 We use XSPEC version 12.12.1~\citep{arnaud1996xspec} to fit a two-temperature additive APEC~\citep{smith2001collisional,foster2012updated} model to the joint PN and MOS spectra, using solar abundances from~\citet{grevesse1998standard}, but adjusting to an Fe/0=.6 ratio, which is more typical of M dwarfs~\citep{wood2018chandra}. We analyzed both the full data set, and the quiescent and flaring parts separately. In the full data set, we used the \texttt{bayes} method in XSPEC to assign constant priors within the model's hard limits, and sample the uncertainties using the Markov-Chain-Monte-Carlo (MCMC) method using \texttt{chain} for a total of 30000 steps, discarding the first 5000 as the burn-in phase. From the same fit, but using PN data only, we derived the flux and X-ray luminosity in the 0.2-12 keV band. For the quiescent and flaring portions of the observations, we chose the same procedure, but chose the Gaussian prior distributions for the two coronal temperatures using the full data set as ground truth, and assigning the largest of the upper and lower uncertainties as standard deviation.
 
-\subsection{Flares}
+\subsection{Flare energies: TESS, OM, and EPIC}
 
-\subsubsection{XMM-Newton flare}
+We fitted the soft X-ray light curve using constant flux with a flare, applying the~\citet{davenport2014kepler} optical flare model that captures the fast rise and exponential decay of the flare seen with XMM-Newton. From the fit, we extracted the baseline flux against which we measured the equivalent duration $ED$ of the flare, i.e., the flare flux $F_{\rm flare}$, divided by the median flux $F_0$ of the star, integrated over the flare duration~\citep{gershberg1972results}:
 
-We fitted the soft X-ray light curve using constant flux with a flare, applying the~\citet{davenport2014kepler} optical flare model that captures the fast rise and exponential decay of the flare seen with XMM-Newton. From the fit, we extracted the baseline flux against which we measured the equivalent duration $ED$ of the flare
+\begin{equation}
+\label{eq:ED}
+ED=\displaystyle \int \mathrm dt\, \frac{F_{\rm flare}(t)}{F_0}.
+\end{equation}
 
-ED EQUATION
+We then converted $ED$ to flare energy in the $0.2-XXXX\,$keV band by multiplying with $L_X$. 
 
-We then converted ED to flare energy in the 0.2-12 keV band by multiplying with $L_X$. 
+For the OM flare, we derived the bolometric flare energy following the procedure in~\citet{shibayama2013superflares}. We used the effective width of $347\,$nm around a mid-wavelength of $406\,$nm of the pass as the response curve $R_{\lambda, \rm OM}$ band to extract a ratio $f_{\rm OM}$ of stellar to flare flux of $1.4\cdot 10^{-4}$ for a $10,000\,$K blackbody flare\footnote{A flare temperature of $10,000\,$K is a typical approximation for energetic M dwarf flares~\citep{kowalski2013timeresolved, howard2020evryflarea}.}:
 
-Lacking calibration for the white light filter in OM, we used the effective width of the passband to extract the conversion factor for a 10kK flare to obtain the corrected $ED$, which we could multiply with $L_{\rm bol}$ to arrive at the bolometric flare energy. $L_{\rm bol}$ was derived using G and J magnitudes, converting J to V mag, then using the bolometric correction from
-\subsubsection{TESS flares}
+\begin{equation}
+    f_{\rm OM} = \frac{\displaystyle\int R_{\lambda, \rm OM} B_{\lambda(T_{\rm eff})}  d\lambda}{\displaystyle\int R_{\lambda, \rm OM} B_{\lambda(T_{\rm eff})} d\lambda} 
+    \label{eq:ratio}
+\end{equation}
 
-Similar to the OM flare, we used the TESS response curve to obtain the conversion factor in the redder optical filter of TESS, and convert to bolometric flare energy.
+With this, we can calculate the bolometric flare energy as:
 
+\begin{equation}
+    E_{\rm flare} = ED \cdot \pi R^2 \cdot \sigma_{kB} T_{\rm eff}^4 \cdot f_{\rm OM}
+    \label{eq:eflare}
+\end{equation}
+
+% To obtain the corrected $ED$, we then multiplied with $L_{\rm bol}$ to arrive at the bolometric flare energy. $L_{\rm bol}$ was derived using G and J magnitudes by converting J to V magnitude, then using the bolometric correction from \citep{mann2015how,mann2016erratum}.
+
+Analogously to Eq.~\ref{eq:ratio} for the OM flare, we used the TESS response curve to obtain a flux ratio $f_{\rm TESS}$ of $6.3\cdot10^{-3}$ in the redder optical filter of TESS, and convert $ED$ to bolometric flare energy using Eq.~\ref{eq:eflare}. Besides the $ED$, \texttt{altaipony} also yields flare start and end times, defined as the difference between the first and last data point above the flare detection criterion defined in Section~\ref{sec:obs:tess}; and relative amplitudes $a$.
 
 \section{Results}
 
@@ -138,7 +160,9 @@ show spectra with fits and residuals
 
 % From the proposal: $F_X=2.7^{-13}$ erg/s/cm$^2$, $L_X=6\cdot10^27$ erg/s (update with new eROSITA data) -- 1 oom above the measured XMM values.
 
-From the XMM-Newton EPIC spectra, we could measure the coronal properties of TIC in both its quiescent, and flaring states~(Table~\ref{tab:specfit}). Using the combined quiescent and flaring data, we found a two-temperature VAPEC model to fit better than a one-temperature solution and no worse than a three-temperature solution. The resulting fit~(Fig.~\ref{fig:spec_joint_all}) consists of a cooler and a hotter component of about $3.1\,$MK and $13.4\,$MK, respectively. The emission measure (norm) weighted mean temperature was $8\,$MK. With these temperatures as ground truth, we also fitted two-temperature VAPEC models to the flaring and quiescent portions of the observations separately. The coronal temperatures did not update significantly using either subset, although the quiescent spectrum appeared slightly cooler overall. However, the emission measure weighted mean temperature was about $1.5\,$MK cooler in the quiescent spectrum, and $\sim3.3\,$MK hotter in the flaring spectrum. This suggests that the flaring corona emits the hotter component, while the cooler component corresponds to the quiescent corona. In this interpretation, the presence of a hot component in the quiescent spectrum indicates suggests that TIC 277 is flaring below the detection threshold, consistent with an extrapolation of the flare frequency distribution to lower temperatures~(see the following Section, and Fig.~\ref{fig:ffd}).
+From the XMM-Newton EPIC spectra, we could measure the coronal properties of TIC in both its quiescent, and flaring states~(Table~\ref{tab:specfit}). Using the combined quiescent and flaring data, we found a two-temperature VAPEC model to fit better than a one-temperature solution and no worse than a three-temperature solution. The resulting fit~(Fig.~\ref{fig:spec_joint_all}) consists of a cooler and a hotter component of about $3.1\,$MK and $13.4\,$MK, respectively. The emission measure (norm) weighted mean temperature was $8\,$MK. With these temperatures as ground truth, we also fitted two-temperature VAPEC models to the flaring and quiescent portions of the observations separately. The coronal temperatures did not update significantly using either subset, although the quiescent spectrum appeared slightly cooler overall. However, the emission measure weighted mean temperature was about $1.5\,$MK cooler in the quiescent spectrum, and $\sim3.2\,$MK hotter in the flaring spectrum. This suggests that the flaring corona emits the hotter component, while the cooler component corresponds to the quiescent corona. In this interpretation, the presence of a hot component in the quiescent spectrum indicates that TIC 277 is flaring below the detection threshold, consistent with an extrapolation of the flare frequency distribution to lower temperatures~(see the following Section, and Fig.~\ref{fig:ffd}). 
+
+Not using the full set of observations as ground truth resulted in an unconstrained hot coronal component. This can be interpreted as due to a lack of X-ray flux above 5 keV. Hot flares with temperatures of >XXXX MK have been measured in other stars. On the Sun, the highest flare associated coronal temperatures are around 35 MK~\citep{kay2003soft}.
 
 From the PN spectra, we measured a soft X-ray flux of $F_X=XXXX$, and a luminosity $L_X=XXXX$ in the $0.2-2\,$keV band. In the broader $0.2-10\,$keV band, we measured XXXX and XXXX.
  \begin{table}
@@ -328,8 +352,14 @@ Using eROSITA data, \citet{magaudda2022first} cover both fully convective and ra
 
 \subsection{Coronal temperature}
 \label{sec:discussion:xraytemp}
+A third, very hot, $>40\,$MK component could only be poorly constrained due to a lack of sensitivity to flux above $5\,$keV. DS Tuc A, a young G dwarf, has been observed flaring with a 74 MK in the flare peaks~\citep{pillitteri2022xraya}, and PMS stars can exceed 100 MK~\citep{getman2008xray, getman2021xray}. The Sun can heat the corona up to over 30 MK during flares~\citep{benz2016flare}. A flare on AD Leo had a peak temperature of about 37 MK~\citep{stelzer2022great}. Other flares are well-described with two temperatures~\citep{behr2023muscles, williams2015simultaneous}. We suggest that the poorly constrained third component could stem from the low energy tail of the hard X-ray emission at >10 keV.
+
+
 
 3 and 13 MK
+
+The 13 MK component represents thermal bremsstrahlung radiation from hot plasma that evaporates from the chromosphere into the coronal flaring loops~\citep{benz2016flare}, which is supported by the observed delay between the optical and the X-ray flare~\citep{hawley2003multiwavelength}. The optical flare originates from the lower chromosphere, which is heated by the precipitating particles. This heating then causes evaporation and lights up the flare loop. 
+%In reality, the corona emits at a range of temperatures decreasing after the flare peak~\citep[e.g., ][]{stelzer2006simultaneous}. Or is it just that the hot contribution decreases?
 
 
 
@@ -338,12 +368,17 @@ Using eROSITA data, \citet{magaudda2022first} cover both fully convective and ra
 
 
 \section*{Acknowledgements}
-\citep{lightkurvecollaboration2018lightkurve}
-Based on observations obtained with XMM-Newton, an ESA science mission with instruments and contributions directly funded by ESA Member States and NASA.
-
-DLR
+This work made use of the open source python software packages \texttt{lightkurve}\citep{lightkurvecollaboration2018lightkurve}, astropy~\citep{robitaille2013astropy}, numpy~(XXXX), pandas~\citep{reback2022pandasdev}, altaipony~\citep{ilin2021altaipony}, and XXXX. This work has made use of data from the European Space Agency (ESA) mission
+{\it Gaia} (\url{https://www.cosmos.esa.int/gaia}), processed by the {\it Gaia}
+Data Processing and Analysis Consortium (DPAC,
+\url{https://www.cosmos.esa.int/web/gaia/dpac/consortium}). Funding for the DPAC
+has been provided by national institutions, in particular the institutions
+participating in the {\it Gaia} Multilateral Agreement.
+This work is based on observations obtained with XMM-Newton, an ESA science mission with instruments and contributions directly funded by ESA Member States and NASA. E.I. acknowledges funding from the Deutsche Luft- und Raumfahrtgesellschaft (FKZ 50 OR 2209, project \textit{X-ray Loops}). K.P. acknowledges funding from XXXX. 
 \section*{Data Availability}
-
+All data used in this study are publicly available in their respective archives.
+This study used the reproducibility software \href{https://github.com/showyourwork/showyourwork}{showyourwork}
+\citep{luger2021mappinga} to create all figures, format all tables, and compile the manuscript. Each figure links to the dataset stored on Zenodo (link to be added after acceptance), and to the script that produced the figure in the git repository~\href{https://github.com/ekaterinailin/xmm_for_tic277}{github.com/ekaterinailin/xmm\_for\_tic277}. The data analysis scripts can be found under \href{https://github.com/ekaterinailin/tic277}{github.com/ekaterinailin/tic277}. 
 
 \bibliography{references}
 
