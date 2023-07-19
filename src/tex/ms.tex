@@ -16,9 +16,11 @@
 
 % Abstract with filler text
 \begin{abstract}
-    TIC 277 is currently the star with the highest latitude flare located to date. In 2020, TESS observed this rapidly rotating M7 dwarf produce a flare at 81 deg latitude. This is in stark contrast to solar flares that occur much closer to the equator, typically below 30 deg. Does a star require a special corona to produce polar flares?
+    TIC 277 is the star with the highest latitude flare located to date. In 2020, TESS observed this rapidly rotating M7 dwarf produce a flare at 81 deg latitude. This is in stark contrast to solar flares that occur much closer to the equator, typically below 30 deg. Does a star require a special corona to produce polar flares?
 
-    We obtained 36 ks ob XMM-Newton observations, and determined that the X-ray luminosity $L_X$ is slightly lower but not far below the $L_X$ of other stars with similar spectral types a rotation rates. We constructed flare frequency distributions using the three TESS Sectors, with a power law slope of $XXXX\pm XXXX$, and flare rate above $\log_{10}E=31.5\,$erg of XXXX, again typical of similar stars. Our results suggest that the star's magnetic activity is typical for its rotation rate and mass. However, the rotation period of 4.56 hours is on the short end, which could indicate that polar flares on these stars are a feature of youth.  
+    We studied five Sectors of TESS observations, and obtained 36 ks ob XMM-Newton observations, to find that TIC 277's corona does not differ significantly from other stars with its spectral type and fast rotation period ($P_{\rm rot})$ with respect to X-ray luminosity, coronal temperatures, and flaring activity. Additionally, XMM-Newton captured a simultaneous X-ray and optical flare on TIC 277 with a bolometric energy of XXXX and a soft X-ray energy of XXXX in the 0.2-2 keV band. Combining the 18 flares found in TESS with the flare from XMM-Newton, we inferred that TIC 277 produces flares at or above this energy approximately once every 10 h. We suggest that TIC 277's X-ray and flaring activity is representative of other rapidly rotating late M dwarfs, but that further measurements of localized flares are needed to understand the conditions under which high latitude flares in these stars can occur.
+    
+%    and determined that the X-ray luminosity $L_X$ is slightly lower but not far below the $L_X$ of other stars with similar spectral types a rotation rates. We constructed flare frequency distributions using the three TESS Sectors, with a power law slope of $XXXX\pm XXXX$, and flare rate above $\log_{10}E=31.5\,$erg of XXXX, again typical of similar stars. Our results suggest that the star's magnetic activity is typical for its rotation rate and mass. However, the rotation period of 4.56 hours is on the short end, which could indicate that polar flares on these stars are a feature of youth.  
     
 \end{abstract}
 
@@ -82,7 +84,7 @@ We used XMM-Newton to observe TIC 277 for 36 ks, i.e. two full rotation periods 
 
  We extracted the events time series from EPIC using XMM SAS version 20 using the \texttt{evselect} task. We selected a circular source region with 20 arcsec radius on all detectors, and a circular source-free background region 120 and 90 arcsec in MOS and PN, respectively. We used the \texttt{epiclccorr} task in XMM SAS to correct for energy and time dependent loss of events\footnote{\url{https://heasarc.gsfc.nasa.gov/docs/xmm/sas/help/epiclccorr/node3.html}, accessed on July 3, 2023}, and extract a soft X-ray time series with a time binning of 200 s.
 
-Simultaneously, we used the optical monitor (OM) aboard XMM-Newton, to monitor TIC 277 in its white light filter at $10$\,s cadence. The OM white light filter is centered on $XXXX\AA$, with an equivalent width of $XXXX\AA$. We used the \texttt{omfchain} in XMM SAS to extract the 8 individual light curves.
+Simultaneously, we used the optical monitor (OM) aboard XMM-Newton, to monitor TIC 277 in its white light filter at $10$\,s cadence. The OM white light filter is centered on $4,060\AA$, with an equivalent width of $3,470\AA$. We used the \texttt{omfchain} in XMM SAS to extract the 8 individual light curves.
 
 Fig.~\ref{fig:lightcurves} shows the time series using the combined PN and MOS time series together with the OM light curve.
 
@@ -103,13 +105,24 @@ From the EPIC observations, we used standard spectral extraction procedure for p
 
 \subsection{TESS}
 \label{sec:obs:tess}
-Since 2018, TESS has been supplying publicly available red-optical high-precision time series photometry in an ongoing all-sky survey. Each uninterrupted observing Sector provides an approximately 27 day long light curve in a broad $XXXX$-$XXXX\AA$ band pass. 
+Since 2018, TESS has been supplying publicly available red-optical high-precision time series photometry in an ongoing all-sky survey. Each uninterrupted observing Sector provides an approximately 27 day long light curve in a broad $6,000$-$10,000\AA$ band pass. 
 
-We used 5 Sectors of optical monitoring of TIC 277 in 2-minute cadence by TESS. Sector 12 was observed in May 2019, Sectors 37 and 39 in April and June 2021, and Sectors 64 and 65 in April and May 2023. 
+We used 5 Sectors of optical monitoring of TIC 277 in 2-minute cadence by TESS. Sector 12 was observed in May 2019, Sectors 37 and 39 in April and June 2021, and Sectors 64 and 65 in April and May 2023~(Fig.~\ref{fig:tess_lcs}). 
 
-We used AltaiPony~\citep{ilin2021altaipony} to de-trend the light curves using the custom de-trending function \texttt{custom\_detrending}\footnote{see also the documentation online at \url{https://altaipony.readthedocs.io/en/latest/tutorials/detrend.html}, accessed on July 3, 2023}, detailed in~\citet{ilin2022searching}. The procedure includes 3rd order spline fitting of coarse trends, followed by iterative sine fitting to remove rotational modulation, and the two Savitzky-Golay filters with a 6h and 3h window, respectively to remove aperiodic short term trends, while masking outliers above $>2.5\sigma$, as well as the six-fold of consecutive orginally masked data points following the original mask, and finally, additional 3 adjacent data point before and after the so expanded mask. 
+We used AltaiPony~\citep{ilin2021altaipony} to de-trend the light curves using the custom de-trending function \texttt{custom\_detrending}\footnote{see also the documentation online at \url{https://altaipony.readthedocs.io/en/latest/tutorials/detrend.html}, accessed on July 3, 2023}, detailed in~\citet{ilin2022searching}. The procedure includes 3rd order spline fitting of coarse trends, followed by iterative sine fitting to remove rotational modulation, and the two Savitzky-Golay filters with a 6h and 3h window, respectively to remove aperiodic short term trends, while masking outliers above $>2.5\sigma$, as well as the six-fold of consecutive originally masked data points following the original mask, and finally, additional 3 adjacent data point before and after the so expanded mask. 
 
-In the de-trended light curves, we searched for flare candidates as at least 3 consecutive $>3\sigma$ outliers above the noise level in the masked light curve, filling in the noise level inside the masked areas with the mean of the noise levels adjecent to the mask. To the series of outliers, we kept adding data points to the flare candidate until a data point falls below $XXXX\sigma$. 
+In the de-trended light curves, we searched for flare candidates as at least 3 consecutive $>3\sigma$ outliers above the noise level in the masked light curve, filling in the noise level inside the masked areas with the mean of the noise levels adjacent to the mask. To the series of outliers, we kept adding data points to the flare candidate until a data point falls below $2\sigma$. 
+
+\begin{figure*}
+    \script{FIGURE_tess_lcs.py}
+    \begin{centering}
+        \includegraphics[width=\linewidth]{figures/tess_lcs.png}
+        \caption{
+         Normalized TESS light curves. Black and red dots show the light curve with and without rotational variability and trends, respectively. The de-trended light curve is offset by $0.2$. The large, rotationally modulated, flare, localized at about 81 deg latitude by~\citet{ilin2021giant}, appears in the second half of the top panel~(Sector 12).}
+        \label{fig:tess_lcs}
+    \end{centering}
+\end{figure*}
+
 
 \section{Methods}
 \label{sec:methods}
@@ -127,7 +140,7 @@ We fitted the soft X-ray light curve using constant flux with a flare, applying 
 ED=\displaystyle \int \mathrm dt\, \frac{F_{\rm flare}(t)}{F_0}.
 \end{equation}
 
-We then converted $ED$ to flare energy in the $0.2-XXXX\,$keV band by multiplying with $L_X$. 
+We then converted $ED$ to flare energy in the $0.2-2\,$keV band by multiplying with $L_X$. 
 
 For the OM flare, we derived the bolometric flare energy following the procedure in~\citet{shibayama2013superflares}. We used the effective width of $347\,$nm around a mid-wavelength of $406\,$nm of the pass as the response curve $R_{\lambda, \rm OM}$ band to extract a ratio $f_{\rm OM}$ of stellar to flare flux of $1.4\cdot 10^{-4}$ for a $10,000\,$K blackbody flare\footnote{A flare temperature of $10,000\,$K is a typical approximation for energetic M dwarf flares~\citep{kowalski2013timeresolved, howard2020evryflarea}.}:
 
@@ -149,20 +162,16 @@ Analogously to Eq.~\ref{eq:ratio} for the OM flare, we used the TESS response cu
 
 \section{Results}
 
-Figure~\ref{fig:lightcurves} shows the time series in X-ray and optical. 
-
-
-
-show spectra with fits and residuals
+With the XMM-Newton and TESS observations, we could constrain the coronal and flaring properties of TIC 277. We derive its coronal temperature and luminosity from the EPIC spectrum~(Section~\ref{sec:res:XrayTL}). We also measure the flare energies in X-ray from the EPIC instruments, and optical from the OM, and compare them to the flare frequency distributions obtained from the 18 detected flares in TESS~(Section~\ref{sec:res:flares}).
 
 
 \subsection{Coronal temperature and luminosity}
-
+\label{sec:res:XrayTL}
 % From the proposal: $F_X=2.7^{-13}$ erg/s/cm$^2$, $L_X=6\cdot10^27$ erg/s (update with new eROSITA data) -- 1 oom above the measured XMM values.
 
 From the XMM-Newton EPIC spectra, we could measure the coronal properties of TIC in both its quiescent, and flaring states~(Table~\ref{tab:specfit}). Using the combined quiescent and flaring data, we found a two-temperature VAPEC model to fit better than a one-temperature solution and no worse than a three-temperature solution. The resulting fit~(Fig.~\ref{fig:spec_joint_all}) consists of a cooler and a hotter component of about $3.1\,$MK and $13.4\,$MK, respectively. The emission measure (norm) weighted mean temperature was $8\,$MK. With these temperatures as ground truth, we also fitted two-temperature VAPEC models to the flaring and quiescent portions of the observations separately. The coronal temperatures did not update significantly using either subset, although the quiescent spectrum appeared slightly cooler overall. However, the emission measure weighted mean temperature was about $1.5\,$MK cooler in the quiescent spectrum, and $\sim3.2\,$MK hotter in the flaring spectrum. This suggests that the flaring corona emits the hotter component, while the cooler component corresponds to the quiescent corona. In this interpretation, the presence of a hot component in the quiescent spectrum indicates that TIC 277 is flaring below the detection threshold, consistent with an extrapolation of the flare frequency distribution to lower temperatures~(see the following Section, and Fig.~\ref{fig:ffd}). 
 
-Not using the full set of observations as ground truth resulted in an unconstrained hot coronal component. This can be interpreted as due to a lack of X-ray flux above 5 keV. Hot flares with temperatures of >XXXX MK have been measured in other stars. On the Sun, the highest flare associated coronal temperatures are around 35 MK~\citep{kay2003soft}.
+Not using the full set of observations as ground truth resulted in an unconstrained hot coronal component. This can be interpreted as due to a lack of X-ray flux above 5 keV. Hot flares with temperatures of >50 MK have been measured on DS Tuc A~\citep{pillitteri2011xray}. On the Sun, the highest flare associated coronal temperatures are around 35 MK~\citep{kay2003soft}.
 
 From the PN spectra, we measured a soft X-ray flux of $F_X=XXXX$, and a luminosity $L_X=XXXX$ in the $0.2-2\,$keV band. In the broader $0.2-10\,$keV band, we measured XXXX and XXXX.
  \begin{table}
@@ -276,43 +285,87 @@ From the PN spectra, we measured a soft X-ray flux of $F_X=XXXX$, and a luminosi
 
 
 \subsection{Flares}
-
-X-ray energy of $8.4\pm0.7\cdot10^{30}\,$erg
-OM energy of XXXX
-
-Ratio of OM and EPIC flare compared to \citet{guarcello2019simultaneous} simultaneous K2 and XMM flares
-
-In TESS, we found 8 flares
-
-FFD power law fit converged after 16000 steps on $\alpha = 1.77_{-0.23}^{+0.29}$.
-
-The OM flare energy fits the extension of TESS' flare frequency distributions to lower energies within uncertainties on the power law fit. Roughly one flare per day of the order of the observed one or above can therefore be expected in future X-ray observations of TIC 277.
+\label{sec:res:flares}
 
 
 
-\section{Discussion}
-\label{sec:discussion}
-% \citep{pass2022constraints} on rotational evol of late Ms
+\begin{table}
+% \movetableright=-20mm
+\centering
+    \script{TABLE_tess_flares.py}
+    \caption{Flares detected with TESS. $a$ is the relative amplitude, and $E$ is the bolometric flare energy assuming a 10,000 K blackbody emission from the flare.
+    \input{output/tess_flares.tex}
+        \label{tab:flares}
+\end{table}
 
-Is the magnetic activity of the star with the highest known flare latitude known to date is any way unusual? The star is rotating rapidly, even for the typically fast rotating late M dwarfs~\citep{medina2022galactic}. This could lead to an unusual manifestation of the stellar dynamo that produces high latitude flares that other dynamo states cannot generate. With TESS and XMM-Newton, we can now evaluate if this suspected exceptionality is reflected in the star's magnetic activity and coronal properties. We compare its flaring activity, coronal luminosity and temperatures to stars of similar spectral type and rotation rates
 
-\subsection{Flaring activity}
-\label{sec:discussion:flares}
+In TESS, we found a total of 18 flares in the five Sectors, or equivalently, 125 days of observing at 2-min cadence. We fit the flare frequency distribution (FFD) with a power law of the form
 
-$\log_10(R_{31.5}$, that is, the rate of flares per day with energies above $\log E_{flare}=10^{31.5}\,$erg, is ca. $-1.XXXX$, consistent with other saturated late M dwarfs~\citep{medina2022galactic}.
+\begin{equation}
+    f(E) \mathrm{d} E = \beta \cdot E^{-\alpha} \mathrm{d} E.
+\end{equation}
+following the procedure in~\citep{ilin2021flares}, implemented as \texttt{FFD.fit\_powerlaw} using the \textit{mcmc} argument in \texttt{AltaiPony}~\citep{ilin2021altaipony}, which is using the posterior distribution derived in \citet{wheatland2004bayesian}, and sampling the posterior distribution with the \texttt{emcee} package~\citep{foreman-mackey2013emcee}.
 
-Compared to the X-ray luminosities of M7 dwarfs among the late M dwarfs observed by eROSITA in \citet{stelzer2022first}, TIC 277 appears mildly underluminous. This could be an effect of its fast rotation, and consequent supersaturation as in \citet{magaudda2022first}, but we lack the rotation periods to confirm this. 
+The FFD power law fit converged after 13,500 steps on a slope $\alpha = 1.9_{-0.2}^{+0.2}$, and $\log_{10}\beta=27.7_{-6.0}^{+7.1}\,\mathrm{d}^{-1}$. The frequency $R_{31.5}$ of flares per day above $\log_{10} E = 31.5\,\mathrm{erg}$ is about $-1.1$. The slope is typical of other flaring stars, regardless of spectral type a rotation period~(XXXX). $R_{31.5}$ is typical of flaring M dwarfs, in particular typical of late M dwarfs in the saturated activity regime, where $R_{31.5}$ becomes independent of rotation period~\citep{medina2020flare,murray2022study}. 
+
+For the X-ray flare in Fig.~\ref{fig:lightcurves}, we obtain a total energy of $6.5\pm0.7\cdot10^{30}\,$erg in the $0.2-5\,$keV band. The energy of the corresponding OM flare is $1.9\pm0.4\cdot 10^{30}\,$erg, which fits the extension of TESS' flare frequency distributions to lower energies within uncertainties on the power law fit~(Fig.~\ref{fig:ffd}). About one flare every $10\,$h of the order of the observed one or above can therefore be expected in future X-ray observations of TIC~277, assuming all optical flares above this energy in the OM data correspond to X-ray flares of similar or higher energy to the observed. \citet{guarcello2019simultaneous} find moderate correlation between flare energies in Kepler/K2 data and XMM-Newton, but the majority of their sampled energies are above $10^{33}\,$erg both in X-ray and optical. \citet{kuznetsov2021stellar} compare primary Kepler mission observations with XMM-Newton to find a similar result. 
+
+
 
 \begin{figure}
     \script{FIGURE_tess_ffd.py}
     \begin{centering}
         \includegraphics[width=\linewidth]{figures/277539431_tess_ffd.png}
         \caption{
-         Flare frequency distribution and power law fit.
+         Cumulative flare frequency distribution and power law fit.
         }
         \label{fig:ffd}
     \end{centering}
 \end{figure}
+
+\section{Discussion}
+\label{sec:discussion}
+% \citep{pass2022constraints} on rotational evol of late Ms
+
+Is the magnetic activity of the star with the highest known flare latitude known to date is any way unusual? Our findings indicate that TIC 277's coronal temperature~(Section~\ref{sec:discussion:xraytemp}), X-ray luminosity~(Section~\ref{sec:discussion:xraylum}), and flaring activity~(Section~\ref{sec:discussion:flares}) are typical of stars with its rotation rate and mass. TIC 277 is rotating rapidly, even for the typically fast rotating late M dwarfs~\citep{medina2022galactic}. This could lead to an unusual manifestation of the stellar dynamo that produces high latitude flares that other dynamo states cannot generate. With TESS and XMM-Newton, we can now evaluate if this suspected exceptionality is reflected in the star's magnetic activity and coronal properties. 
+
+
+\subsection{Coronal temperature}
+\label{sec:discussion:xraytemp}
+
+We find that the quiescent corona of TIC 277 is best described by two components of 3 MK and 12 MK with an emission-measure weighted temperature of about 6.5 MK, which rises to 11 MK during the flare~(Table~\ref{tab:specfit}). The hotter 13 MK component represents thermal bremsstrahlung radiation from hot plasma that evaporates from the chromosphere into the coronal flaring loops~\citep{benz2016flare}, which is supported by the observed delay between the optical and the X-ray flare~\citep{hawley2003multiwavelength}. The optical flare originates from the lower chromosphere, which is heated by the precipitating particles. This heating then causes evaporation of particles into the flare loop. 
+
+A third, very hot, $>40\,$MK component could only be poorly constrained due to a lack of sensitivity to flux above $5\,$keV. DS Tuc A, a young G dwarf, has been observed flaring with a >50 MK temperature in the flare peaks~\citep{pillitteri2022xraya}, and PMS stars can exceed 100 MK~\citep{getman2008xray, getman2021xray}. The Sun can heat the corona up to over 30 MK during flares~\citep{benz2016flare}. A flare on AD Leo had a peak temperature of about 37 MK~\citep{stelzer2022great}. Other M dwarf flares are well-described with two temperatures~\citep{behr2023muscles, magaudda2022firsta}. The corona of NLTT 33370 AB, an M7 binary with a rotation period of about $3.8\,$h (close to TIC 277's $4.56\,$h) is combined of a 3.1 MK and 14 MK component~\citep{williams2015simultaneous}. 
+
+\textcolor{red}{the poorly constrained third component could stem from the low energy tail of the hard X-ray emission at >10 keV.}
+
+
+
+%In reality, the corona emits at a range of temperatures decreasing after the flare peak~\citep[e.g., ][]{stelzer2006simultaneous}. Or is it just that the hot contribution decreases?
+
+
+
+\subsection{X-ray luminosity}
+\label{sec:discussion:xraylum}
+
+
+Using eROSITA data, \citet{magaudda2022first} cover both fully convective and rapidly rotating M dwarfs, and find a downward trend with decreasing rotation period, pointing toward a supersaturation of the corona at fast rotation speeds, as has been conjectured before~\citep{jeffries2011investigating,ramsay2020tess}. \citet{jeffries2011investigating} suggest that the cause for supersaturation is centrifugal stripping of the corona, but \citet{reiners2022magnetism} show that if magnetic field increases, X-ray XXXX increases likewise with no sign of a break. They conclude that the trend is rather due to the underlying dynamo.
+
+\cite{brown2023coronal}
+
+\cite{johnstone2012soft}
+
+Compared to the X-ray luminosities of M7 dwarfs among the late M dwarfs observed by eROSITA in \citet{stelzer2022first}, TIC 277 appears mildly underluminous. This could be an effect of its fast rotation, and consequent supersaturation as in \citet{magaudda2022first}, but we lack the rotation periods to confirm this.
+
+
+\subsection{Flaring activity}
+\label{sec:discussion:flares}
+
+$\log_10(R_{31.5}$, that is, the rate of flares per day with energies above $\log E_{flare}=10^{31.5}\,$erg, is ca. $-1.1$, consistent with other saturated late M dwarfs~\citep{medina2020flare, murray2022study}. 
+
+ 
+
+
 
 
 % \begin{figure}
@@ -327,44 +380,18 @@ Compared to the X-ray luminosities of M7 dwarfs among the late M dwarfs observed
 % \end{figure}
 
 
-\subsection{X-ray luminosity}
-\label{sec:discussion:xraylum}
 
-% \begin{figure}[ht!]
-%     \script{FIGURE_lx_lbol.py}
-%     \begin{centering}
-%         \includegraphics[width=\linewidth]{figures/lx_lbol.png}
-%         \caption{
-%          Rossby number versus $L_x/L_{bol}$.
-%         }
-%         \label{fig:lxlbol}
-%     \end{centering}
-% \end{figure}
-
-
-
-Using eROSITA data, \citet{magaudda2022first} cover both fully convective and rapidly rotating M dwarfs, and find a downward trend with decreasing rotation period, pointing toward a supersaturation of the corona at fast rotation speeds, as has been conjectured before~\citep{jeffries2011investigating,ramsay2020tess}. \citet{jeffries2011investigating} suggest that the cause for supersaturation is centrifugal stripping of the corona, but \citet{reiners2022magnetism} show that if magnetic field increases, X-ray increases likewise with no sign of a break. They conclude that the trend is rather due to the underlying dynamo.
-
-\cite{brown2023coronal}
-
-\cite{johnstone2012soft}
-
-
-\subsection{Coronal temperature}
-\label{sec:discussion:xraytemp}
-A third, very hot, $>40\,$MK component could only be poorly constrained due to a lack of sensitivity to flux above $5\,$keV. DS Tuc A, a young G dwarf, has been observed flaring with a 74 MK in the flare peaks~\citep{pillitteri2022xraya}, and PMS stars can exceed 100 MK~\citep{getman2008xray, getman2021xray}. The Sun can heat the corona up to over 30 MK during flares~\citep{benz2016flare}. A flare on AD Leo had a peak temperature of about 37 MK~\citep{stelzer2022great}. Other flares are well-described with two temperatures~\citep{behr2023muscles, williams2015simultaneous}. We suggest that the poorly constrained third component could stem from the low energy tail of the hard X-ray emission at >10 keV.
-
-
-
-3 and 13 MK
-
-The 13 MK component represents thermal bremsstrahlung radiation from hot plasma that evaporates from the chromosphere into the coronal flaring loops~\citep{benz2016flare}, which is supported by the observed delay between the optical and the X-ray flare~\citep{hawley2003multiwavelength}. The optical flare originates from the lower chromosphere, which is heated by the precipitating particles. This heating then causes evaporation and lights up the flare loop. 
-%In reality, the corona emits at a range of temperatures decreasing after the flare peak~\citep[e.g., ][]{stelzer2006simultaneous}. Or is it just that the hot contribution decreases?
 
 
 
 
 \section{Summary and Conclusions}
+We investigated whether TIC 277, a rapidly rotating M7 dwarf with a flare localized at 81 deg latitude, shows exceptional coronal or flaring properties to produce said flare so close to the rotational pole. We obtained 36 ks of EPIC and OM observations with XMM-Newton, and studied the five Sectors of red-optical 27-day light curves provided by TESS. We found an X-ray luminosity of XXXX, and a mean coronal temperature of XXXX MK, typical of rapidly rotating late M dwarfs. The flaring activity is also typical of late M dwarfs in the saturated regime, with a flare rate $f(> log 10 Eflare = 31.5 erg)\approx -1.1$. 
+
+XMM-Newton also captured a simultaneous X-ray and optical flare with its EPIC and OM instruments, respectively. The flare energy and rate of the OM flare are consistent with the flare frequency distribution of the 18 detected TESS flares, indicating that X-ray flares on TIC 277 can be observed with XMM-Newton about once every $10\,$h. The bolometric and soft-X-ray flare energies are within an order of magnitude within each other, which places them among other stars with simultaneous X-ray and optical flare energies~\citep{guarcello2019simultaneous, kuznetsov2021stellar}, as well as the Sun~(XXXX).
+
+While TIC 277's coronal and flaring properties do not appear uncommon, this does not mean that the corona has no influence on the high latitude occurrence of flares. TIC 277 is a fully convective rapid rotator with a rotation period of only $4.56\,$h. The detected high-latitude flare in TESS~\citep{ilin2021giant} may hence be a product of high-latitude flux emergence driven by its fast rotation~\citep{weber2016modeling,weber2017suppression}.
+However, the type of magnetic dynamo driven by such fast rotation may produce a peculiarly structured corona~(XXXX), which then appears common within the mass-rotation regime of TIC 277. Less than ten flare latitudes on stars other than the Sun are known to date~\citep{wolter2008doppler, ilin2021giant, johnson2021simultaneous}. Localization of more flares on the surfaces of a broader range of stars will allow us to discriminate the role of dynamo and flux emergence theories from that of coronal properties in the production of active latitudes.
 
 
 \section*{Acknowledgements}
