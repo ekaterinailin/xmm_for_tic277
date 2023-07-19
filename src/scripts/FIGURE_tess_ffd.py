@@ -80,7 +80,7 @@ if __name__ == "__main__":
     
     
 
-    for tic, teff, radius in tic_teff_rad:
+    for tic, teff, radius in tic_teff_rad[:1]:
 
         print(tic)
 
@@ -112,6 +112,7 @@ if __name__ == "__main__":
         high_alpa, high_beta = ffd.alpha_up_err + ffd.alpha, ffd.beta_up_err + ffd.beta
         low_alpa, low_beta = ffd.alpha - ffd.alpha_low_err, ffd.beta - ffd.beta_low_err
         print(ffd.beta, high_beta, low_beta)
+        print(ffd.beta_low_err)
         ed, freq, counts = ffd.ed_and_freq()
 
         # plot
