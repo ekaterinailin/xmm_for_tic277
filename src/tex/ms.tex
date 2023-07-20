@@ -129,7 +129,7 @@ In the de-trended light curves, we searched for flare candidates as at least 3 c
 
 
 \subsection{Spectral fitting: EPIC}
-We use XSPEC version 12.12.1~\citep{arnaud1996xspec} to fit a two-temperature additive APEC~\citep{smith2001collisional,foster2012updated} model to the joint PN and MOS spectra, using solar abundances from~\citet{grevesse1998standard}, but adjusting to an Fe/0=.6 ratio, which is more typical of M dwarfs~\citep{wood2018chandra}. We analyzed both the full data set, and the quiescent and flaring parts separately. In the full data set, we used the \texttt{bayes} method in XSPEC to assign constant priors within the model's hard limits, and sample the uncertainties using the Markov-Chain-Monte-Carlo (MCMC) method using \texttt{chain} for a total of 30000 steps, discarding the first 5000 as the burn-in phase. From the same fit, but using PN data only, we derived the flux and X-ray luminosity in the 0.2-12 keV band. For the quiescent and flaring portions of the observations, we chose the same procedure, but chose the Gaussian prior distributions for the two coronal temperatures using the full data set as ground truth, and assigning the largest of the upper and lower uncertainties as standard deviation.
+We use XSPEC version 12.12.1~\citep{arnaud1996xspec} to fit a two-temperature (2T) additive APEC~\citep{smith2001collisional,foster2012updated} model to the joint PN and MOS spectra, using solar abundances from~\citet{grevesse1998standard}, but adjusting to an Fe/0$=0.6$ ratio, which is more typical of M dwarfs~\citep{wood2018chandra}. We analyzed both the full data set, and the quiescent and flaring parts separately. Neither subset could be adequately fit with a single temperature component (1T), and a 3T model did not improve the fit compared to the 2T-model either. In the full data set, we used the \texttt{bayes} method in XSPEC to assign constant priors within the model's hard limits, and sample the uncertainties using the Markov-Chain-Monte-Carlo (MCMC) method using \texttt{chain} for a total of 30000 steps, discarding the first 5000 as the burn-in phase. From the same fit, but using PN data only, we derived the flux and X-ray luminosity in the 0.2-12 keV band. For the quiescent and flaring portions of the observations, we chose the same procedure, but used Gaussian prior distributions for the two coronal temperatures using the full data set as ground truth, and assigning the largest of the upper and lower uncertainties as standard deviation.
 
 \subsection{Flare energies: TESS, OM, and EPIC}
 
@@ -173,7 +173,7 @@ From the XMM-Newton EPIC spectra, we could measure the coronal properties of TIC
 
 Not using the full set of observations as ground truth resulted in an unconstrained hot coronal component. This can be interpreted as due to a lack of X-ray flux above 5 keV. Hot flares with temperatures of >50 MK have been measured on DS Tuc A~\citep{pillitteri2011xray}. On the Sun, the highest flare associated coronal temperatures are around 35 MK~\citep{kay2003soft}.
 
-From the PN spectra, we measured a soft X-ray flux of $F_X=XXXX$, and a luminosity $L_X=XXXX$ in the $0.2-2\,$keV band. In the broader $0.2-10\,$keV band, we measured XXXX and XXXX.
+From the PN spectra, we measured a soft X-ray flux of $F_X=XXXX$, and a luminosity $L_X=XXXX$ in the $0.2-2\,$keV band. 
  \begin{table}
 % \movetableright=-20mm
 \centering
@@ -183,99 +183,11 @@ From the PN spectra, we measured a soft X-ray flux of $F_X=XXXX$, and a luminosi
         \label{tab:specfit}
 \end{table}
 
-% \begin{figure}
-%     \script{FIGURE_data_resid.py}
-%     \begin{centering}
-%         \includegraphics[width=\linewidth]{figures/pn_onlyflare_data_resid.png}
-%         \caption{
-%          Flare only PN Double apec spectrum fit.
-%         }
-%         \label{fig:spec_pn_onlyflare}
-%     \end{centering}
-% \end{figure}
-
-% \begin{figure}
-%     \script{FIGURE_data_resid.py}
-%     \begin{centering}
-%         \includegraphics[width=\linewidth]{figures/pn_noflare_data_resid.png}
-%         \caption{
-%          No flare PN Double apec spectrum fit.
-%         }
-%         \label{fig:spec_pn_noflare}
-%     \end{centering}
-% \end{figure}
-
-% \begin{figure}
-%     \script{FIGURE_data_resid.py}
-%     \begin{centering}
-%         \includegraphics[width=\linewidth]{figures/pn_data_resid.png}
-%         \caption{
-%          PN Double apec spectrum fit.
-%         }
-%         \label{fig:spec_pn}
-%     \end{centering}
-% \end{figure}
-
-% \begin{figure}
-%     \script{FIGURE_data_resid.py}
-%     \begin{centering}
-%         \includegraphics[width=\linewidth]{figures/mos1_data_resid.png}
-%         \caption{
-%          MOS1 Double apec spectrum fit.
-%         }
-%         \label{fig:spec_mos1}
-%     \end{centering}
-% \end{figure}
-
-% \begin{figure}
-%     \script{FIGURE_data_resid.py}
-%     \begin{centering}
-%         \includegraphics[width=\linewidth]{figures/mos2_data_resid.png}
-%         \caption{
-%          MOS2 Double apec spectrum fit.
-%         }
-%         \label{fig:spec_mos2}
-%     \end{centering}
-% \end{figure}
-
-% \begin{figure}
-%     \script{FIGURE_data_resid.py}
-%     \begin{centering}
-%         \includegraphics[width=\linewidth]{figures/joint_onlyflare_data_resid.png}
-%         \caption{
-%          Flare only joint Double APEC spectrum fit.
-%         }
-%         \label{fig:spec_joint_onlyflare}
-%     \end{centering}
-% \end{figure}
-
-
-% \begin{figure}
-%     \script{FIGURE_data_resid.py}
-%     \begin{centering}
-%         \includegraphics[width=\linewidth]{figures/joint_noflare_data_resid.png}
-%         \caption{
-%          Joint Double APEC spectrum fit with flare excluded.
-%         }
-%         \label{fig:spec_joint_noflare}
-%     \end{centering}
-% \end{figure}
-
-% \begin{figure}
-%     \script{FIGURE_data_resid.py}
-%     \begin{centering}
-%         \includegraphics[width=\linewidth]{figures/joint_all_data_resid.png}
-%         \caption{
-%          Joint Double APEC spectrum fit.
-%         }
-%         \label{fig:spec_joint_all}
-%     \end{centering}
-% \end{figure}
 
 \begin{figure}
     \script{FIGURE_data_resid.py}
     \begin{centering}
-        \includegraphics[width=\linewidth]{figures/joint_vapec_fe06_data_resid.png}
+        \includegraphics[width=\linewidth]{figures/joint_chain_fit_data_resid.png}
         \caption{
          Joint Double APEC spectrum fit with Fe/0$=0.6$.
         }
@@ -335,9 +247,8 @@ Is the magnetic activity of the star with the highest known flare latitude known
 
 We find that the quiescent corona of TIC 277 is best described by two components of 3 MK and 12 MK with an emission-measure weighted temperature of about 6.5 MK, which rises to 11 MK during the flare~(Table~\ref{tab:specfit}). The hotter 13 MK component represents thermal bremsstrahlung radiation from hot plasma that evaporates from the chromosphere into the coronal flaring loops~\citep{benz2016flare}, which is supported by the observed delay between the optical and the X-ray flare~\citep{hawley2003multiwavelength}. The optical flare originates from the lower chromosphere, which is heated by the precipitating particles. This heating then causes evaporation of particles into the flare loop. 
 
-A third, very hot, $>40\,$MK component could only be poorly constrained due to a lack of sensitivity to flux above $5\,$keV. DS Tuc A, a young G dwarf, has been observed flaring with a >50 MK temperature in the flare peaks~\citep{pillitteri2022xraya}, and PMS stars can exceed 100 MK~\citep{getman2008xray, getman2021xray}. The Sun can heat the corona up to over 30 MK during flares~\citep{benz2016flare}. A flare on AD Leo had a peak temperature of about 37 MK~\citep{stelzer2022great}. Other M dwarf flares are well-described with two temperatures~\citep{behr2023muscles, magaudda2022firsta}. The corona of NLTT 33370 AB, an M7 binary with a rotation period of about $3.8\,$h (close to TIC 277's $4.56\,$h) is combined of a 3.1 MK and 14 MK component~\citep{williams2015simultaneous}. 
+A third, very hot, $>40\,$MK component could only be poorly constrained due to a lack of sensitivity to flux above $5\,$keV. DS Tuc A, a young G dwarf, has been observed flaring with a >50 MK temperature in the flare peaks~\citep{pillitteri2022xraya}, and PMS stars can exceed 100 MK~\citep{getman2008xray, getman2021xray}. The Sun can heat the corona up to over 30 MK during flares~\citep{benz2016flare}. A flare on AD Leo had a peak temperature of about 37 MK~\citep{stelzer2022great}. Other M dwarf flares are well-described with two temperatures~\citep{robrade2010quiescent, behr2023muscles, magaudda2022firsta}. The corona of NLTT 33370 AB, an M7 binary with a rotation period of about $3.8\,$h (close to TIC 277's $4.56\,$h) is combined of a 3.1 MK and 14 MK component~\citep{williams2015simultaneous}. However, flares on Proxima Cen (M5.5, 85 d rotation~XXXX), also appear with temperatures of 2-3 MK and 10-20 MK~\citep{gudel2004flares,fuhrmeister2022high, howard2022mouse}.
 
-\textcolor{red}{the poorly constrained third component could stem from the low energy tail of the hard X-ray emission at >10 keV.}
 
 
 
