@@ -47,7 +47,9 @@ if __name__ == "__main__":
         f315 = beta / (ff.alpha - 1) * (10**31.5)**(-ff.alpha +1)
         r315s.append(np.log10(f315).values[0])
 
+
     ffd_vals["r315"] = r315s
+    print(ffd_vals)    
 
 
     # TRAPPIST-1

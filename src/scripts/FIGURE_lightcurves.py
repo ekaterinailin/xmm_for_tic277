@@ -38,6 +38,9 @@ if __name__ == "__main__":
     ax[1].errorbar(xray["TIME"], xray["RATE"], yerr=xray["ERROR"],
                    label="PN + MOS1 + MOS2", c="olive", alpha=0.8, lw=1.5)
     
+    # add vertical filled area
+    ax[1].axvspan(776075500 / 3600. / 24., 776080000 / 3600. / 24.,
+                  color="grey", alpha=0.2)
     
     # add inset
     axins = ax[1].inset_axes([0.3, 0.55, 0.4, 0.5])
