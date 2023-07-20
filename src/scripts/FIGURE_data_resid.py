@@ -157,12 +157,12 @@ def plot_data_resid_1(file):
 if __name__ == "__main__":
 
     # filename
-    files = ["pn_onlyflare.txt", "joint_onlyflare.txt", "joint_noflare.txt",
-             "joint_all.txt", 'mos1.txt', 'mos2.txt', 'pn.txt', "pn_noflare.txt",
-             "joint_3vapec_fe06.txt", "pn_all_vapec_fe06.txt", 
-             "pn_onlyflare_3vapec_fe06.txt", "joint_vapec_fe06.txt", 
-             "pn_noflare_vapec_fe06.txt", "pn_onlyflare_vapec_fe06.txt",
-             "joint_chain_fit.txt"]
+    # ["pn_onlyflare.txt", "joint_onlyflare.txt", "joint_noflare.txt",
+    #          "joint_all.txt", 'mos1.txt', 'mos2.txt', 'pn.txt', "pn_noflare.txt",
+    #          "joint_3vapec_fe06.txt", "pn_all_vapec_fe06.txt", 
+    #          "pn_onlyflare_3vapec_fe06.txt", "joint_vapec_fe06.txt", 
+    #          "pn_noflare_vapec_fe06.txt", "pn_onlyflare_vapec_fe06.txt",
+    files =  ["joint_chain_fit.txt"]
 
     # plot
     for file in files:
