@@ -73,7 +73,8 @@ In this work, we follow TIC 277 with XMM-Newton for 36 ks and use optical monito
 
 
 \begin{table}
-
+% \footnotesize
+\centering
     \caption{TIC 277539431 (WISEA J105515.71-735611.3)}
     \begin{tabular}{ll}\hline 
          Parameter & Value  \\\hline
@@ -83,14 +84,14 @@ In this work, we follow TIC 277 with XMM-Newton for 36 ks and use optical monito
          % $G_{BP}$ mag & \\
          % $K_s$ mag & $9.666 \pm 0.024$ [3]\\
          % $J$ mag & $10.630 \pm 0.023$ [3] \\
-         SpT & M7 [1]\\
-         $T_{eff}$ & $2680^{60}_{-50}\,$ K [5]\\
+         Spectral type & M7 [1]\\
+         Effective temperature $T_{\rm eff}$ & $2680^{60}_{-50}\,$ K [3]\\
          % age & \\
-         Rotation period $P$ & $273.618 \pm 0.007\,$min [1]\\
-         $v\sin i$ & $38.6\pm1.0\,$km/s [1] \\
+         Rotation period $P_{\rm rot}$ & $273.618 \pm 0.007\,$min [1]\\
+         Projected rotation velocity $v\sin i$ & $38.6\pm1.0\,$km/s [1] \\
          Inclination $i$ & $87.0^{+2.0}_{-2.4}\,$ deg [1]\\
          Radius $R$ & $0.145\pm0.004\,R_\odot$ [1]\\
-         $L_{\rm bol}$ & \Lbol \\\hline
+         Bol. luminosity $L_{\rm bol}$ & \Lbol \\\hline
         
     \end{tabular}
     \newline\footnotesize
@@ -98,7 +99,7 @@ In this work, we follow TIC 277 with XMM-Newton for 36 ks and use optical monito
     [2] \citet{bailer-jones2018estimating}, 
     % [3] 2MASS, \citet{skrutskie2006two}, 
     % [4] \citet{collaboration2016gaia,gaiacollaboration2023gaia}, 
-    [5] \citet{pecaut2013intrinsic}
+    [3] \citet{pecaut2013intrinsic}
     \label{tab:modelparams}
 \end{table}
 
@@ -173,7 +174,7 @@ ED=\displaystyle \int \mathrm dt\, \frac{F_{\rm flare}(t)}{F_0}.
 
 We then converted $ED$ to flare energy in the $0.2-2\,$keV band by multiplying with $L_X$. 
 
-For the OM flare, we derived the bolometric flare energy following the procedure in~\citet{shibayama2013superflares}. We used the effective width of $347\,$nm around a mid-wavelength of $406\,$nm of the pass as the response curve $R_{\lambda, \rm OM}$ band to extract a ratio $f_{\rm OM}$ of stellar to flare flux of $1.4\cdot 10^{-4}$ for a $10,000\,$K blackbody flare\footnote{A flare temperature of $10,000\,$K is a typical approximation for energetic M dwarf flares~\citep{kowalski2013timeresolved, howard2020evryflarea}.}:
+For the OM flare, we derived the bolometric flare energy following the procedure in~\citet{shibayama2013superflares}. We used the throughput curve for the white light filter scaled to unity at the peak of transmission as an optimistic response curve $R_{\lambda, \rm OM}$, given that the degradation of this filter's response is poorly constrained. From that, we extracted a ratio $f_{\rm OM}$ of stellar to flare flux of $1.4\cdot 10^{-4}$ for a $10,000\,$K blackbody flare\footnote{A flare temperature of $10,000\,$K is a typical approximation for energetic M dwarf flares~\citep{kowalski2013timeresolved, howard2020evryflarea}.}:
 
 \begin{equation}
     f_{\rm OM} = \frac{\displaystyle\int R_{\lambda, \rm OM} B_{\lambda(T_{\rm eff})}  d\lambda}{\displaystyle\int R_{\lambda, \rm OM} B_{\lambda(T_{\rm eff})} d\lambda} 
@@ -186,6 +187,8 @@ With this, we can calculate the bolometric flare energy as:
     E_{\rm flare} = ED \cdot \pi R^2 \cdot \sigma_{kB} T_{\rm eff}^4 \cdot f_{\rm OM}
     \label{eq:eflare}
 \end{equation}
+
+We note that due to the optimistic response curve assumption the resulting $E_{\rm flare}$ is likely higher in reality.
 
 % To obtain the corrected $ED$, we then multiplied with $L_{\rm bol}$ to arrive at the bolometric flare energy. $L_{\rm bol}$ was derived using G and J magnitudes by converting J to V magnitude, then using the bolometric correction from \citep{mann2015how,mann2016erratum}.
 
