@@ -88,7 +88,7 @@ if __name__ == "__main__":
     row = ilin2021[ilin2021.TIC == 277539431].iloc[0]
     Lbol, eLbol = row.Lbol_erg_s, row.eLbol_erg_s
 
-    Lbolstr = fr"${Lbol/1e30:.1e} \pm {eLbol/1e30:.0e}" + r" \times 10^{30}\,\rm{erg s}^{-1}$"
+    Lbolstr = fr"${Lbol/1e30:.1f} \pm {eLbol/1e30:.1f}" + r" \times 10^{30}\,\rm{erg s}^{-1}$"
 
     with open(paths.output / "Lbol.tex", "w") as f:
         f.write(f"{Lbolstr}")
