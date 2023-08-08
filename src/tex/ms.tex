@@ -12,7 +12,8 @@
 \author{Ekaterina Ilin, Katja Poppenh\"ager, Beate Stelzer}
 
 %\affiliation
-
+\newcommand{\T1}{\input{output/T1.tex}}
+\newcommand{\T2}{\input{output/T1.tex}}
 
 % Abstract with filler text
 \begin{abstract}
@@ -93,7 +94,7 @@ Fig.~\ref{fig:lightcurves} shows the time series using the combined PN and MOS t
     \begin{centering}
         \includegraphics[width=0.75\linewidth]{figures/lightcurves.png}
         \caption{
-         Top panel: Optical Monitoring (OM) light curve. Bottom panel: X-ray (PN, MOS1 and MOS2 combined) light curve. 
+         Top panel: Optical Monitoring (OM) light curve. Bottom panel: X-ray (PN, MOS1 and MOS2 combined) light curve. The grey shaded portion defines the flare-only subset of the observations (see Section~\ref{sec:methods:epic} and Table~\ref{tab:specfit}).
         }
         \label{fig:lightcurves}
     \end{centering}
@@ -129,6 +130,7 @@ In the de-trended light curves, we searched for flare candidates as at least 3 c
 
 
 \subsection{Spectral fitting: EPIC}
+\label{sec:methods:epic}
 We use XSPEC version 12.12.1~\citep{arnaud1996xspec} to fit a two-temperature (2T) additive APEC~\citep{smith2001collisional,foster2012updated} model to the joint PN and MOS spectra, using solar abundances from~\citet{grevesse1998standard}, but adjusting to an Fe/0$=0.6$ ratio, which is more typical of M dwarfs~\citep{wood2018chandra}. We analyzed both the full data set, and the quiescent and flaring parts separately. Neither subset could be adequately fit with a single temperature component (1T), and a 3T model did not improve the fit compared to the 2T-model either. In the full data set, we used the \texttt{bayes} method in XSPEC to assign constant priors within the model's hard limits, and sample the uncertainties using the Markov-Chain-Monte-Carlo (MCMC) method using \texttt{chain} for a total of 30000 steps, discarding the first 5000 as the burn-in phase. From the same fit, but using PN data only, we derived the flux and X-ray luminosity in the 0.2-12 keV band. For the quiescent and flaring portions of the observations, we chose the same procedure, but used Gaussian prior distributions for the two coronal temperatures using the full data set as ground truth, and assigning the largest of the upper and lower uncertainties as standard deviation.
 
 \subsection{Flare energies: TESS, OM, and EPIC}
@@ -169,7 +171,7 @@ With the XMM-Newton and TESS observations, we could constrain the coronal and fl
 \label{sec:res:XrayTL}
 % From the proposal: $F_X=2.7^{-13}$ erg/s/cm$^2$, $L_X=6\cdot10^27$ erg/s (update with new eROSITA data) -- 1 oom above the measured XMM values.
 
-From the XMM-Newton EPIC spectra, we could measure the coronal properties of TIC in both its quiescent, and flaring states~(Table~\ref{tab:specfit}). Using the combined quiescent and flaring data, we found a two-temperature VAPEC model to fit better than a one-temperature solution and no worse than a three-temperature solution. The resulting fit~(Fig.~\ref{fig:spec_joint_all}) consists of a cooler and a hotter component of about $3.1\,$MK and $13.4\,$MK, respectively. The emission measure (norm) weighted mean temperature was $8\,$MK. With these temperatures as ground truth, we also fitted two-temperature VAPEC models to the flaring and quiescent portions of the observations separately. The coronal temperatures did not update significantly using either subset, although the quiescent spectrum appeared slightly cooler overall. However, the emission measure weighted mean temperature was about $1.5\,$MK cooler in the quiescent spectrum, and $\sim3.2\,$MK hotter in the flaring spectrum. This suggests that the flaring corona emits the hotter component, while the cooler component corresponds to the quiescent corona. In this interpretation, the presence of a hot component in the quiescent spectrum indicates that TIC 277 is flaring below the detection threshold, consistent with an extrapolation of the flare frequency distribution to lower temperatures~(see the following Section, and Fig.~\ref{fig:ffd}). 
+From the XMM-Newton EPIC spectra, we could measure the coronal properties of TIC in both its quiescent, and flaring states~(Table~\ref{tab:specfit}). Using the combined quiescent and flaring data, we found a two-temperature VAPEC model to fit better than a one-temperature solution and no worse than a three-temperature solution. The resulting fit~(Fig.~\ref{fig:spec_joint_all}) consists of a cooler and a hotter component of about $\T1\,$MK and $\T2\,$MK, respectively. With these temperatures as ground truth, we also fitted two-temperature VAPEC models to the flaring and quiescent portions of the observations separately. The coronal temperatures did not update significantly using either subset, although the quiescent spectrum appeared slightly cooler overall. However, the emission measure weighted mean temperature was about $1.5\,$MK cooler in the quiescent spectrum, and $\sim3.2\,$MK hotter in the flaring spectrum. This suggests that the flaring corona emits the hotter component, while the cooler component corresponds to the quiescent corona. In this interpretation, the presence of a hot component in the quiescent spectrum indicates that TIC 277 is flaring below the detection threshold, consistent with an extrapolation of the flare frequency distribution to lower temperatures~(see the following Section, and Fig.~\ref{fig:ffd}). 
 
 Not using the full set of observations as ground truth resulted in an unconstrained hot coronal component. This can be interpreted as due to a lack of X-ray flux above 5 keV. Hot flares with temperatures of >50 MK have been measured on DS Tuc A~\citep{pillitteri2011xray}. On the Sun, the highest flare associated coronal temperatures are around 35 MK~\citep{kay2003soft}.
 
@@ -178,7 +180,7 @@ From the PN spectra, we measured a soft X-ray flux of $F_X=XXXX$, and a luminosi
 % \movetableright=-20mm
 \centering
     \script{TABLE_specfits.py}
-    \caption{XSPEC fits EPIC spectra for different subsets of observations.}
+    \caption{XSPEC fits to EPIC spectra for different subsets of observations.}
     \input{output/mcmc_specfit.tex}
         \label{tab:specfit}
 \end{table}
@@ -189,7 +191,7 @@ From the PN spectra, we measured a soft X-ray flux of $F_X=XXXX$, and a luminosi
     \begin{centering}
         \includegraphics[width=\linewidth]{figures/joint_chain_fit_data_resid.png}
         \caption{
-         Joint Double APEC spectrum fit with Fe/0$=0.6$.
+         Best-fit joint Double APEC spectrum fit with Fe/0$=0.6$.
         }
         \label{fig:spec_joint_all}
     \end{centering}
@@ -220,8 +222,7 @@ following the procedure in~\citep{ilin2021flares}, implemented as \texttt{FFD.fi
 
 The FFD power law fit converged after 13,500 steps on a slope $\alpha = 1.9_{-0.2}^{+0.2}$, and $\log_{10}\beta=27.7_{-6.0}^{+7.1}\,\mathrm{d}^{-1}$. The frequency $R_{31.5}$ of flares per day above $\log_{10} E = 31.5\,\mathrm{erg}$ is about $-1.1$. The slope is typical of other flaring stars, regardless of spectral type a rotation period~(XXXX). $R_{31.5}$ is typical of flaring M dwarfs, in particular typical of late M dwarfs in the saturated activity regime, where $R_{31.5}$ becomes independent of rotation period~\citep{medina2020flare,murray2022study}. 
 
-For the X-ray flare in Fig.~\ref{fig:lightcurves}, we obtain a total energy of $6.5\pm0.7\cdot10^{30}\,$erg in the $0.2-5\,$keV band. The energy of the corresponding OM flare is $1.9\pm0.4\cdot 10^{30}\,$erg, which fits the extension of TESS' flare frequency distributions to lower energies within uncertainties on the power law fit~(Fig.~\ref{fig:ffd}). About one flare every $10\,$h of the order of the observed one or above can therefore be expected in future X-ray observations of TIC~277, assuming all optical flares above this energy in the OM data correspond to X-ray flares of similar or higher energy to the observed. \citet{guarcello2019simultaneous} find moderate correlation between flare energies in Kepler/K2 data and XMM-Newton, but the majority of their sampled energies are above $10^{33}\,$erg both in X-ray and optical. \citet{kuznetsov2021stellar} compare primary Kepler mission observations with XMM-Newton to find a similar result. 
-
+For the X-ray flare in Fig.~\ref{fig:lightcurves}, we obtain a total energy of $6.5\pm0.7\cdot10^{30}\,$erg in the $0.2-5\,$keV band. The energy of the corresponding OM flare is $1.9\pm0.4\cdot 10^{30}\,$erg, which fits the extension of TESS' flare frequency distributions to lower energies within uncertainties on the power law fit~(Fig.~\ref{fig:ffd}). About one flare every $10\,$h of the order of the observed one or above can therefore be expected in future X-ray observations of TIC~277, assuming all optical flares above this energy in the OM data correspond to X-ray flares of similar or higher energy to the observed. \citet{guarcello2019simultaneous} find moderate correlation between flare energies in Kepler/K2 data and XMM-Newton, but the majority of their sampled energies are above $10^{33}\,$erg both in X-ray and optical. \citet{kuznetsov2021stellar} compare primary Kepler mission observations with XMM-Newton to find a similar result. We note that the X-ray flare light curve follows the typical fast-rise exponential decay shape, and is therefore unlikely eclipsed by the star~\citep{johnstone2012soft}.
 
 
 \begin{figure}
@@ -244,40 +245,40 @@ Is the magnetic activity of the star with the highest known flare latitude known
 
 \subsection{Coronal temperature}
 \label{sec:discussion:xraytemp}
+Low mass stars' coronae are not uniform. Magnetic structures create a range of temperatures, starting at about 1 MK by definition and rising up to 30 MK in flares, in the heterogeneous Solar corona~\citep{vaiana1978recent}. Stellar point source X-ray observations are a superposition of various temperatures and densities. The resolution of different temperature component depends on the apparent brightness and integration time of the spectrum. Nearby stars like Proxima Cen can be modeled with a range of temperatures without overfitting~\citep[e.g.,][]{gudel2004flares}, while one can often only capture one dominant temperature in fainter objects~(XXXX).  
 
-We find that the quiescent corona of TIC 277 is best described by two components of 3 MK and 12 MK with an emission-measure weighted temperature of about 6.5 MK, which rises to 11 MK during the flare~(Table~\ref{tab:specfit}). The hotter 13 MK component represents thermal bremsstrahlung radiation from hot plasma that evaporates from the chromosphere into the coronal flaring loops~\citep{benz2016flare}, which is supported by the observed delay between the optical and the X-ray flare~\citep{hawley2003multiwavelength}. The optical flare originates from the lower chromosphere, which is heated by the precipitating particles. This heating then causes evaporation of particles into the flare loop. 
+We find that the quiescent corona of TIC 277 is best described by two components, similar to many other active M dwarfs~\citep{wargelin2008xray, robrade2010quiescent, behr2023muscles, magaudda2022firsta}. We measure temperatures of 3 MK and 12 MK with an emission-measure weighted average of about 6.5 MK, which rises to 11 MK during the flare~(Table~\ref{tab:specfit}). The hotter 13 MK component represents thermal bremsstrahlung radiation from hot plasma that evaporates from the chromosphere into the coronal flaring loops~\citep{benz2016flare}, which is supported by the observed delay between the optical and the X-ray flare~\citep{hawley2003multiwavelength}. The optical flare originates from the lower chromosphere, which is heated by the precipitating particles. This heating then causes evaporation of particles into the flare loop. A third, very hot, $>40\,$MK component could only be poorly constrained due to a lack of sensitivity to flux above $5\,$keV.
 
-A third, very hot, $>40\,$MK component could only be poorly constrained due to a lack of sensitivity to flux above $5\,$keV. DS Tuc A, a young G dwarf, has been observed flaring with a >50 MK temperature in the flare peaks~\citep{pillitteri2022xraya}, and PMS stars can exceed 100 MK~\citep{getman2008xray, getman2021xray}. The Sun can heat the corona up to over 30 MK during flares~\citep{benz2016flare}. A flare on AD Leo had a peak temperature of about 37 MK~\citep{stelzer2022great}. Other M dwarf flares are well-described with two temperatures~\citep{robrade2010quiescent, behr2023muscles, magaudda2022firsta}. The corona of NLTT 33370 AB, an M7 binary with a rotation period of about $3.8\,$h (close to TIC 277's $4.56\,$h) is combined of a 3.1 MK and 14 MK component~\citep{williams2015simultaneous}. However, flares on Proxima Cen (M5.5, 85 d rotation~XXXX), also appear with temperatures of 2-3 MK and 10-20 MK~\citep{gudel2004flares,fuhrmeister2022high, howard2022mouse}.
+The range of 6.5-11 MK for the emission measure weighted temperature of TIC 277 places it squarely in the saturated regime with other mid M dwarfs down to spectral type M6~\citep{wright2018stellar, magaudda2020relation, stelzer2022first,robrade2005xray,raassen2003xray,paudel2021simultaneous, foster2020corona}. Flares on the slowly rotating Proxima Cen (M5.5, 85 d rotation~XXXX), appear with a range of temperatures at 2-3 MK and 10-20 MK~\citep{gudel2004flares, fuhrmeister2011multiwavelength, fuhrmeister2022high, howard2022mouse} placing it in the transition region between saturated and unsaturated regimes. Only at rotation periods beyond 100 days, flaring activity declines to yield coronal temperatures $<2\,$MK~\citep{wright2018stellar, foster2020corona}. For a more direct comparison, there are only few late M dwarfs beyond spectral type M6 with a spectrally resolved corona. Their intrinsic faintness and gradual decline in coronal emission make them hard to detect~\citep{berger2010, cook2014trends, stelzer2022first}. One example is NLTT 33370 AB, an M7 binary with a rotation period of about $3.8\,$h (close to TIC 277's $4.56\,$h and of the same spectral type) is combined of a 3.1 MK and 14 MK component~\citep{williams2015simultaneous}. Another is TRAPPIST-1~(M8, $P_{\rm rot} = 1.4\,$d~XXXX). Its corona appears cooler, with a 1.74 MK and a 9.6 MK component~\citep{wheatley2017strong}, and an emission measure weighted temperature of 5.36 MK~\citep{brown2023coronal}. 
+
+To summarize, considering the relatively low two-temperature resolution of TIC~277's X-ray spectrum and the dearth of X-ray spectra for $>M7$ dwarfs to compare with, it shows a coronal temperature make-up common for mid-to-late M dwarf in the saturated activity regime. 
 
 
 
-
-%In reality, the corona emits at a range of temperatures decreasing after the flare peak~\citep[e.g., ][]{stelzer2006simultaneous}. Or is it just that the hot contribution decreases?
+%DS Tuc A, a young G dwarf, has been observed flaring with a >50 MK temperature in the flare peaks~\citep{pillitteri2022xraya}, and PMS stars can exceed 100 MK~\citep{getman2008xray, getman2021xray}. The Sun can heat the corona up to over 30 MK during flares~\citep{benz2016flare}. A flare on AD Leo (M3.5) had a peak temperature of about 37 MK~\citep{stelzer2022great}. CC Eri, a K7 dwarf, was described with a 3T model~\citep{crespo-chacon2007xray} with energies about $10^{33}\,$erg and peak temperatures of 30 MK.
 
 
 
 \subsection{X-ray luminosity}
 \label{sec:discussion:xraylum}
+Similar to its temperature make-up, while TIC~277's coronal luminosity of XXXX is somewhat lower than the $L_X/L_{\rm bol}\sim 10^{-3}$ average for saturated regime, it is not an outlier to other M dwarfs in this activity regime.  
+
+Using eROSITA data, \citet{magaudda2022first} cover both fully convective and rapidly rotating M dwarfs, and find a downward trend in $L_X/L_{\rm bol}$ with decreasing rotation period, pointing toward a supersaturation of the corona at fast rotation speeds, as has been conjectured before~\citep{jeffries2011investigating,ramsay2020tess}.   \citet{jeffries2011investigating} suggest that the cause for supersaturation is centrifugal stripping of the corona, but \citet{reiners2022magnetism} show that if magnetic field increases, X-ray XXXX increases likewise with no sign of a break. They conclude that the trend is rather due to the underlying dynamo. If TIC~277 is indeed underluminous, these results suggest that its dynamo produces a weaker magnetic field than that of other saturated M dwarfs, which results in a slightly lower X-ray luminosity. However, since both the temperature structure and flaring activity of TIC~277 are in line with saturated activity, this conjecture currently lacks evidence from other activity indicators. Moreover, late M dwarfs are underrepresented in these studies. 
+
+\citet{stelzer2022first} investigated late M and L dwarfs with eROSITA to show that $L_X/L_{\rm bol}$ increases from the full convection boundary (M3) towards later spectral types, but begins to decrease again from M7 downward. In that study, TIC~277 is at the lower boundary of the $L_X/L_{\rm bol}$ distribution for M7 dwarfs. At the same time, strong magnetic fields are found across the board in brown dwarfs~(XXXX). While it is not clear whether M7 falls in the stellar regime of~\citet{reiners2022magnetism} or into that latter brown dwarf realm, or has features of both, it appears at the lower bound regardless. The small number of supersaturated stars in \citet{magaudda2022first} tentatively suggests that this may be a common phenomenon among mid-to-late M dwarfs when they are quickly rotating.  
+
+%Compared to the X-ray luminosities of M7 dwarfs among the late M dwarfs observed by eROSITA in \citet{stelzer2022first}, TIC 277 appears mildly underluminous. This could be an effect of its fast rotation, and consequent supersaturation as in \citet{magaudda2022first}, but we lack the rotation periods to confirm this.
 
 
-Using eROSITA data, \citet{magaudda2022first} cover both fully convective and rapidly rotating M dwarfs, and find a downward trend with decreasing rotation period, pointing toward a supersaturation of the corona at fast rotation speeds, as has been conjectured before~\citep{jeffries2011investigating,ramsay2020tess}. \citet{jeffries2011investigating} suggest that the cause for supersaturation is centrifugal stripping of the corona, but \citet{reiners2022magnetism} show that if magnetic field increases, X-ray XXXX increases likewise with no sign of a break. They conclude that the trend is rather due to the underlying dynamo.
-
-\cite{brown2023coronal}
-
-\cite{johnstone2012soft}
-
-Compared to the X-ray luminosities of M7 dwarfs among the late M dwarfs observed by eROSITA in \citet{stelzer2022first}, TIC 277 appears mildly underluminous. This could be an effect of its fast rotation, and consequent supersaturation as in \citet{magaudda2022first}, but we lack the rotation periods to confirm this.
-
-
-\subsection{Flaring activity}
+\subsection{Flaring activity -- a young TRAPPIST-1}
 \label{sec:discussion:flares}
 
-$\log_10(R_{31.5}$, that is, the rate of flares per day with energies above $\log E_{flare}=10^{31.5}\,$erg, is ca. $-1.1$, consistent with other saturated late M dwarfs~\citep{medina2020flare, murray2022study}. 
+$\log_{10}(R_{31.5}$, that is, the rate of flares per day with energies above $\log E_{flare}=10^{31.5}\,$erg, is ca. $-1.1$, consistent with other saturated late M dwarfs~\citep{medina2020flare, murray2022study}. It is similar to TRAPPIST-1's flaring rate~(XXXX), which has been investigated for its effects on the seven terrestrial planets in its orbit. 
 
+Recent observations of TRAPPIST-1 b~(XXXX) with the James Webb Space Telescope~(XXXX) find the planet mostly stripped of an atmosphere, which the authors attribute to the intense flare driven X-ray radiation and energetic particle exposure at the short orbital periods of the innermost planet. For the habitable zone planets TRAPPIST-1 e and f, simulations suggest that flares alter their chemical composition, in particular ozone, nitric oxide and hydroxide, but that the effects would be below the noise floor of JWST~\citep{chen2021persistence}. However, given the uncertain age of TRAPPIST-1~(XXXX), the temperate planets e and f may have been entirely stripped of their atmospheres in the past gigayear(s)~\citep{garraffo2017threatening}. 
+
+TIC~277's rapid rotation is indicative of a younger age than TRAPPIST, although it has not been attributed to any star cluster so far~(XXXX). A correct understanding of whatever the upcoming observations of TRAPPIST-1 e will yield -- detection or non-detection of an atmosphere -- will depend strongly on its activity history. Studies of its younger counterparts, late M dwarfs like TIC~277, are required to empirically constrain cumulative effects of atmospheric forcing of planets. If, as this work suggests, TIC~277 is typical of stars of its spectral type and rotation rate, it may represent the youth of TRAPPIST-1. And if its energetic flares commonly occur at high latitudes, as suggested by~\citet{ilin2021giant}, future models of energetic particle exposure of habitable zone planets may have to include age dependent latitudes of particle eruption to reproduce observations. 
  
-
-
-
 
 % \begin{figure}
 %     \script{FIGURE_r315_comparison.py}
@@ -306,13 +307,14 @@ However, the type of magnetic dynamo driven by such fast rotation may produce a 
 
 
 \section*{Acknowledgements}
+ E.I. acknowledges funding from the Deutsche Luft- und Raumfahrtgesellschaft (FKZ 50 OR 2209, project \textit{X-ray Loops}). K.P. acknowledges funding from the German \textit{Leibniz-Gemeinschaft} under project number P67/2018. 
 This work made use of the open source python software packages \texttt{lightkurve}\citep{lightkurvecollaboration2018lightkurve}, astropy~\citep{robitaille2013astropy}, numpy~(XXXX), pandas~\citep{reback2022pandasdev}, altaipony~\citep{ilin2021altaipony}, and XXXX. This work has made use of data from the European Space Agency (ESA) mission
 {\it Gaia} (\url{https://www.cosmos.esa.int/gaia}), processed by the {\it Gaia}
 Data Processing and Analysis Consortium (DPAC,
 \url{https://www.cosmos.esa.int/web/gaia/dpac/consortium}). Funding for the DPAC
 has been provided by national institutions, in particular the institutions
 participating in the {\it Gaia} Multilateral Agreement.
-This work is based on observations obtained with XMM-Newton, an ESA science mission with instruments and contributions directly funded by ESA Member States and NASA. E.I. acknowledges funding from the Deutsche Luft- und Raumfahrtgesellschaft (FKZ 50 OR 2209, project \textit{X-ray Loops}). K.P. acknowledges funding from XXXX. 
+This work is based on observations obtained with XMM-Newton, an ESA science mission with instruments and contributions directly funded by ESA Member States and NASA.
 \section*{Data Availability}
 All data used in this study are publicly available in their respective archives.
 This study used the reproducibility software \href{https://github.com/showyourwork/showyourwork}{showyourwork}
