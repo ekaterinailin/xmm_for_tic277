@@ -65,7 +65,7 @@ if __name__ == "__main__":
     df = pd.read_csv(paths.data / "joint_vapec_chain_fits.csv")
 
     # select full data set
-    row = df[df.subset == "spec"].iloc[0]
+    row = df[df.subset == "noflare"].iloc[0]
 
     # get Lx and make latex string with a single uncertainty
     Lx, Lxerr = row.Lx_erg_s, row.Lx_erg_s_err
@@ -96,9 +96,10 @@ if __name__ == "__main__":
     lxlbol, elxlbol = (Lx / Lbol, 
                     Lx / Lbol * np.sqrt(Lxerr**2 / (Lx**2) + eLbol**2 / (Lbol**2)))
 
-    lxlbolstr = fr"${lxlbol:.1e}X\pm {elxlbol:.0e}$ "
-    lxlbolstr = lxlbolstr.replace("e-0","\\times 10^{-")
-    lxlbolstr = lxlbolstr.replace(r"$ ","}$").replace(r"X","}")
+
+    lxlbolstr = fr"${lxlbol*1e4:.1f}\pm {elxlbol*1e4:.1f}" + r"\times 10^{-4}$ "
+
+    print(lxlbolstr)
 
     with open(paths.output / "lxlbol.tex", "w") as f:
         f.write(rf"{lxlbolstr}")
