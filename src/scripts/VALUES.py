@@ -57,8 +57,12 @@ if __name__ == "__main__":
     r315 = beta / (alpha - 1) * (10**31.5)**(-alpha +1)
     r315 = np.log10(r315)
 
+    r315str = f"${r315:.2f}" + r"\,\mathrm{d}^{-1}$"
+
+    print(r315str)
+
     with open(paths.output / "R315.tex", "w") as f:
-        f.write(f"${r315:.2f}" + r"\,\mathrm{d}^{-1}$")
+        f.write(r315str)
 
     # Lx -----------------------------------------------------------------------
 
@@ -69,7 +73,9 @@ if __name__ == "__main__":
 
     # get Lx and make latex string with a single uncertainty
     Lx, Lxerr = row.Lx_erg_s, row.Lx_erg_s_err
-    Lx_str = fr"${Lx:.2f} \pm {Lxerr:.2f}\,\rm erg/\rm s$"
+    Lx_str = fr"${Lx/1e26:.2f} \pm {Lxerr/1e26:.2f}" + r"\times 10^{26}\,\rm{erg s}^{-1}$"
+
+    print(Lx_str)
 
     with open(paths.output / "epic_Lx.tex", "w") as f:
         f.write(f"{Lx_str}")
@@ -77,7 +83,9 @@ if __name__ == "__main__":
     # Fx -----------------------------------------------------------------------
 
     flux, fluxerr = row.flux_erg_s_cm2, row.flux_erg_s_cm2_err
-    flux_str = f"${flux:.2f} \pm {fluxerr:.2f}\,\rm erg/\rm cm^2/\rm s$"
+    flux_str = fr"${flux*1e14:.1f} \pm {fluxerr*1e14:.1f}" + r"\times 10^{-14} \,\rm{erg}\, \rm{cm}^{-2} \rm{s}^{-1}$"
+
+    print(flux_str)
 
     with open(paths.output / "epic_flux.tex", "w") as f:
         f.write(f"{flux_str}")
