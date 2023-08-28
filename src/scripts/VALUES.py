@@ -43,7 +43,7 @@ if __name__ == "__main__":
     alpha, beta = row["alpha"], row["beta"]
     beta_low_err, beta_up_err = row["beta_low_err"], row["beta_up_err"]
 
-    alpha_str = f"${alpha:.2f}_{{-{row['alpha_low_err']:.2f}}}^{{+{row['alpha_up_err']:.2f}}}$"
+    alpha_str = f"$-{alpha:.2f}_{{-{row['alpha_up_err']:.2f}}}^{{+{row['alpha_low_err']:.2f}}}$"
     beta_str = f"${np.log10(beta):.2f}_{{-{np.log10(beta_low_err):.2f}}}^{{+{np.log10(beta_up_err):.2f}}}" + r"\,\mathrm{d}^{-1}$"
 
     with open(paths.output / "tess_ffd_alpha.tex", "w") as f:

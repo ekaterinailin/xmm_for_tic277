@@ -64,10 +64,19 @@ def plot_data_resid_3(file):
     ax[1].axhline(0,c="k")
 
     # labels
-    ax[1].set_xlabel("E [keV]")
-    ax[0].set_ylabel("flux [counts / s / keV]")
-    ax[1].set_ylabel("residuals")
+        # labels
+    ax[1].set_xlabel("E [keV]", fontsize=14)
+    ax[0].set_ylabel("flux [counts/s/keV]", fontsize=14)
+    ax[1].set_ylabel("residuals [counts/s/keV]", fontsize=14)
+
+    # increase tick size labels
+    for a in ax:
+        a.tick_params(axis='both', which='major', labelsize=13)
+
+    # y limits
     ax[0].set_ylim(0,)
+
+    # legend
     ax[0].legend(loc=1, frameon=False, fontsize=12)
 
     # x limits
@@ -135,9 +144,12 @@ def plot_data_resid_1(file):
     ax[1].axhline(0,c="k")
 
     # labels
-    ax[1].set_xlabel("E [keV]")
-    ax[0].set_ylabel("flux [counts/s/keV]")
-    ax[1].set_ylabel("residuals")
+    ax[1].set_xlabel("E [keV]", fontsize=15)
+    ax[0].set_ylabel("flux [counts/s/keV]", fontsize=15)
+    ax[1].set_ylabel("residuals [counts/s/keV]", fontsize=15)
+
+    # increase tick size labels
+    ax[0].tick_params(axis='both', which='major', labelsize=15)
 
     # x limits
     for a in ax:
