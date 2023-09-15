@@ -83,10 +83,27 @@ if __name__ == "__main__":
 
     df = pd.read_csv(paths.data / "mcmc_results.csv", index_col=0)
 
+    # load luminosity from PN data
+    lxs = pd.read_csv(paths.data / "joint_vapec_chain_fits.csv")
+
+    lxs[r"$L_X$ [$10^{26}$ erg s$^{-1}$]"] = lxs.apply(lambda x: fr"${x.Lx_erg_s/1e26:.2f} [{x.Lx_erg_s_err/1e26:.2f}]$", axis=1) 
+
+    # rename subset in lxs as follows: spec to full data set, no flare to quiescent, onlyflare to flaring
+    lxs["subset"] = lxs["subset"].replace({"spec": "full data set", "noflare": "quiescent", "onlyflare": "flaring"})
+
+
+    # merge the subset, and LX column in lxs with df
+    df = df.reset_index()
+    df = df.merge(lxs[["subset", r"$L_X$ [$10^{26}$ erg s$^{-1}$]"]], right_on="subset", left_on="index")
+    df = df.set_index("index")
+
     # remove extra columns
     del df["symb"]
     del df["norm_ratio"]
     del df["e_norm_ratio"]
+    del df["subset"]
+
+    print(df.index)
 
     for c in df.columns:
         if "_err" in c:
@@ -126,6 +143,7 @@ if __name__ == "__main__":
     string = string.replace("midrule","hline")
     string = string.replace("toprule","hline")
     string = string.replace("bottomrule","hline")
+    string = string.replace("index","")
    
 
     # write to file
