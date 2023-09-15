@@ -68,7 +68,7 @@ if __name__ == "__main__":
 
     df = pd.read_csv(paths.data / "joint_vapec_chain_fits.csv")
 
-    # select full data set
+    # select quiescent data set
     row = df[df.subset == "noflare"].iloc[0]
 
     # get Lx and make latex string with a single uncertainty
@@ -77,7 +77,20 @@ if __name__ == "__main__":
 
     print(Lx_str)
 
-    with open(paths.output / "epic_Lx.tex", "w") as f:
+    with open(paths.output / "epic_Lx_quiet.tex", "w") as f:
+        f.write(f"{Lx_str}")
+
+
+    # select flaring data set
+    row = df[df.subset == "onlyflare"].iloc[0]
+
+    # get Lx and make latex string with a single uncertainty
+    Lx, Lxerr = row.Lx_erg_s, row.Lx_erg_s_err
+    Lx_str = fr"${Lx/1e27:.2f} \pm {Lxerr/1e27:.2f}" + r"\times 10^{27}\,\rm{erg s}^{-1}$"
+
+    print(Lx_str)
+
+    with open(paths.output / "epic_Lx_flaring.tex", "w") as f:
         f.write(f"{Lx_str}")
 
     # Fx -----------------------------------------------------------------------
