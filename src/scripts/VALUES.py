@@ -189,3 +189,15 @@ if __name__ == "__main__":
     with open(paths.output / "om_flare.tex", "w") as f:
         f.write(omstr)
 
+    # flare duration in EPIC ---------------------------------------------------
+
+    tstart, tstop = epic.tstart, epic.tstop
+
+    dur = tstop - tstart
+
+    durstr = f"${dur/1e3:.1f}\,$ks"
+
+    print(durstr)
+
+    with open(paths.output / "epic_flare_dur.tex", "w") as f:
+        f.write(durstr)

@@ -41,7 +41,7 @@ if __name__ == "__main__":
     # add vertical filled area
     ax[1].axvspan(776075500 / 3600. / 24., 776080000 / 3600. / 24.,
                   color="grey", alpha=0.2)
-    
+
     # add inset
     axins = ax[1].inset_axes([0.3, 0.55, 0.4, 0.5])
     l, r = 600, 750
