@@ -15,7 +15,8 @@
 \newcommand{\Tqmean}{\input{output/Tqmean.tex}}
 \newcommand{\Tfmean}{\input{output/Tfmean.tex}}
 \newcommand{\FX}{\input{output/epic_flux.tex}}
-\newcommand{\LX}{\input{output/epic_Lx.tex}}
+\newcommand{\LXquiet}{\input{output/epic_Lx_quiet.tex}}
+\newcommand{\LXflaring}{\input{output/epic_Lx_flaring.tex}}
 \newcommand{\Lbol}{\input{output/Lbol.tex}}
 \newcommand{\LXLbol}{\input{output/lxlbol}}
 \newcommand{\ffdalpha}{\input{output/tess_ffd_alpha}}
@@ -170,16 +171,14 @@ We use XSPEC version 12.12.1~\citep{arnaud1996xspec} to fit a two-temperature (2
 
 \subsection{Flare energies: TESS, OM, and EPIC}
 
-We fitted the soft X-ray light curve using constant flux with a flare, applying the~\citet{davenport2014kepler} optical flare model that captures the fast rise and exponential decay of the flare seen with XMM-Newton. From the fit, we extracted the baseline flux against which we measured the equivalent duration $ED$ of the flare, i.e., the flare flux $F_{\rm flare}$, divided by the median flux $F_0$ of the star, integrated over the flare duration~\citep{gershberg1972results}:
+For the OM flare, we median flux of the lightcurve as the quiescent flux $F_0$, against which we measured the equivalent duration $ED$ of the flare, i.e., the flare flux $F_{\rm flare}$, divided by $F_0$, integrated over the flare duration~\citep{gershberg1972results}:
 
 \begin{equation}
 \label{eq:ED}
 ED=\displaystyle \int \mathrm dt\, \frac{F_{\rm flare}(t)}{F_0}.
 \end{equation}
 
-We then converted $ED$ to flare energy in the $0.2-2\,$keV band by multiplying with $L_X$. 
-
-For the OM flare, we derived the bolometric flare energy following the procedure in~\citet{shibayama2013superflares}. We used the throughput curve for the white light filter scaled to unity at the peak of transmission as an optimistic response curve $R_{\lambda, \rm OM}$, given that the degradation of this filter's response is poorly constrained\footnote{XMM-Newton User's Handbook 3.5.3.1, \url{https://xmm-tools.cosmos.esa.int/external/xmm_user_support/documentation/uhb/omfilters.html}, accessed Aug 8, 2023}. From that, we extracted a ratio $f_{\rm OM}$ of stellar to flare flux of $1.4\cdot 10^{-4}$ for a $10,000\,$K blackbody flare\footnote{A flare temperature of $T_{\rm flare}=10,000\,$K is a typical approximation for energetic M dwarf flares~\citep{kowalski2013timeresolved, howard2020evryflarea}.}:
+We then converted $ED$ to flare energy using the bolometric flare energy following the procedure in~\citet{shibayama2013superflares}. We used the throughput curve for the white light filter scaled to unity at the peak of transmission as an optimistic response curve $R_{\lambda, \rm OM}$, given that the degradation of this filter's response is poorly constrained\footnote{XMM-Newton User's Handbook 3.5.3.1, \url{https://xmm-tools.cosmos.esa.int/external/xmm_user_support/documentation/uhb/omfilters.html}, accessed Aug 8, 2023}. From that, we extracted a ratio $f_{\rm OM}$ of stellar to flare flux of $1.4\cdot 10^{-4}$ for a $10,000\,$K blackbody flare\footnote{A flare temperature of $T_{\rm flare}=10,000\,$K is a typical approximation for energetic M dwarf flares~\citep{kowalski2013timeresolved, howard2020evryflarea}.}:
 
 \begin{equation}
     f_{\rm OM} = \frac{\displaystyle\int R_{\lambda, \rm OM} B_{\lambda(T_{\rm eff})}  d\lambda}{\displaystyle\int R_{\lambda, \rm OM} B_{\lambda(T_{\rm flare})} d\lambda} 
@@ -199,6 +198,13 @@ We note that due to the optimistic response curve assumption, the resulting $E_{
 
 Analogously to Eq.~\ref{eq:ratio} for the OM flare, we used the TESS response curve to obtain a flux ratio $f_{\rm TESS}$ of $6.3\cdot10^{-3}$ in the redder optical filter of TESS, and convert $ED$ to bolometric flare energy using Eq.~\ref{eq:eflare}. Besides the $ED$, \texttt{AltaiPony} also yields start and end time, defined as the difference between the first and last data point above the flare detection criterion defined in Section~\ref{sec:obs:tess}; and relative amplitude $a$, for each flare.
 
+For the X-ray flare, we use the flare duration $\Delta t$ marked in the bottom panel in Fig.~\ref{fig:lightcurves}, and multiply it by the flare luminosity in the EPIC data. The flare luminosity is equal to the difference between the quiescent and flaring X-ray luminosities in the 0.2-2 keV band, i.e.:
+
+\begin{equation}
+    E_{X, \mathrm{flare}} = \left(L_{X,\mathrm{flaring}} -  L_{X,\mathrm{quiescent}}\right) \times \Delta t
+    \label{eq:xrayflare}
+\end{equation}
+
 \section{Results}
 \label{sec:results}
 With the XMM-Newton and TESS observations, we could constrain the coronal and flaring properties of TIC 277. We derive its coronal temperature and luminosity from the EPIC spectrum~(Section~\ref{sec:res:XrayTL}). We also measure the flare energies in X-ray from the EPIC instruments, and optical from the OM, and compare them to the flare frequency distributions obtained from the 18 detected flares in TESS~(Section~\ref{sec:res:flares}).
@@ -208,7 +214,7 @@ With the XMM-Newton and TESS observations, we could constrain the coronal and fl
 \label{sec:res:XrayTL}
 % From the proposal: $F_X=2.7^{-13}$ erg/s/cm$^2$, $L_X=6\cdot10^27$ erg/s (update with new eROSITA data) -- 1 oom above the measured XMM values.
 
-From the XMM-Newton EPIC spectra, we could measure the coronal properties of TIC in both its quiescent, and flaring states~(Table~\ref{tab:specfit}). The resulting fit~(Fig.~\ref{fig:spec_joint_all}) consists of a cooler and a hotter component of about \Tcool and \Thot, respectively. Assuming these temperatures as ground truth, we also fitted 2T APEC models to the flaring and quiescent portions of the observations separately. The coronal temperatures did not update significantly using either subset, although the quiescent spectrum appeared slightly cooler overall. However, the emission measure weighted mean temperature $T_{\rm mean}$ changed from \Tqmean in the quiescent spectrum to \Tfmean in the flaring spectrum. From the quiescent PN spectra, we then also calculated soft X-ray flux of $F_X$\FX, and a luminosity $L_X=$\LX in the $0.2$-$2\,$keV band. %This suggests that the flaring corona emits the hotter component, while the cooler component corresponds to the quiescent corona. In this interpretation, the presence of a hot component in the quiescent spectrum indicates that TIC 277 is flaring below the detection threshold, consistent with an extrapolation of the flare frequency distribution to lower temperatures~(see the following Section, and Fig.~\ref{fig:ffd}). 
+From the XMM-Newton EPIC spectra, we could measure the coronal properties of TIC in both its quiescent, and flaring states~(Table~\ref{tab:specfit}). The resulting fit~(Fig.~\ref{fig:spec_joint_all}) consists of a cooler and a hotter component of about \Tcool and \Thot, respectively. Assuming these temperatures as ground truth, we also fitted 2T APEC models to the flaring and quiescent portions of the observations separately. The coronal temperatures did not update significantly using either subset, although the quiescent spectrum appeared slightly cooler overall. However, the emission measure weighted mean temperature $T_{\rm mean}$ changed from \Tqmean in the quiescent spectrum to \Tfmean in the flaring spectrum. From the quiescent PN spectra, we then also calculated soft X-ray flux of $F_X$\FX, and a luminosity $L_X=$\LXquiet in the $0.2$-$2\,$keV band. %This suggests that the flaring corona emits the hotter component, while the cooler component corresponds to the quiescent corona. In this interpretation, the presence of a hot component in the quiescent spectrum indicates that TIC 277 is flaring below the detection threshold, consistent with an extrapolation of the flare frequency distribution to lower temperatures~(see the following Section, and Fig.~\ref{fig:ffd}). 
 
 We note that not using the full set of observations as ground truth resulted in an unconstrained hot coronal component. This can be interpreted as due to a lack of X-ray flux above $5\,$keV. Hot flares with temperatures of $>50\,$MK have been measured on DS~Tuc~A~\citep{pillitteri2011xray}. On the Sun, the highest flare associated coronal temperatures are around $35\,$MK~\citep{kay2003soft}.
 
@@ -259,7 +265,7 @@ following the procedure in~\citep{ilin2021flares}, implemented as \texttt{FFD.fi
 
 The FFD power law fit converged after 13,500 steps on a slope $\alpha =$\ffdalpha\unskip. The frequency $R_{31.5}$ of flares per day above $\log_{10} E_{\rm flare} = 31.5\,\mathrm{erg}$ is about $\log_{10}R_{31.5}=$\ffdr\unskip. The slope is typical of other flaring stars, regardless of spectral type and rotation period~(see, e.g., Fig.~13 in \citealt{ilin2021flares}). $R_{31.5}$ is typical of flaring M dwarfs, in particular typical of late M dwarfs in the saturated activity regime, where $R_{31.5}$ becomes independent of rotation period~\citep{medina2020flare,murray2022study}. 
 
-For the X-ray flare in Fig.~\ref{fig:lightcurves}, we obtain a total energy of \eepic in the $0.2-5\,$keV band. The energy of the corresponding OM flare is \eom\unskip. We use the 36ks observing baseline of XMM-Newton to calculate a flare rate in OM. Fig.~\ref{fig:ffd} illustrates that it is roughly consistent, if slightly higher, than the extension of TESS' flare frequency distributions to lower energies. About one flare per day of the order of the observed one or above can therefore be expected in future X-ray observations of TIC~277. However, this assumes that all optical flares above this energy in the optical data correspond to detected X-ray flares in the EPIC instruments, which is not always the case~\citep{paudel2021simultaneous}. \citet{guarcello2019simultaneous, kuznetsov2021stellar} find moderate correlation between flare energies in Kepler/K2 data and XMM-Newton, but the majority of their sampled flare energies are two orders of magnitude above the flare in this work, both in X-ray and optical. \citet{kuznetsov2021stellar} compare primary Kepler mission observations with XMM-Newton to find a similar result. We note that the X-ray flare light curve follows the typical fast-rise exponential decay shape, and is therefore unlikely eclipsed by the star~\citep{johnstone2012soft}.
+For the X-ray flare in Fig.~\ref{fig:lightcurves}, we obtain a total energy of \eepic in the $0.2-2\,$keV band, using $L_{X,\rm quiescent}=$\LXquiet\unskip, $L_{X,\rm flaring}=$\LXflaring\unskip, and $\Delta t =$\xraydur\unskip in Eq.~\ref{eq:xrayflare}. The energy of the corresponding OM flare is \eom\unskip. We use the 36ks observing baseline of XMM-Newton to calculate a flare rate in OM. Fig.~\ref{fig:ffd} illustrates that it is roughly consistent, if slightly higher, than the extension of TESS' flare frequency distributions to lower energies. About one flare per day of the order of the observed one or above can therefore be expected in future X-ray observations of TIC~277. However, this assumes that all optical flares above this energy in the optical data correspond to detected X-ray flares in the EPIC instruments, which is not always the case~\citep{paudel2021simultaneous}. \citet{guarcello2019simultaneous, kuznetsov2021stellar} find moderate correlation between flare energies in Kepler/K2 data and XMM-Newton, but the majority of their sampled flare energies are two orders of magnitude above the flare in this work, both in X-ray and optical. \citet{kuznetsov2021stellar} compare primary Kepler mission observations with XMM-Newton to find a similar result. We note that the X-ray flare light curve follows the typical fast-rise exponential decay shape, and is therefore unlikely eclipsed by the star~\citep{johnstone2012soft}.
 
 
 \begin{figure}
