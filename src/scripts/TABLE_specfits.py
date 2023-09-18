@@ -86,15 +86,26 @@ if __name__ == "__main__":
     # load luminosity from PN data
     lxs = pd.read_csv(paths.data / "joint_vapec_chain_fits.csv")
 
-    lxs[r"$L_X$ [$10^{26}$ erg s$^{-1}$]"] = lxs.apply(lambda x: fr"${x.Lx_erg_s/1e26:.2f} [{x.Lx_erg_s_err/1e26:.2f}]$", axis=1) 
+    # get flux and luminosity
+    g = lambda x: fr"${x.flux_erg_s_cm2/1e-14:.2e} [{x.flux_erg_s_cm2_err/1e-14:.2e}]$"
+    lxs[r"$F_X$ [$10^{-14}$ erg s$^{-1}$ cm$^{-2}$]"] = lxs.apply(g, axis=1)
 
-    # rename subset in lxs as follows: spec to full data set, no flare to quiescent, onlyflare to flaring
-    lxs["subset"] = lxs["subset"].replace({"spec": "full data set", "noflare": "quiescent", "onlyflare": "flaring"})
+    g = lambda x: fr"${x.Lx_erg_s/1e26:.2f} [{x.Lx_erg_s_err/1e26:.2f}]$"
+    lxs[r"$L_X$ [$10^{26}$ erg s$^{-1}$]"] = lxs.apply(g, axis=1) 
 
+    # rename subset in lxs as follows: spec to full data set, 
+    # no flare to quiescent, onlyflare to flaring
+    lxs["subset"] = lxs["subset"].replace({"spec": "full data set", 
+                                           "noflare": "quiescent", 
+                                           "onlyflare": "flaring"})
 
     # merge the subset, and LX column in lxs with df
     df = df.reset_index()
-    df = df.merge(lxs[["subset", r"$L_X$ [$10^{26}$ erg s$^{-1}$]"]], right_on="subset", left_on="index")
+    df = df.merge(lxs[["subset",
+                       r"$L_X$ [$10^{26}$ erg s$^{-1}$]",
+                       r"$F_X$ [$10^{-14}$ erg s$^{-1}$ cm$^{-2}$]"]], 
+                       right_on="subset", left_on="index")
+    
     df = df.set_index("index")
 
     # remove extra columns
@@ -102,8 +113,6 @@ if __name__ == "__main__":
     del df["norm_ratio"]
     del df["e_norm_ratio"]
     del df["subset"]
-
-    print(df.index)
 
     for c in df.columns:
         if "_err" in c:
@@ -123,7 +132,9 @@ if __name__ == "__main__":
         df[f"{col}_lowerr"] = df[f"{col}_16"] - df[f"{col}_50"]
 
         newname = mapcolnames[col]
-        df[newname] = tex_up_low(df[f"{col}_50"], df[f"{col}_uperr"], df[f"{col}_lowerr"])
+        df[newname] = tex_up_low(df[f"{col}_50"], 
+                                 df[f"{col}_uperr"], 
+                                 df[f"{col}_lowerr"])
 
         del df[f"{col}_84"]
         del df[f"{col}_50"]
@@ -144,6 +155,8 @@ if __name__ == "__main__":
     string = string.replace("toprule","hline")
     string = string.replace("bottomrule","hline")
     string = string.replace("index","")
+
+    print(string)
    
 
     # write to file
