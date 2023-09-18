@@ -28,7 +28,7 @@ def convert_to_scinote(series, rel_err=1e-2):
     pd.Series
         The converted series of strings.
     """
-    return series.apply(lambda x: f"{x:.1e}" if np.abs(x)<rel_err else f"{x:.2f}").astype(str)
+    return series.apply(lambda x: f"{x:.1e}" if np.abs(x)<rel_err else f"{x:.1f}").astype(str)
 
 
 
@@ -87,10 +87,10 @@ if __name__ == "__main__":
     lxs = pd.read_csv(paths.data / "joint_vapec_chain_fits.csv")
 
     # get flux and luminosity
-    g = lambda x: fr"${x.flux_erg_s_cm2/1e-14:.2f} [{x.flux_erg_s_cm2_err/1e-14:.2f}]$"
+    g = lambda x: fr"${x.flux_erg_s_cm2/1e-14:.1f} [{x.flux_erg_s_cm2_err/1e-14:.1f}]$"
     lxs[r"$F_X$ [$10^{-14}$ erg s$^{-1}$ cm$^{-2}$]"] = lxs.apply(g, axis=1)
 
-    g = lambda x: fr"${x.Lx_erg_s/1e26:.2f} [{x.Lx_erg_s_err/1e26:.2f}]$"
+    g = lambda x: fr"${x.Lx_erg_s/1e26:.1f} [{x.Lx_erg_s_err/1e26:.1f}]$"
     lxs[r"$L_X$ [$10^{26}$ erg s$^{-1}$]"] = lxs.apply(g, axis=1) 
 
     # rename subset in lxs as follows: spec to full data set, 
