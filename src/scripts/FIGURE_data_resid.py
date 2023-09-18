@@ -66,12 +66,13 @@ def plot_data_resid_3(file):
     # labels
         # labels
     ax[1].set_xlabel("E [keV]", fontsize=14)
-    ax[0].set_ylabel("flux [counts/s/keV]", fontsize=14)
-    ax[1].set_ylabel("residuals [counts/s/keV]", fontsize=14)
+    ax[0].set_ylabel(r"flux [counts s$^{-1}\,$keV$^{-1}$]", fontsize=13)
+    ax[1].set_ylabel(r"residuals [counts s$^{-1}\,$keV$^{-1}$]", fontsize=13)
 
     # increase tick size labels
     for a in ax:
         a.tick_params(axis='both', which='major', labelsize=13)
+    
 
     # y limits
     ax[0].set_ylim(0,)
@@ -87,6 +88,8 @@ def plot_data_resid_3(file):
 
         a.set_xscale("log")
 
+    ax[1].set_xticks(ticks=[0.25,0.4,0.6,0.8,1,2,3,4,5],
+                     labels=[0.25,0.4,0.6,0.8,1,2,3,4,5])
 
     # layout
     plt.tight_layout()
@@ -145,8 +148,8 @@ def plot_data_resid_1(file):
 
     # labels
     ax[1].set_xlabel("E [keV]", fontsize=15)
-    ax[0].set_ylabel("flux [counts/s/keV]", fontsize=15)
-    ax[1].set_ylabel("residuals [counts/s/keV]", fontsize=15)
+    ax[0].set_ylabel(r"flux [counts s$^{-1}$ keV^$^{-1}$]", fontsize=15)
+    ax[1].set_ylabel(r"residuals [counts s$^{-1}$ keV^$^{-1}$]", fontsize=15)
 
     # increase tick size labels
     ax[0].tick_params(axis='both', which='major', labelsize=15)
