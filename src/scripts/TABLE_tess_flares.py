@@ -26,9 +26,9 @@ if __name__ == "__main__":
     sel["ed_rec_err"] = sel["ed_rec_err"] / 1e31
 
     # format
-    sel[r"$E_{\rm bol}$ [$10^{31}$ erg]"] = (sel["ed_rec"].round(2).astype(str) + 
+    sel[r"$E_{\rm bol}$ [$10^{31}$ erg]"] = (sel["ed_rec"].round(1).astype(str) + 
                                             " [" + 
-                                            sel["ed_rec_err"].round(2).astype(str) + 
+                                            sel["ed_rec_err"].round(1).astype(str) + 
                                             "]")
     # delete unused columns
     del sel["ed_rec_err"]
