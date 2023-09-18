@@ -87,7 +87,7 @@ if __name__ == "__main__":
     lxs = pd.read_csv(paths.data / "joint_vapec_chain_fits.csv")
 
     # get flux and luminosity
-    g = lambda x: fr"${x.flux_erg_s_cm2/1e-14:.2e} [{x.flux_erg_s_cm2_err/1e-14:.2e}]$"
+    g = lambda x: fr"${x.flux_erg_s_cm2/1e-14:.2f} [{x.flux_erg_s_cm2_err/1e-14:.2f}]$"
     lxs[r"$F_X$ [$10^{-14}$ erg s$^{-1}$ cm$^{-2}$]"] = lxs.apply(g, axis=1)
 
     g = lambda x: fr"${x.Lx_erg_s/1e26:.2f} [{x.Lx_erg_s_err/1e26:.2f}]$"
