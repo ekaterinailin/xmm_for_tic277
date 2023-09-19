@@ -61,9 +61,9 @@ if __name__ == "__main__":
         a.legend(loc=1, frameon=True)
 
 
-    ax[0].set_ylabel("normalized flux")
-    ax[1].set_ylabel("background subtracted flux <10 keV [cts/s]")
-    ax[1].set_xlabel("time [days]")
+    ax[0].set_ylabel("normalized flux", fontsize=11)
+    ax[1].set_ylabel(r"background subtracted flux [counts s$^-1$]", fontsize=11)
+    ax[1].set_xlabel("time [d]", fontsize=13)
 
     plt.tight_layout()
     plt.savefig(paths.figures / "lightcurves.png", dpi=300)

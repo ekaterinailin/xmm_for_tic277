@@ -85,13 +85,13 @@ if __name__ == "__main__":
     row = df[df.subset == "onlyflare"].iloc[0]
 
     # get Lx and make latex string with a single uncertainty
-    Lx, Lxerr = row.Lx_erg_s, row.Lx_erg_s_err
-    Lx_str = fr"${Lx/1e27:.2f} \pm {Lxerr/1e27:.2f}" + r"\times 10^{27}\,\rm{erg s}^{-1}$"
+    Lxq, Lxerrq = row.Lx_erg_s, row.Lx_erg_s_err
+    Lx_strq = fr"${Lx/1e27:.2f} \pm {Lxerr/1e27:.2f}" + r"\times 10^{27}\,\rm{erg s}^{-1}$"
 
-    print(Lx_str)
+    print(Lx_strq)
 
     with open(paths.output / "epic_Lx_flaring.tex", "w") as f:
-        f.write(f"{Lx_str}")
+        f.write(f"{Lx_strq}")
 
     # Fx -----------------------------------------------------------------------
 
