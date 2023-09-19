@@ -123,7 +123,7 @@ We used \textit{XMM-Newton} to observe TIC 277 for 36 ks, i.e. two full rotation
 
 \subsubsection{Time series with EPIC and OM}
 
-Fig.~\ref{fig:lightcurves} shows the time series using the combined PN and MOS time series together with the OM light curve. We extracted the events time series from EPIC using XMM SAS version 20~\footnote{"Users Guide to the \textit{XMM-Newton} Science Analysis System", Issue 18.0, 2023 (ESA: \textit{XMM-Newton} SOC)} using the \texttt{evselect} task. We selected a circular source region with 20 arcsec radius on all detectors, and a circular source-free background region 120 and 90 arcsec in MOS and PN, respectively. We used the \texttt{epiclccorr} task in XMM SAS to correct for energy and time dependent loss of events\footnote{\url{https://heasarc.gsfc.nasa.gov/docs/xmm/sas/help/epiclccorr/node3.html}, accessed on July 3, 2023}, and extract a soft X-ray time series with a time binning of $200\,$s.
+Fig.~\ref{fig:lightcurves} shows the time series using the combined PN and MOS time series together with the OM light curve. We extracted the events time series from EPIC using XMM SAS version 20\footnote{"Users Guide to the \textit{XMM-Newton} Science Analysis System", Issue 18.0, 2023 (ESA: \textit{XMM-Newton} SOC)} using the \texttt{evselect} task in the full $0-10\,$keV band. We selected a circular source region with 20 arcsec radius on all detectors, and a circular source-free background region 120 and 90 arcsec in MOS and PN, respectively. We used the \texttt{epiclccorr} task in XMM SAS to correct for energy and time dependent loss of events\footnote{\url{https://heasarc.gsfc.nasa.gov/docs/xmm/sas/help/epiclccorr/node3.html}, accessed on July 3, 2023}, and extract a soft X-ray time series with a time binning of $200\,$s.
 
 Simultaneously, we used the optical monitor (OM) aboard \textit{XMM-Newton}, to monitor TIC 277 in its white light filter at $10$\,s cadence. The OM white light filter is centered on $4,060\,$\AA, with an equivalent width of $3,470\,$\AA. We used the \texttt{omfchain} in XMM SAS to extract the 8 individual light curves. In each light curve, OM observed uninterruptedly for $4390\,$s, followed by a short gap of $318\,$s before the next one.
 
@@ -134,7 +134,7 @@ Simultaneously, we used the optical monitor (OM) aboard \textit{XMM-Newton}, to 
     \begin{centering}
         \includegraphics[width=0.75\linewidth]{figures/lightcurves.png}
         \caption{
-         Top panel: Optical Monitoring (OM) light curve. Bottom panel: X-ray (PN, MOS1 and MOS2 combined) light curve. The grey shaded portion defines the flare-only subset of the observations (see Section~\ref{sec:methods:epic} and Table~\ref{tab:specfit}).
+         Top panel: Optical Monitoring (OM) light curve. Bottom panel: Background-subtracted X-ray light curve using the flux in the entire $0-10\,$keV range  (PN, MOS1 and MOS2 combined). The grey shaded portion defines the flare-only subset of the observations (see Section~\ref{sec:methods:epic} and Table~\ref{tab:specfit}).
         }
         \label{fig:lightcurves}
     \end{centering}
@@ -295,9 +295,9 @@ TIC~277's spectral type and rotation places it in the middle of the transition f
 \label{sec:discussion:xraytemp}
 Low mass stars' coronae are not uniform. Magnetic structures create a range of temperatures, starting at about 1 MK by definition and rising up to 30 MK in flares, in the heterogeneous Solar corona~\citep{vaiana1978recent}. Stellar point source X-ray observations are a superposition of various temperatures and densities. The resolution of different temperature components depends on the apparent brightness and integration time of the spectrum. Nearby stars like Proxima Cen can be modeled with a range of temperatures~\citep[e.g.,][]{gudel2004flares, drake2020pointing}, while one can often only capture few dominant temperatures in fainter objects.  
 
-We find that the quiescent corona of TIC 277 is best described by two components, similar to many other active M dwarfs~\citep{wargelin2008xray, robrade2010quiescent, behr2023muscles, magaudda2022firsta}. The hotter component represents thermal bremsstrahlung radiation from hot plasma that evaporates from the chromosphere into the coronal flaring loops~\citep{benz2016flare}, which is supported by the observed delay between the optical and the X-ray flare~\citep[Fig.~\ref{fig:lightcurves}, ][]{hawley2003multiwavelength}. The optical flare originates from the lower chromosphere, which is heated by the precipitating particles. This heating then causes evaporation of particles into the flare loop. %A third, very hot, possibly $>40\,$MK component could only be poorly constrained due to a lack of sensitivity to flux above $5\,$keV, and its short lifetime during the peak of the flare.
+We find that the quiescent corona of TIC 277 is best described by two components, similar to many other active M dwarfs, in line with the standard picture for stellar flares~\citep{wargelin2008xray, robrade2010quiescent, behr2023muscles, magaudda2022firsta}. Both the cooler and the hotter component represent thermal radiation from hot plasma that evaporates from the chromosphere into the corona. The hotter component is driven by particles precipitating downward during flares that then heat the chromosphere to high temperatures, and cause additional evaporation into the coronal flaring loops~\citep{benz2016flare}. In our osbervation, this interpretation is supported by the observed delay between the optical and the X-ray flare~\citep[Fig.~\ref{fig:lightcurves}, ][]{hawley2003multiwavelength}. The optical flare originates from the lower chromosphere, which is heated by the precipitating particles. The heating then causes evaporation of particles into the flare loop. In the cooler component, the source of the more quiescent coronal heating is an open question, even for the Sun, where the respective contributions of reconnection and magnetohydrodynamical waves are under investigation~\citep{vandoorsselaere2020coronal}.  %A third, very hot, possibly $>40\,$MK component could only be poorly constrained due to a lack of sensitivity to flux above $5\,$keV, and its short lifetime during the peak of the flare.
 
-The range of 6.5-11 MK for the emission measure weighted temperature of TIC 277 places it squarely in the saturated regime with other mid M dwarfs down to spectral type M6~\citep{wright2018stellar, magaudda2020relation, stelzer2022first,robrade2005xray,raassen2003xray,paudel2021simultaneous, foster2020corona}. Flares on the slowly rotating Proxima Cen (M5.5, $P_{\rm rot} = 83\,$d,~\citealt{anglada-escude2016terrestrial}), appear with a range of temperatures at 2-3 MK and 10-20 MK~\citep{gudel2004flares, fuhrmeister2011multiwavelength, fuhrmeister2022high, howard2022mouse} placing it in the transition region between saturated and unsaturated regimes. Only at rotation periods beyond 100 days, flaring activity declines to yield coronal temperatures $<2\,$MK~\citep{wright2018stellar, foster2020corona}. 
+The range of 6.5-11 MK for the emission measure weighted temperature of TIC 277 places it squarely in the saturated regime with other mid M dwarfs down to spectral type M6~\citep{wright2018stellar, magaudda2020relation, stelzer2022first,robrade2005xray,raassen2003xray,paudel2021simultaneous, foster2020corona}. Flares on the slowly rotating Proxima Cen (M5.5, $P_{\rm rot} = 83\,$d,~\citealt{anglada-escude2016terrestrial}), appear with a range of temperatures at 2-3 MK and 10-20 MK~\citep{gudel2004flares, fuhrmeister2011multiwavelength, fuhrmeister2022high, howard2022mouse} placing it in the transition region between saturated and unsaturated regimes. Only at rotation periods beyond 100 days, flaring activity declines to yield coronal temperatures $<2\,$MK in M3-M6 dwarfs~\citep{wright2018stellar, foster2020corona}. 
 
 There are only few late M dwarfs beyond spectral type M6 with a spectrally resolved corona. Their intrinsic faintness and gradual decline in coronal emission toward the brown dwarf regime make them hard to detect~\citep{berger2010simultaneous, cook2014trends, stelzer2022first}. One example is NLTT 33370 AB, an M7 binary with a rotation period of about $3.8\,$h (close to TIC 277's $4.56\,$h, and of the same spectral type) is combined of a 3.1 MK and 14 MK component~\citep{williams2015simultaneous}. Another is TRAPPIST-1~(M8, $P_{\rm rot} = 3.3\,$d~\citep{luger2017sevenplanet}). Its corona appears cooler, with a 1.74 MK and a 9.6 MK component~\citep{wheatley2017strong}, and an emission measure weighted temperature of 5.36 MK~\citep{brown2023coronal}. 
 
@@ -309,9 +309,9 @@ Bearing in mind the relatively low two-temperature resolution of TIC~277's X-ray
 
 TIC~277's flare rate is consistent with other saturated fully convective dwarfs~\citep{medina2020flare, murray2022study}, and so is the energy distribution with a power law slope of \ffdalpha\unskip. It is in fact comparable to TRAPPIST-1's flaring behavior~\citep{paudel2018k2}, which has been investigated for its effects on the seven terrestrial planets in its orbit. 
 
-Recent observations of TRAPPIST-1 b~\citep{greene2023thermal, ih2023constraining} with the James Webb Space Telescope find the planet mostly stripped of an atmosphere, which the authors attribute to the intense flare driven X-ray radiation and energetic particle exposure at the short orbital periods of the innermost planet. For the habitable zone planets, TRAPPIST-1 e and f, simulations suggest that flares alter their chemical composition, in particular ozone, nitric oxide and hydroxide, but that the effects would be below the noise floor of JWST~\citep{chen2021persistence}. However, given the uncertain age of TRAPPIST-1~\citep{burgasser2017age, gonzales2019reanalysis, birky2021improved}, the temperate planets e and f may have been entirely stripped of their atmospheres in the past gigayear(s)~\citep{garraffo2017threatening}. 
+%Recent observations of TRAPPIST-1 b~\citep{greene2023thermal, ih2023constraining} with the James Webb Space Telescope find the planet mostly stripped of an atmosphere, which the authors attribute to the intense flare driven X-ray radiation and energetic particle exposure at the short orbital periods of the innermost planet. For the habitable zone planets, TRAPPIST-1 e and f, simulations suggest that flares alter their chemical composition, in particular ozone, nitric oxide and hydroxide, but that the effects would be below the noise floor of JWST~\citep{chen2021persistence}. However, given the uncertain age of TRAPPIST-1~\citep{burgasser2017age, gonzales2019reanalysis, birky2021improved}, the temperate planets e and f may have been entirely stripped of their atmospheres in the past gigayear(s)~\citep{garraffo2017threatening}. 
 
-TIC~277's rapid rotation and UV flux is indicative of a younger age than TRAPPIST-1, although it has not been attributed to any star cluster so far~\citep{schneider2018hazmat}. Interpreting the upcoming observations of TRAPPIST-1 e with JWST will most likely involve its activity history. Studies of its younger counterparts, late M dwarfs like TIC~277, are required to empirically constrain cumulative effects of atmospheric forcing of planets. If its energetic flares commonly occur at high latitudes~\citep{ilin2021giant}, future models of energetic particle exposure of habitable zone planets may have to include age dependent latitudes of particle eruption to reproduce observations. 
+TIC~277's rapid rotation and UV flux is indicative of a younger age than TRAPPIST-1, although it has not been attributed to any star cluster so far~\citep{schneider2018hazmat}. Interpreting the upcoming observations of TRAPPIST-1 e, one of the rocky planets in the habitable zone of the system, with the James Webb Space Telescope will most likely involve its activity history. Studies of its younger counterparts, late M dwarfs like TIC~277, are required to empirically constrain cumulative effects of atmospheric forcing of planets. If its energetic flares commonly occur at high latitudes~\citep{ilin2021giant}, future models of energetic particle exposure of habitable zone planets may have to include age dependent latitudes of particle eruption to reproduce observations. 
 
 \subsection{X-ray luminosity}
 \label{sec:discussion:xraylum}
@@ -319,26 +319,26 @@ TIC~277's coronal luminosity relative to bolometric luminosity of $L_X/L_{\rm bo
 
 At later spectral type, a decline in coronal activity is expected as the magnetosphere transitions from a stellar to a planetary one~\citep{pineda2017panchromatic}. \citet{stelzer2022first} investigated late M and L dwarfs with eROSITA to show that $L_X/L_{\rm bol}$ increases towards later spectral types~\citep{magaudda2022firsta}, but begins to decrease again from M7 downward. In their compilation together with previous work from \citet{stelzer2012ultracool, cook2014trends, deluca2020extras, williams2014trends}, TIC~277 appears at the lower boundary of the $L_X/L_{\rm bol}$ distribution for M7 dwarfs. However, the rotation periods are unknown for most of these late M dwarfs. Sometimes projected rotation periods are known~\citep{cook2014trends}, but true periods are only detected in a handful of these stars, which we list in Table~\ref{tab:latmlxlbol}. TIC~277 appears at the lower end of this small sample.
 
-\begin{table}[]
+\begin{table*}[]
     \centering
     \caption{Late M dwarfs with known rotation period and X-ray luminosity.}
-    \begin{tabular}{lccc}
-        ID & SpT &$P_{\rm rot}$ [d] & $\log_{10} \frac{L_X}{L_{\rm bol}} $\\\hline
-        TIC 277 (this work) & M7 & 0.19 & $-4$ \\
-        TRAPPIST-1 & M8 & 3.3 & $-4$ [1]\\
-        LHS 248 & M6.5 & 0.46 & $-3.9$ [2] \\
-        NLTT 33370 AB & M7 & 0.16 & $-3.5$ [3] \\
-        LP 412-31 & M8 & 0.61 & $-3.1$ [4]\\\hline
+    \begin{tabular}{lcccc}
+        ID & SpT &$P_{\rm rot}$ [d] & $\log_{10} \frac{L_X}{L_{\rm bol}} $ & energy range [keV]\\\hline
+        TIC 277 (this work) & M7 & 0.19 & $-4$ & $0.2-2$ \\
+        TRAPPIST-1 [1] & M8 & 3.3 & $-4$ & $0.3-10$\\
+        LHS 248 [2] & M6.5 & 0.46 & $-3.9$ & $0.2-2$\\
+        NLTT 33370 AB [3] & M7 & 0.16 & $-3.5$ & $0.2-2$ \\
+        LP 412-31  [4] & M8 & 0.61 & $-3.1$& \textcolor{red}{soft X-ray band?}\\\hline
     \end{tabular}
-    \flushleft
      \footnotesize
+     \vspace{0.1cm}\newline
     [1] \citet{brown2023coronal}, 
     [2] \citet{cook2014trends}, 
     [3] \citet{williams2015simultaneous}, 
     [4] \citet{stelzer2006simultaneous}    
     %3.3 d from \citep{luger2017sevenplanet}
     \label{tab:latmlxlbol}
-\end{table}
+\end{table*}
 
 
 %At the same time, strong magnetic fields are found across the board in brown dwarfs~(XXXX).
