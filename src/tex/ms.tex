@@ -45,7 +45,7 @@
 
 % Abstract with filler text
 \begin{abstract}
-    In 2020, the \textit{Transiting Exoplanet Survey Satellite} (\textit{TESS}) observed a rapidly rotating M7 dwarf, TIC~277539431, produce a flare at $81^{\circ}$ latitude, the highest latitude flare located to date. This is in stark contrast to solar flares that occur much closer to the equator, typically below $30^{\circ}$. The circumstances that allow flares at high latitudes to occur are poorly understood. We studied five Sectors of \textit{TESS} monitoring, and obtained 36 ks of \textit{XMM-Newton} observations, to find that TIC~277539431's corona does not differ significantly from other low mass stars on the saturated activity branch with respect to coronal temperatures and flaring activity, but is underluminous in soft X-ray emission by about an order of magnitude. Combining the lack of X-ray flux, the high latitude flare, the star's viewing geometry, and the otherwise typical stellar corona, we suggest that the migration of flux emergence to the poles in rapid rotators can explain the observations of TIC~277539431.
+    In 2020, the \textit{Transiting Exoplanet Survey Satellite} (\textit{TESS}) observed a rapidly rotating M7 dwarf, TIC~277539431, produce a flare at $81^{\circ}$ latitude, the highest latitude flare located to date. This is in stark contrast to solar flares that occur much closer to the equator, typically below $30^{\circ}$. The circumstances that allow flares at high latitudes to occur are poorly understood. We studied five Sectors of \textit{TESS} monitoring, and obtained 36 ks of \textit{XMM-Newton} observations, to find that TIC~277539431's corona does not differ significantly from other low mass stars on the saturated activity branch with respect to coronal temperatures and flaring activity, but is underluminous, in soft X-ray emission by about an order of magnitude compared to M dwarfs on the saturated activity branch. Combining the lack of X-ray flux, the high latitude flare, the star's viewing geometry, and the otherwise typical stellar corona, we suggest that the migration of flux emergence to the poles in rapid rotators can explain the observations of TIC~277539431.
     
     
     %Additionally, XMM-Newton captured a simultaneous X-ray and optical flare on TIC 277 with a bolometric energy of \eom and a soft X-ray energy of \eepic in the 0.2-2 keV band. In combination with the TESS data, we infer that TIC 277 produces flares at or above this energy approximately once a day. 
@@ -150,7 +150,19 @@ Since 2018, \textit{TESS} has been supplying publicly available red-optical high
 
 We used 5 Sectors of optical monitoring of TIC 277 in 2-minute cadence. Sector 12 was observed in May 2019, Sectors 37 and 39 in April and June 2021, and Sectors 64 and 65 in April and May 2023~(Fig.~\ref{fig:tess_lcs}). 
 
-We used AltaiPony~\citep{ilin2021altaipony} to de-trend the light curves using the custom de-trending function \texttt{custom\_detrending}\footnote{see also the documentation online at \url{https://altaipony.readthedocs.io/en/latest/tutorials/detrend.html}, accessed on July 3, 2023}, detailed in~\citet{ilin2022searching}. The procedure includes 3rd order spline fitting of coarse trends, followed by iterative sine fitting to remove rotational modulation, and two Savitzky-Golay filters~\citep{savitzky1964smoothing} with a 6h and 3h window, respectively to remove aperiodic short term trends, while masking potential flare candidates in each step. The masking takes three steps each time. First, all outliers above $>2.5\sigma$ are masked. Second, the six-fold of the number of data points masked in the first step are also masked. Third, three adjacent data points before and after the so expanded mask are added to the mask. 
+
+
+\section{Methods}
+\label{sec:methods}
+In this work, we analyse the coronal properties and flaring behavior of the late M dwarf TIC~277. From the X-ray observations with XMM-Newton, we obtain a soft X-ray spectrum, which we model with two thermal emitter components~(Section~\ref{sec:methods:epic}). In TESS' optical time series photometry, we remove the variability introduced by the star's rotation, and find and characterize the flares in the so de-trended light curves~(Section~\ref{sec:methods:tess}). XMM-Newton captured a flare simultaneously in both the PN and MOS instruments in X-ray, and marginally the OM instrument in the optical. We derive its soft X-ray energy using the luminosity derived from X-ray spectrum, and its bolometric energy from the OM data. For the following comparison between optical and X-ray flaring activity, we also calculate the bolometric energies of the flares detected in TESS~(Section~\ref{sec:methods:flareenergies}). 
+
+\subsection{Spectral fitting: EPIC}
+\label{sec:methods:epic}
+The stellar corona can be described as an optically thin thermal plasma that can consist of one or multiple temperature components that represent different regions. We use XSPEC version 12.12.1~\citep{arnaud1996xspec} to fit a two-temperature (2T) additive APEC~\citep{smith2001collisional,foster2012updated} model to the joint PN and MOS spectra, using solar abundances from~\citet{grevesse1998standard}, but adjusting to an Fe/0$=0.6$ ratio, which is more typical of M dwarfs~\citep{wood2018chandra}. We analyzed both the full data set, and the quiescent and flaring parts separately. Neither subset could be adequately fit with a single temperature component (1T), and a 3T model did not improve the fit compared to the 2T-model. In the full data set, we used the \texttt{bayes} method in XSPEC to assign constant priors within the model's hard limits, and sample the uncertainties using the Markov-Chain-Monte-Carlo (MCMC) method using \texttt{chain} for a total of 30000 steps, discarding the first 5000 as the burn-in phase. From the same fit, but using PN data only, we derived the flux $F_X$ and X-ray luminosity $L_X$ in the soft $0.2-2\,$keV band. For the quiescent and flaring portions of the observations, we chose the same procedure, but used Gaussian prior distributions for the two coronal temperatures from the full data set, where we assigned the largest difference between the 50th, and 16th and 84th percentiles as standard deviation.
+
+\subsection{Lightcurve de-trending and flare finding: TESS}
+\label{sec:methods:tess}
+We used AltaiPony~\citep{ilin2021altaipony} to de-trend the light curves using the de-trending function \texttt{custom\_detrending}\footnote{see also the documentation online at \url{https://altaipony.readthedocs.io/en/latest/tutorials/detrend.html}, accessed on July 3, 2023}, detailed in~\citet{ilin2022searching}. The procedure begins with a 3rd order spline fitting of coarse trends, followed by iterative sine fitting to remove rotational modulation, and two Savitzky-Golay filters~\citep{savitzky1964smoothing} with a 6h and 3h window, respectively to remove aperiodic short term trends, while masking potential flare candidates in each step. The masking takes three steps each time. First, all outliers above $>2.5\sigma$ are masked. Second, the six-fold of the number of data points masked in the first step are also masked. Third, three adjacent data points before and after the so expanded mask are added to the mask. 
 
 In the de-trended light curves, we searched for flare candidates as at least 3 consecutive $>3\sigma$ outliers above the noise level, filling in the noise level inside the previously masked areas with the mean of the noise levels adjacent to the mask. To the series of outliers, we kept adding data points to the flare candidate until a data point falls below $2\sigma$. 
 
@@ -164,14 +176,6 @@ In the de-trended light curves, we searched for flare candidates as at least 3 c
     \end{centering}
 \end{figure*}
 
-
-\section{Methods}
-\label{sec:methods}
-
-
-\subsection{Spectral fitting: EPIC}
-\label{sec:methods:epic}
-The stellar corona can be described as an optically thin thermal plasma that can consist of one or multiple temperature components that represent different regions. We use XSPEC version 12.12.1~\citep{arnaud1996xspec} to fit a two-temperature (2T) additive APEC~\citep{smith2001collisional,foster2012updated} model to the joint PN and MOS spectra, using solar abundances from~\citet{grevesse1998standard}, but adjusting to an Fe/0$=0.6$ ratio, which is more typical of M dwarfs~\citep{wood2018chandra}. We analyzed both the full data set, and the quiescent and flaring parts separately. Neither subset could be adequately fit with a single temperature component (1T), and a 3T model did not improve the fit compared to the 2T-model. In the full data set, we used the \texttt{bayes} method in XSPEC to assign constant priors within the model's hard limits, and sample the uncertainties using the Markov-Chain-Monte-Carlo (MCMC) method using \texttt{chain} for a total of 30000 steps, discarding the first 5000 as the burn-in phase. From the same fit, but using PN data only, we derived the flux $F_X$ and X-ray luminosity $L_X$ in the soft $0.2-2\,$keV band. For the quiescent and flaring portions of the observations, we chose the same procedure, but used Gaussian prior distributions for the two coronal temperatures using the full data set as ground truth, and assigning the largest difference between the 50th, and 16th and 84th percentiles as standard deviation.
 
 \subsection{Flare energies: TESS, OM, and EPIC}
 \label{sec:methods:flareenergies}
@@ -239,7 +243,7 @@ We note that not using the full set of observations as ground truth resulted in 
     \begin{centering}
         \includegraphics[width=\linewidth]{figures/joint_chain_fit_data_resid.png}
         \caption{
-         Best-fit joint two-temperature APEC spectral fit with Fe/O$=0.6$. The top panel shows the spectra taken with the different EPIC instruments. The bottom panel shows the residuals to the fit.
+         Best-fit joint two-temperature APEC spectral fit with Fe/O$=0.6$ for the full data set. The top panel shows the spectra taken with the different EPIC instruments. The bottom panel shows the residuals to the fit.
         }
         \label{fig:spec_joint_all}
     \end{centering}
@@ -288,7 +292,7 @@ For the X-ray flare in Fig.~\ref{fig:lightcurves}, we obtain a total energy of \
 \label{sec:discussion}
 % \citep{pass2022constraints} on rotational evol of late Ms
 
-TIC~277's spectral type and rotation places it in the middle of the transition from star to brown dwarf. Its coronal properties are therefore not known a priori. Our findings indicate that TIC 277's coronal temperature~(Section~\ref{sec:discussion:xraytemp}) and flaring activity~(Section~\ref{sec:discussion:flares}) are typical of saturated fully convective M dwarf stars. However, TIC 277 is rotating rapidly, even for the typically fast rotating late M dwarfs~\citep{medina2022galactic}, which is more typical of brown dwarfs. This combination could lead to an unusual manifestation of the stellar dynamo that produces high latitude flares that other dynamo states cannot generate~\citep{weber2016modeling, weber2023understanding}. TIC 277 is underluminous in X-ray by about an order of magnitude compared to other activity saturated M dwarfs, which, in combination with the detection of a high latitude flare, may be an indication of polar updraft migration that is suspected to occur in rapid rotators~(Section~\ref{sec:discussion:xraylum}).
+TIC~277's spectral type and rotation places it in the middle of the transition from star to brown dwarf. Its coronal properties are therefore not known a priori. Our findings indicate that TIC 277's coronal temperature~(Section~\ref{sec:discussion:xraytemp}) and flaring activity~(Section~\ref{sec:discussion:flares}) are typical of saturated fully convective M dwarf stars. However, TIC 277 is rotating rapidly, even for the typically fast rotating late M dwarfs~\citep{medina2022galactic}, which is more typical of brown dwarfs. This combination could lead to an unusual manifestation of the stellar dynamo that produces high latitude flares that other dynamo states cannot generate~\citep{weber2016modeling, weber2023understanding}. TIC 277 is underluminous, or supersaturated, in X-ray by about an order of magnitude compared to other activity saturated M dwarfs, which, in combination with the detection of a high latitude flare, may be an indication of polar updraft migration that is suspected to occur in rapid rotators~(Section~\ref{sec:discussion:xraylum}).
 
 
 \subsection{Coronal temperature}
