@@ -145,11 +145,16 @@ if __name__ == "__main__":
         del df[f"{col}_lowerr"]
 
 
-    for col in ["weighted_mean_T", "EM1_50", "EM2_50"]:
+    for col in ["EM1_50", "EM2_50","weighted_mean_T"]:
         df[mapcolnames[col]] = tex_one_err(df[col], df[f"e_{col}"])
 
         del df[col]
         del df[f"e_{col}"]
+
+    del df["EM1_16"]
+    del df["EM1_84"]
+    del df["EM2_16"]
+    del df["EM2_84"]
 
     string = df.T.to_latex(escape=False,index=True)
 
