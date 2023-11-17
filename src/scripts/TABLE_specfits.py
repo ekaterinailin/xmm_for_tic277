@@ -123,6 +123,8 @@ if __name__ == "__main__":
                    'T2': r'$T_{\rm hot}$ [MK]',
                    'norm1': r'$10^6$ norm$_{\rm cool}$',
                    'norm2': r'$10^6$ norm$_{\rm hot}$',
+                   'EM1_50' : r'$\log_{10} EM_{\rm cool}$ [cm$^{-3}$]',
+                   'EM2_50' : r'$\log_{10} EM_{\rm hot}$ [cm$^{-3}$]',
                    'weighted_mean_T': r'$T_{\rm mean}$ [MK]'}
     
     # convert to LaTeX
@@ -143,10 +145,11 @@ if __name__ == "__main__":
         del df[f"{col}_lowerr"]
 
 
-    col = "weighted_mean_T"
-    df[mapcolnames[col]] = tex_one_err(df[col], df[f"e_{col}"])
-    del df[col]
-    del df[f"e_{col}"]
+    for col in ["weighted_mean_T", "EM1_50", "EM2_50"]:
+        df[mapcolnames[col]] = tex_one_err(df[col], df[f"e_{col}"])
+
+        del df[col]
+        del df[f"e_{col}"]
 
     string = df.T.to_latex(escape=False,index=True)
 

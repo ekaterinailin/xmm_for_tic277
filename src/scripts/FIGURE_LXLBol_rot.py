@@ -36,7 +36,7 @@ if __name__ == "__main__":
                 cmap='viridis', c=df["V-K(mag)"], alpha=0.9, marker='o',
                 label=r"Wright et al. 2011, 2016 (M3.5 - M5.5)")
 
-    plt.colorbar(label="V-K [mag]", ax=ax)
+    plt.colorbar(label=r"$V-K$ [mag]", ax=ax)
 
     s, ss = 80, 300
 

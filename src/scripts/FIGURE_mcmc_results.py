@@ -45,16 +45,27 @@ if __name__ == "__main__":
         # discard the first 5000 steps
         df = df.iloc[5000:]
 
+        norm_to_EM = lambda x: np.log10(1e14 * np.pi * 4. * (13.7 * 3.08567758 * 1e18)**2 * x) #unit cm^-3
+        l10 = np.log(10)
+
+        def norm_to_EM_err(norm, norm_err, d, derr):
+            # print(norm, norm_err, d, derr, (norm_err**2 / (norm * l10)**2 + 4 * derr**2 / (l10 * d)**2))
+            return np.sqrt(norm_err**2 / (norm * l10)**2 + 4 * derr**2 / (l10 * d)**2)
+
         # convert units
+        df["EM1"] = norm_to_EM(df["norm__16"])
+        df["EM2"] = norm_to_EM(df["norm__32"])
+
         df["norm__16"] = df["norm__16"] * 1e6 # now in 10^-6
         df["norm__32"] = df["norm__32"] * 1e6 # now in 10^-6
+        
         df["kT__1"] = df["kT__1"] * 11.604525 # now in MK
         df["kT__17"] = df["kT__17"] * 11.604525 # now in MK
 
         # make a corner plot
-        corner.corner(df[["kT__1", "norm__16", "kT__17", "norm__32"]].values,
-                    labels=[r"$T_1$ [MK]", r"$norm_1 \cdot 10^6$",
-                            r"$T_2$ [MK]",r"$norm_2  \cdot 10^6$"],
+        corner.corner(df[["kT__1", "norm__16", "EM1", "kT__17", "norm__32", "EM2"]].values,
+                    labels=[r"$T_1$ [MK]", r"$norm_1 \cdot 10^6$", r"$\log_{10} EM_1$ [cm$^{-3}$]",
+                            r"$T_2$ [MK]",r"$norm_2  \cdot 10^6$", r"$\log_{10} EM_2$ [cm$^{-3}$]"],
                     quantiles=[0.16, 0.5, 0.84],
                     show_titles=True,
                     title_kwargs={"fontsize": 12},)
@@ -65,14 +76,17 @@ if __name__ == "__main__":
         plt.savefig(paths.figures / figname, dpi=300)
 
         # caclulate the 0.16, 0.5, 0.84 quantiles and add them to a new dataframe
-        q = np.quantile(df[["kT__1","norm__16","kT__17","norm__32"]].values,
+        q = np.quantile(df[["kT__1","norm__16", "EM1","kT__17","norm__32","EM2"]].values,
                         [0.16, 0.5, 0.84], axis=0).T
         
         # add the quantiles to the results dictionary
         res[subset] = dict(zip(["T1_16","T1_50","T1_84",
                                 "norm1_16","norm1_50","norm1_84",
+                                "EM1_16","EM1_50","EM1_84",
                                 "T2_16","T2_50","T2_84",
-                                "norm2_16","norm2_50","norm2_84","symb"
+                                "norm2_16","norm2_50","norm2_84",
+                                "EM2_16","EM2_50","EM2_84",
+                                "symb"
                                 ],q.flatten()))
         
         # add the symbol to the results dictionary
@@ -143,6 +157,16 @@ if __name__ == "__main__":
                                 (res["norm2_err"] / res["norm2_50"])**2)
 
     res["e_norm_ratio"] = np.sqrt(e2.values.astype(float))
+
+
+    # ERROR propagation from norm to EM with distance uncertanty of 0.11 pc
+
+    # calculate the EM error
+    res["e_EM1_50"] = norm_to_EM_err(res["norm1_50"].values.astype(float)*1e-6, res["norm1_err"].values.astype(float)*1e-6, 13.7, 0.11)
+    res["e_EM2_50"] = norm_to_EM_err(res["norm2_50"].values.astype(float)*1e-6, res["norm2_err"].values.astype(float)*1e-6, 13.7, 0.11)
+
+    # error propagate the EMs
+    
 
     # --------------------------------------------------------------------------
 
