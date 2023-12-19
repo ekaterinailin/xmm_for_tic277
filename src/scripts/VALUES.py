@@ -178,13 +178,13 @@ if __name__ == "__main__":
     E_om, eE_om = om.E_erg, om.eE_erg
 
     e, ee = E_epic / 1e30, eE_epic /1e30
-    epicstr = fr"${e:.1f}\pm{ee:.1f}" + r"\times 10^{30}\,$erg"
+    epicstr = fr"$({e:.1f}\pm{ee:.1f})" + r"\times 10^{30}\,$erg"
 
     with open(paths.output / "epic_flare.tex", "w") as f:
         f.write(epicstr)
 
     e, ee = E_om / 1e30, eE_om /1e30
-    omstr = fr"${e:.1f}\pm{ee:.1f}" + r"\times 10^{30}\,$erg"
+    omstr = fr"$({e:.1f}\pm{ee:.1f})" + r"\times 10^{30}\,$erg"
 
     with open(paths.output / "om_flare.tex", "w") as f:
         f.write(omstr)
