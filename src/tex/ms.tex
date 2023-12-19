@@ -179,6 +179,8 @@ In the de-trended light curves, we searched for flare candidates as at least 3 c
 
 \subsection{Flare energies: TESS, OM, and EPIC}
 \label{sec:methods:flareenergies}
+\textcolor{red}{The OM data contain one marginal flare that we interpret as associated with the large X-ray flare shortly after~(inset in Fig.~\ref{fig:lightcurves}). In the TESS light curves, we found a total of 18 flares. To assess the flaring activity of TIC~277, we computed the bolometric energies for both OM and TESS flares.} 
+
 For the OM flare, we \textcolor{red}{used the} median flux of the lightcurve as the quiescent flux $F_0$, against which we measured the equivalent duration ($ED$) of the flare, i.e., the flare flux $F_{\rm flare}$, divided by $F_0$, integrated over the flare duration~\citep{gershberg1972results}:
 
 \begin{equation}
@@ -215,14 +217,14 @@ For the X-ray flare energy, we multiply flare duration $\Delta t$ by the flare l
 
 \section{Results}
 \label{sec:results}
-With the \textit{XMM-Newton} and \textit{TESS} observations, we could constrain the coronal and flaring properties of TIC 277. We derive its coronal temperature and luminosity from the EPIC spectrum~(Section~\ref{sec:res:XrayTL}). We also measure the flare energies in X-ray from the EPIC instruments, and in optical from the OM, and compare them to the flare frequency distributions obtained from the 18 detected flares in \textit{TESS}~(Section~\ref{sec:res:flares}).
+With the \textit{XMM-Newton} and \textit{TESS} observations, we could constrain the coronal and flaring properties of TIC 277. We derive its coronal temperature and luminosity from the EPIC spectrum~(Section~\ref{sec:res:XrayTL}). We also measure the flare energies in X-rays from the EPIC instruments, and in optical from the OM, and compare them to the flare frequency distributions obtained from the 18 detected flares in \textit{TESS}~(Section~\ref{sec:res:flares}).
 
 
 \subsection{Coronal temperature and luminosity}
 \label{sec:res:XrayTL}
 % From the proposal: $F_X=2.7^{-13}$ erg/s/cm$^2$, $L_X=6\cdot10^27$ erg/s (update with new eROSITA data) -- 1 oom above the measured XMM values.
 
-From the \textit{XMM-Newton} EPIC spectra, we could measure the coronal properties of TIC~277 in both its quiescent, and flaring states~(Table~\ref{tab:specfit}). The resulting fit for the full data set~(Fig.~\ref{fig:spec_joint_all}) consists of a cooler and a hotter component of about \Tcool and \Thot\hspace{-1.cm}, respectively. Assuming these temperatures \textcolor{red}{for the prior distribution}, we also fitted 2T APEC models to the flaring and quiescent portions of the observations separately. The coronal temperatures did not update significantly using either subset. However, the emission measure weighted mean temperature $T_{\rm mean}$ changed from \Tqmean in the quiescent spectrum to \Tfmean in the flaring spectrum, since the hot component became more much dominant during the flare. From the quiescent PN spectra, we then also calculated soft X-ray flux of $F_X=$\FX, and a luminosity $L_X=$\LXquiet in the $0.2$-$2.0\,$keV band. %This suggests that the flaring corona emits the hotter component, while the cooler component corresponds to the quiescent corona. In this interpretation, the presence of a hot component in the quiescent spectrum indicates that TIC 277 is flaring below the detection threshold, consistent with an extrapolation of the flare frequency distribution to lower temperatures~(see the following Section, and Fig.~\ref{fig:ffd}). 
+From the \textit{XMM-Newton} EPIC spectra, we could measure the coronal properties of TIC~277 in both its quiescent, and flaring states~(Table~\ref{tab:specfit}). The resulting fit for the full data set~(Fig.~\ref{fig:spec_joint_all}) consists of a cooler and a hotter component of about \Tcool and \Thot\hspace{-1.cm}, respectively. Assuming these temperatures \textcolor{red}{for the prior distribution}, we also fitted 2T VAPEC models to the flaring and quiescent portions of the observations separately. The coronal temperatures did not update significantly using either subset. However, the emission measure weighted mean temperature $T_{\rm mean}$ changed from \Tqmean in the quiescent spectrum to \Tfmean in the flaring spectrum, since the hot component became more much dominant during the flare. From the quiescent PN spectra, we then also calculated soft X-ray flux of $F_X=$\FX, and a luminosity $L_X=$\LXquiet in the $0.2$-$2.0\,$keV band. %This suggests that the flaring corona emits the hotter component, while the cooler component corresponds to the quiescent corona. In this interpretation, the presence of a hot component in the quiescent spectrum indicates that TIC 277 is flaring below the detection threshold, consistent with an extrapolation of the flare frequency distribution to lower temperatures~(see the following Section, and Fig.~\ref{fig:ffd}). 
 
 We note that not using the full set of observations as the prior resulted in an unconstrained hot coronal component during the flare. This can be interpreted as due to a lack of X-ray flux above $5\,$keV. Hot flares with temperatures of $>50\,$MK have been measured on DS~Tuc~A~\citep{pillitteri2011xray}. On the Sun, the highest flare associated coronal temperatures are around $35\,$MK~\citep{kay2003soft}.
 
@@ -243,7 +245,7 @@ We note that not using the full set of observations as the prior resulted in an 
     \begin{centering}
         \includegraphics[width=\linewidth]{figures/joint_chain_fit_data_resid.png}
         \caption{
-         Best-fit joint two-temperature APEC spectral fit with Fe/O$=0.6$ for the full data set. The top panel shows the spectra taken with the different EPIC instruments. The bottom panel shows the residuals to the fit.
+         \textcolor{red}{XMM-Newton EPIC spectra. The top panel shows the spectra taken with the different EPIC instruments together with the best-fit two-temperature VAPEC model with Fe/O$=0.6$ for the full data set.} The bottom panel shows the residuals to the fit.
         }
         \label{fig:spec_joint_all}
     \end{centering}
