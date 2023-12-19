@@ -73,7 +73,7 @@ if __name__ == "__main__":
 
     # get Lx and make latex string with a single uncertainty
     Lx, Lxerr = row.Lx_erg_s, row.Lx_erg_s_err
-    Lx_str = fr"${Lx/1e26:.2f} \pm {Lxerr/1e26:.2f}" + r"\times 10^{26}\,\rm{erg s}^{-1}$"
+    Lx_str = fr"$({Lx/1e26:.2f} \pm {Lxerr/1e26:.2f})" + r"\times 10^{26}\,\rm{erg} \rm{s}^{-1}$"
 
     print(Lx_str)
 
@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     # get Lx and make latex string with a single uncertainty
     Lxq, Lxerrq = row.Lx_erg_s, row.Lx_erg_s_err
-    Lx_strq = fr"${Lx/1e27:.2f} \pm {Lxerr/1e27:.2f}" + r"\times 10^{27}\,\rm{erg s}^{-1}$"
+    Lx_strq = fr"$({Lx/1e27:.2f} \pm {Lxerr/1e27:.2f})" + r"\times 10^{27}\,\rm{erg s}^{-1}$"
 
     print(Lx_strq)
 
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     # Fx -----------------------------------------------------------------------
 
     flux, fluxerr = row.flux_erg_s_cm2, row.flux_erg_s_cm2_err
-    flux_str = fr"${flux*1e14:.1f} \pm {fluxerr*1e14:.1f}" + r"\times 10^{-14} \,\rm{erg}\, \rm{cm}^{-2} \rm{s}^{-1}$"
+    flux_str = fr"$({flux*1e14:.1f} \pm {fluxerr*1e14:.1f})" + r"\times 10^{-14} \,\rm{erg}\, \rm{cm}^{-2} \rm{s}^{-1}$"
 
     print(flux_str)
 
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     row = ilin2021[ilin2021.TIC == 277539431].iloc[0]
     Lbol, eLbol = row.Lbol_erg_s, row.eLbol_erg_s
 
-    Lbolstr = fr"${Lbol/1e30:.1f} \pm {eLbol/1e30:.1f}" + r" \times 10^{30}\,\rm{erg s}^{-1}$"
+    Lbolstr = fr"$({Lbol/1e30:.1f} \pm {eLbol/1e30:.1f})" + r" \times 10^{30}\,\rm{erg s}^{-1}$"
 
     with open(paths.output / "Lbol.tex", "w") as f:
         f.write(f"{Lbolstr}")
@@ -118,7 +118,7 @@ if __name__ == "__main__":
                     Lx / Lbol * np.sqrt(Lxerr**2 / (Lx**2) + eLbol**2 / (Lbol**2)))
 
 
-    lxlbolstr = fr"${lxlbol*1e4:.1f}\pm {elxlbol*1e4:.1f}" + r"\times 10^{-4}$ "
+    lxlbolstr = fr"$({lxlbol*1e4:.1f}\pm {elxlbol*1e4:.1f})" + r"\times 10^{-4}$ "
 
     print(lxlbolstr)
 
