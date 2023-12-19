@@ -53,11 +53,11 @@ def plot_data_resid_3(file):
 
         # flux with errors
         ax[0].errorbar(data["E [keV]"], data["flux [counts/s/keV]"],
-                    yerr=data["e_flux"], fmt=m, markersize=6, alpha=1, c=c)
+                    yerr=data["e_flux"]/1.644854, fmt=m, markersize=6, alpha=1, c=c)
 
         # residuals
         ax[1].errorbar(resid["E [keV]"], resid["flux [counts/s/keV]"],
-                    yerr=resid["e_flux"], fmt=m, markersize=6, c=c)
+                    yerr=resid["e_flux"]/1.644854, fmt=m, markersize=6, c=c)
         
         
       # zero line for residuals
@@ -137,11 +137,11 @@ def plot_data_resid_1(file):
 
     # flux with errors
     ax[0].errorbar(data["E [keV]"], data["flux [counts/s/keV]"],
-                yerr=data["e_flux"], fmt=".", markersize=13, alpha=1, c="olive")
+                yerr=data["e_flux"] / 1.644854, fmt=".", markersize=13, alpha=1, c="olive")
 
     # residuals
     ax[1].errorbar(resid["E [keV]"], resid["flux [counts/s/keV]"],
-                yerr=resid["e_flux"], fmt=".", markersize=13, c="olive")
+                yerr=resid["e_flux"]/1.644854, fmt=".", markersize=13, c="olive")
 
     # zero line for residuals
     ax[1].axhline(0,c="k")
