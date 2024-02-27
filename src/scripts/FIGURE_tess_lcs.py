@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 import paths
 
 import numpy as np
+import pandas as pd
 
 
 if __name__ == "__main__":
@@ -31,6 +32,12 @@ if __name__ == "__main__":
     # detrended flux
     fig, axes = plt.subplots(5, 1, figsize=(13, 15))
 
+    # read in the flare table
+    df = pd.read_csv(paths.data / "tess_flares.csv")
+
+    # select the columns we want, sort by time
+    sel = df[["tstart", "ampl_rec", 'ed_rec', 'ed_rec_err', 'Sector']].sort_values("tstart")
+
     # loop over axes, light curves and sectors
     for ax, lcr, sector in zip(axes, lcrs, sectors):
 
@@ -39,6 +46,13 @@ if __name__ == "__main__":
                 ms=1.5)
         ax.plot(lcr['TIME'], lcr['DETRENDED_FLUX']/np.nanmedian(lcr["DETRENDED_FLUX"]) +0.2, 
                 'r.', ms=1.5,)
+        
+        # plot the flares as vertical lines at the bottom of the panel
+
+        flare_times = sel[sel["Sector"] == sector]["tstart"].values
+
+        for t in flare_times:
+                ax.axvline(t, color="blue", lw=0.5, alpha=0.5)
         
         # layout
         ax.set_ylabel("normalized flux", fontsize=13)
