@@ -99,15 +99,17 @@ if __name__ == "__main__":
 
             plt.legend()
             plt.savefig(paths.figures / f"expfit_flare_{sector}_{i}.png")
+            plt.close()
 
     df["efold"] = efolds
 
 
     # plot B and L relations
 
-    energies = np.logspace(29.3, 35, 100)
-    times = np.logspace(-1.2, 3, 100) 
+    energies = np.logspace(29.3, 36, 100)
+    times = np.logspace(-2, 3, 100) 
     rho0= 10**11 * m_e * u.cm**(-3)
+    radius = (0.145 * u.R_sun).to(u.cm).value
     MA = 0.01
 
     for B in [30,60,100, 200]:
@@ -117,7 +119,9 @@ if __name__ == "__main__":
         plt.plot(energies , t, linestyle='--', c="grey", alpha=0.8)
         plt.text(energies[-20], t[-22], f"${B}$ G", ha='left', va='center', rotation=20)    
 
-    for L in [5e8, 1e9, 5e9, 1e10, 5e10, 1e11]:
+    for L in [5e8, 1e9, 3e9, 5e9, 1e10, 2e10, 5e10, 1e11]:
+        Lrstar = L / radius
+        print(fr"Loop length: {L:.0e} or {Lrstar:.2e} R_*")
         t =  (energies * u.erg)**(-0.5) * (L * u.cm)**2.5 * np.sqrt(rho0) / MA * 2**(1/3) 
         t = t.decompose().to(u.min).value
         plt.plot(energies , t, linestyle=':', c="grey")
@@ -132,19 +136,50 @@ if __name__ == "__main__":
         # find a good position for the annotation
         i = np.where((t < times[-1]))[0][0]
     
-        plt.text(energies[i+10], t[i+12], f"${latexL}$ cm", ha='left', va='center', rotation=-30)
+        if L > 1e10:
+            plt.text(energies[i+8], t[i+10], f"${latexL}$ cm", ha='left', va='center', rotation=-30)
+        else:
+            plt.text(energies[i], t[i], f"${latexL}$ cm", ha='left', va='center', rotation=-30)
 
-    plt.scatter(df.ed_rec, df.efold * 24 * 60, c="olive", alpha=0.9)
-    plt.scatter([3.7e30],[1/6], c="r", marker="X", label="OM flare")
-    plt.scatter([34.473],[0.05*24*60], c="olive", marker='s', label="high latitude flare")
+    plt.scatter(df.ed_rec, df.efold * 24 * 60, c="olive", alpha=0.8, s=40)
+    plt.scatter([3.7e30],[1/6], c="r", marker="X", label="TIC 277: OM flare", s=40)
+    plt.scatter([10**34.473],[0.05*24*60], c="olive", marker='d', s=40, label="TIC 277: TESS high latitude flare")
+
+
+    handle = plt.scatter([],[], c="olive", label="TIC 277: other TESS flares")
+
+    # add in the Maehara + 2021 flares from YZ CMi
+    yzcmi = pd.read_csv(paths.data / "maehara2021_yz_cmi.csv", skiprows=8)
+    
+    # replace "na" with np.nan
+    yzcmi = yzcmi.replace("na", np.nan)
+    yzcmi = yzcmi.dropna()
+    yzcmi["Ebol(erg)"] = yzcmi["Ebol(erg)"].astype(float)
+    yzcmi["eftime(min)"] = yzcmi["eftime(min)"].astype(float)
+
+
+    plt.scatter(yzcmi["Ebol(erg)"], yzcmi["eftime(min)"], c="grey", marker='.',
+                label="M4 YZ CMi: TESS flares (Notsu+2024)", s=40, alpha=0.3, zorder=-10)
+    
+    # ramsay 2021
+    efold = [21.2, 16.1, 25.2, 31.3, 20.2, 11.9, 19.5, 39, 16.6, 19.8, 32.1]
+    energy = [6e35, 1e34, 7.5e35, 6.1e35, 8.2e34, 1.1e34, 3.4e35, 4e34, 1.6e34, 4.3e35, 1.3e34]
+
+    ramsay = pd.DataFrame({"Ebol(erg)": energy, "eftime(min)": efold})
+
+    plt.scatter(ramsay["Ebol(erg)"], ramsay["eftime(min)"], c="grey", marker='x',
+                label="M3-M4 dwarf: TESS flares (Ramsay+2021)", s=40, alpha=1, zorder=-10)
+
+
     plt.xscale('log')
     plt.yscale('log')
-    plt.xlabel("Bolometric flare energy [erg]")
-    plt.ylabel("Flare decay e-folding time [min]")
+    plt.xlabel("$E_{flare}$ [erg]", fontsize=13)
+
+    plt.ylabel("Flare decay e-folding time [min]", fontsize=13)
     plt.xlim(energies[0], energies[-1])
     plt.ylim(times[0], times[-1])
 
     # add legend handle for olive TESS flare circles
-    handle = plt.scatter([],[], c="olive", label="TESS flares")
-    plt.legend(loc=4, frameon=False)
+    plt.legend(loc=4, frameon=True, fontsize=11)
+    plt.tight_layout()
     plt.savefig(paths.figures / "tess_flares_B_L_relation.png")
