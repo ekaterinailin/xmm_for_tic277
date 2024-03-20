@@ -116,7 +116,7 @@ if __name__ == "__main__":
     flare.loc[r"$B$ [G]"] = np.round(flare.loc[r"$B$ [G]"].values.astype(float), 0).astype(int)
 
     # round L row to 2 decimal places
-    flare.loc[r"$L$ [R$_*$]"] = np.round(flare.loc[r"$L$ [R$_*$]"].values.astype(float), 2).astype(str)
+    flare.loc[r"$L$ [$R_*$]"] = np.round(flare.loc[r"$L$ [$R_*$]"].values.astype(float), 2).astype(str)
 
     # print with index name
     string = flare.to_latex(escape=False)
@@ -142,5 +142,6 @@ if __name__ == "__main__":
     # check out both psi values
     for psi in [1.2, 2.0]:
         print(rf'$\Psi={psi:.1f}$')
-        ls = flare_loop_size_from_duration(1e3, 0.13 * (T * 1e6)**1.16, psi=psi) * 100 / radius
-        print(fr"${ls:.2f} R_*$")
+        ls = flare_loop_size_from_duration(1e3, 0.13 * (T * 1e6)**1.16, psi=psi) * 100
+        print(fr"${ls/1e9:.2f} \times 10^9$ cm")
+        print(fr"${ls/radius:.2f} R_*$")

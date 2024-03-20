@@ -108,22 +108,20 @@ if __name__ == "__main__":
 
     energies = np.logspace(29.3, 36, 100)
     times = np.logspace(-2, 3, 100) 
-    rho0= 10**11 * m_e * u.cm**(-3)
     radius = (0.145 * u.R_sun).to(u.cm).value
-    MA = 0.01
+    E0, t0, B0, L0 = 1.5e30, 3.5, 57, 2.4e9
 
-    for B in [30,60,100, 200]:
-        t = (energies * u.erg)**(1/3) * (B * u.Gauss)**(-5/3) * np.sqrt(rho0 * mu0) / MA * (2 * mu0)**(1/3) 
+    for B in [30,60,100, 250, 450]:
+        t = t0 * (energies / E0)**(1/3) * (B / B0)**(-5/3) # * np.sqrt(rho0 * mu0) / MA * (2 * mu0)**(1/3) 
 
-        t = t.decompose().to(u.min).value
         plt.plot(energies , t, linestyle='--', c="grey", alpha=0.8)
         plt.text(energies[-20], t[-22], f"${B}$ G", ha='left', va='center', rotation=20)    
 
     for L in [5e8, 1e9, 3e9, 5e9, 1e10, 2e10, 5e10, 1e11]:
         Lrstar = L / radius
         print(fr"Loop length: {L:.0e} or {Lrstar:.2e} R_*")
-        t =  (energies * u.erg)**(-0.5) * (L * u.cm)**2.5 * np.sqrt(rho0) / MA * 2**(1/3) 
-        t = t.decompose().to(u.min).value
+        t = t0 * (energies / E0)**(-0.5) * (L / L0)**2.5 #* np.sqrt(rho0) / MA * 2**(1/3) 
+        
         plt.plot(energies , t, linestyle=':', c="grey")
         # covert L to latex
         latexL = f"{L:.0e}".split("e+")[1].lstrip("0")
@@ -159,7 +157,7 @@ if __name__ == "__main__":
 
 
     plt.scatter(yzcmi["Ebol(erg)"], yzcmi["eftime(min)"], c="grey", marker='.',
-                label="M4 YZ CMi: TESS flares (Notsu+2024)", s=40, alpha=0.3, zorder=-10)
+                label="M4 YZ CMi: TESS flares (Maehara+2021)", s=40, alpha=0.3, zorder=-10)
     
     # ramsay 2021
     efold = [21.2, 16.1, 25.2, 31.3, 20.2, 11.9, 19.5, 39, 16.6, 19.8, 32.1]
@@ -175,7 +173,7 @@ if __name__ == "__main__":
     plt.yscale('log')
     plt.xlabel("$E_{flare}$ [erg]", fontsize=13)
 
-    plt.ylabel("Flare decay e-folding time [min]", fontsize=13)
+    plt.ylabel(r"Flare decay $e$-folding time [min]", fontsize=13)
     plt.xlim(energies[0], energies[-1])
     plt.ylim(times[0], times[-1])
 
