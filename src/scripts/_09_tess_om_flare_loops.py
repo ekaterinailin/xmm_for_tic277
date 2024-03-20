@@ -112,15 +112,15 @@ if __name__ == "__main__":
     E0, t0, B0, L0 = 1.5e30, 3.5, 57, 2.4e9
 
     for B in [30,60,100, 250, 450]:
-        t = t0 * (energies / E0)**(1/3) * (B / B0)**(-5/3) # * np.sqrt(rho0 * mu0) / MA * (2 * mu0)**(1/3) 
+        t = t0 * (energies / E0)**(1/3) * (B / B0)**(-5/3) 
 
         plt.plot(energies , t, linestyle='--', c="grey", alpha=0.8)
         plt.text(energies[-20], t[-22], f"${B}$ G", ha='left', va='center', rotation=20)    
 
-    for L in [5e8, 1e9, 3e9, 5e9, 1e10, 2e10, 5e10, 1e11]:
+    for L in [5e8,1e9, 3e9, 5e9, 1e10, 2e10, 5e10, 1e11]:
         Lrstar = L / radius
         print(fr"Loop length: {L:.0e} or {Lrstar:.2e} R_*")
-        t = t0 * (energies / E0)**(-0.5) * (L / L0)**2.5 #* np.sqrt(rho0) / MA * 2**(1/3) 
+        t = t0 * (energies / E0)**(-0.5) * (L / L0)**2.5 
         
         plt.plot(energies , t, linestyle=':', c="grey")
         # covert L to latex
@@ -140,7 +140,7 @@ if __name__ == "__main__":
             plt.text(energies[i], t[i], f"${latexL}$ cm", ha='left', va='center', rotation=-30)
 
     plt.scatter(df.ed_rec, df.efold * 24 * 60, c="olive", alpha=0.8, s=40)
-    plt.scatter([3.7e30],[1/6], c="r", marker="X", label="TIC 277: OM flare", s=40)
+    plt.scatter([3.7e30],[24/60], c="r", marker="X", label="TIC 277: OM flare", s=40)
     plt.scatter([10**34.473],[0.05*24*60], c="olive", marker='d', s=40, label="TIC 277: TESS high latitude flare")
 
 
